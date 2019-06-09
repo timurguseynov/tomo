@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Tomo::PluginDSL - Tomo</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Tomo::PluginDSL";
+    var mkdocs_page_input_path = "api/PluginDSL.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Tomo</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../configuration/">Configuration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Commands</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../commands/init/">init</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../commands/setup/">setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../commands/deploy/">deploy</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../commands/run/">run</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../commands/tasks/">tasks</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Plugins</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../plugins/core/">core</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/bundler/">bundler</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/env/">env</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/git/">git</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/nvm/">nvm</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/puma/">puma</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/rails/">rails</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/rbenv/">rbenv</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Tutorials</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../tutorials/writing-custom-tasks/">Writing Custom Tasks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../tutorials/publishing-a-plugin/">Publishing a Plugin</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Host/">Tomo::Host</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Logger/">Tomo::Logger</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Paths/">Tomo::Paths</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Tomo::PluginDSL</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#tomoplugindsl">Tomo::PluginDSL</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#instance-methods">Instance methods</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Remote/">Tomo::Remote</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Result/">Tomo::Result</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../TaskLibrary/">Tomo::TaskLibrary</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../testing/MockPluginTester/">Tomo::Testing::MockPluginTester</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../testing/DockerPluginTester/">Tomo::Testing::DockerPluginTester</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Tomo</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API &raquo;</li>
+        
+      
+    
+    <li>Tomo::PluginDSL</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/mattbrictson/tomo/edit/master/docs/api/PluginDSL.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="tomoplugindsl">Tomo::PluginDSL</h1>
+<p>A tomo plugin is defined by a Ruby module that extends Tomo::PluginDSL. A plugin definition can specify three things:</p>
+<ul>
+<li>Default settings</li>
+<li>Tasks</li>
+<li>Helpers</li>
+</ul>
+<p>Here is the bundler plugin as an example:</p>
+<pre><code class="ruby">require_relative &quot;bundler/helpers&quot;
+require_relative &quot;bundler/tasks&quot;
+
+module Tomo::Plugin::Bundler
+  extend Tomo::PluginDSL
+
+  tasks Tomo::Plugin::Bundler::Tasks
+  helpers Tomo::Plugin::Bundler::Helpers
+
+  defaults bundler_install_flags: [&quot;--deployment&quot;],
+           bundler_gemfile:       nil,
+           bundler_jobs:          &quot;4&quot;,
+           bundler_path:          &quot;%&lt;shared_path&gt;/bundle&quot;,
+           bundler_without:       %w[development test]
+end
+</code></pre>
+
+<p>The above plugin defines several default settings, defines tasks using a <a href="../TaskLibrary/">TaskLibrary</a> named <code>Tomo::Plugin::Bundler::Tasks</code>, and defines helpers in a module named <code>Tomo::Plugin::Bundler::Helpers</code>.</p>
+<p>Refer to the <a href="../../tutorials/publishing-a-plugin/">Publishing a Plugin</a> tutorial for more information about packaging and distributing tomo plugins.</p>
+<h2 id="instance-methods">Instance methods</h2>
+<h3 id="defaultshash">defaults(hash)</h3>
+<p>Specify default settings that will be applied when this plugin is loaded. Although not strictly necessary, it is best practice to list all required and optional settings that are used by the plugin, even if the default values are <code>nil</code>. This lets other developers know what setting names are expected when using the plugin.</p>
+<p>Settings must use symbol keys and typically String values, although any Ruby type is possible. Strings can contain <a href="../../configuration/#interpolation">interpolated values</a>.</p>
+<pre><code class="ruby">module Tomo::Plugin::Bundler
+  extend Tomo::PluginDSL
+
+  defaults bundler_install_flags: [&quot;--deployment&quot;],
+           bundler_gemfile:       nil,
+           bundler_jobs:          &quot;4&quot;,
+           bundler_path:          &quot;%&lt;shared_path&gt;/bundle&quot;,
+           bundler_without:       %w[development test]
+end
+</code></pre>
+
+<h3 id="tasks42task_library_class">tasks(*task_library_class)</h3>
+<p>Specify the tasks that will be defined by this plugin by supplying one or more <a href="../TaskLibrary/">TaskLibrary</a> classes. The public instance methods of each class will be turned into tomo tasks.</p>
+<pre><code class="ruby">class Tomo::Plugin::Git::Tasks &lt; Tomo::TaskLibrary
+  def clone
+    # ...
+  end
+
+  def create_release
+    # ...
+  end
+end
+
+class Tomo::Plugin::Git
+  extend Tomo::PluginDSL
+
+  tasks Tomo::Plugin::Git::Tasks
+end
+</code></pre>
+
+<p>You can use <code>self</code> to define a plugin and its tasks together as a single class:</p>
+<pre><code class="ruby">class Tomo::Plugin::Git &lt; Tomo::TaskLibrary
+  extend Tomo::PluginDSL
+  tasks self
+
+  def clone
+    # ...
+  end
+
+  def create_release
+    # ...
+  end
+end
+</code></pre>
+
+<h3 id="helpers42module">helpers(*module)</h3>
+<p>Specify the helpers that will be defined by this plugin by supplying one or more plain Ruby modules. The modules will be mixed in at runtime to extend the <a href="../Remote/">Remote</a> interface with additional methods.</p>
+<pre><code class="ruby">module Tomo::Plugin::Core::Helpers
+  def ln_sf(target, link, **run_opts)
+    # ...
+  end
+
+  def mkdir_p(*directories, **run_opts)
+    # ...
+  end
+end
+
+module Tomo::Plugin::Core
+  extend Tomo::PluginDSL
+
+  helpers Tomo::Plugin::Core::Helpers
+end
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Remote/" class="btn btn-neutral float-right" title="Tomo::Remote">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Paths/" class="btn btn-neutral" title="Tomo::Paths"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/mattbrictson/tomo/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Paths/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Remote/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

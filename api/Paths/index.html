@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Tomo::Paths - Tomo</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Tomo::Paths";
+    var mkdocs_page_input_path = "api/Paths.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Tomo</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../configuration/">Configuration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Commands</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../commands/init/">init</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../commands/setup/">setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../commands/deploy/">deploy</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../commands/run/">run</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../commands/tasks/">tasks</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Plugins</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../plugins/core/">core</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/bundler/">bundler</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/env/">env</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/git/">git</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/nvm/">nvm</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/puma/">puma</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/rails/">rails</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../plugins/rbenv/">rbenv</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Tutorials</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../tutorials/writing-custom-tasks/">Writing Custom Tasks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../tutorials/publishing-a-plugin/">Publishing a Plugin</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Host/">Tomo::Host</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Logger/">Tomo::Logger</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Tomo::Paths</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#tomopaths">Tomo::Paths</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../PluginDSL/">Tomo::PluginDSL</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Remote/">Tomo::Remote</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Result/">Tomo::Result</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../TaskLibrary/">Tomo::TaskLibrary</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../testing/MockPluginTester/">Tomo::Testing::MockPluginTester</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../testing/DockerPluginTester/">Tomo::Testing::DockerPluginTester</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Tomo</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API &raquo;</li>
+        
+      
+    
+    <li>Tomo::Paths</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/mattbrictson/tomo/edit/master/docs/api/Paths.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="tomopaths">Tomo::Paths</h1>
+<p>Provides syntactic sugar for accessing settings that represent file system paths. For every tomo setting in the form <code>:&lt;name&gt;_path</code>, Paths will expose a method of that name that behaves like a Ruby Pathname object. As a special exception, the <code>:deploy_to</code> setting is also exposed even though it does not follow the same naming convention.</p>
+<p>In tomo the following path settings are always available:</p>
+<pre><code class="ruby">settings[:deploy_to]     # =&gt; &quot;/var/www/my-app&quot;
+settings[:current_path]  # =&gt; &quot;/var/www/my-app/current&quot;
+settings[:release_path]  # =&gt; &quot;/var/www/my-app/releases/20190531164322&quot;
+settings[:releases_path] # =&gt; &quot;/var/www/my-app/releases&quot;
+settings[:shared_path]   # =&gt; &quot;/var/www/my-app/shared&quot;
+</code></pre>
+
+<p>Using Paths, these same settings can be accessed like this:</p>
+<pre><code class="ruby">paths.deploy_to # =&gt; &quot;/var/www/my-app&quot;
+paths.current   # =&gt; &quot;/var/www/my-app/current&quot;
+paths.release   # =&gt; &quot;/var/www/my-app/releases/20190531164322&quot;
+paths.releases  # =&gt; &quot;/var/www/my-app/releases&quot;
+paths.shared    # =&gt; &quot;/var/www/my-app/shared&quot;
+</code></pre>
+
+<p>More powerfully, the values returned by Paths respond to <code>join</code> and <code>dirname</code>, so you can easily compose them:</p>
+<pre><code class="ruby">paths.current.dirname       # =&gt; &quot;/var/www/my-app&quot;
+paths.release.join(&quot;tmp&quot;)   # =&gt; &quot;/var/www/my-app/releases/20190531164322/tmp&quot;
+paths.shared.join(&quot;bundle&quot;) # =&gt; &quot;/var/www/my-app/shared/bundle&quot;
+</code></pre>
+
+<p>Paths can be used wherever a path string is expected, like <a href="../Remote/#chdirdir-block-obj">chdir</a>:</p>
+<pre><code class="ruby">remote.chdir(paths.current) do
+  remote.run(&quot;bundle&quot;, &quot;exec&quot;, &quot;puma&quot;, &quot;--daemon&quot;)
+end
+# $ cd /var/www/my-app/current &amp;&amp; bundle exec puma --daemon
+</code></pre>
+
+<p>If a plugin defines a setting with the suffix <code>_path</code> or if you create your own setting with that suffix, it automatically will be exposed via the Paths object:</p>
+<pre><code class="ruby"># .tomo/config.rb
+set my_custom_path: &quot;/opt/custom&quot;
+</code></pre>
+
+<pre><code class="ruby">paths.my_custom.join(&quot;var&quot;) # =&gt; &quot;/opt/custom/var&quot;
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../PluginDSL/" class="btn btn-neutral float-right" title="Tomo::PluginDSL">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Logger/" class="btn btn-neutral" title="Tomo::Logger"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/mattbrictson/tomo/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Logger/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../PluginDSL/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>
