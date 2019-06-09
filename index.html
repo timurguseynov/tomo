@@ -53,13 +53,23 @@
     <a class="current" href=".">Home</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#welcome-to-mkdocs">Welcome to MkDocs</a></li>
+    <li class="toctree-l2"><a href="#tomo">Tomo</a></li>
     
         <ul>
         
-            <li><a class="toctree-l3" href="#commands">Commands</a></li>
+            <li><a class="toctree-l3" href="#quick-start">Quick start</a></li>
         
-            <li><a class="toctree-l3" href="#project-layout">Project layout</a></li>
+            <li><a class="toctree-l3" href="#reference-documentation">Reference documentation</a></li>
+        
+            <li><a class="toctree-l3" href="#faq">FAQ</a></li>
+        
+            <li><a class="toctree-l3" href="#support">Support</a></li>
+        
+            <li><a class="toctree-l3" href="#license">License</a></li>
+        
+            <li><a class="toctree-l3" href="#code-of-conduct">Code of conduct</a></li>
+        
+            <li><a class="toctree-l3" href="#contribution-guide">Contribution guide</a></li>
         
         </ul>
     
@@ -235,21 +245,135 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+                <h1 id="tomo">Tomo</h1>
+<p><a href="https://rubygems.org/gems/tomo"><img alt="Gem Version" src="https://badge.fury.io/rb/tomo.svg" /></a>
+<a href="https://travis-ci.org/mattbrictson/tomo"><img alt="Travis" src="https://travis-ci.org/mattbrictson/tomo.svg?branch=master" /></a>
+<a href="https://circleci.com/gh/mattbrictson/tomo"><img alt="Circle" src="https://circleci.com/gh/mattbrictson/tomo.svg?style=svg" /></a>
+<a href="https://codeclimate.com/github/mattbrictson/tomo"><img alt="Code Climate" src="https://codeclimate.com/github/mattbrictson/tomo/badges/gpa.svg" /></a>
+<a href="https://saythanks.io/to/mattbrictson"><img alt="Say Thanks!" src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg" /></a></p>
+<p>Tomo is a friendly command-line tool for deploying Rails apps. It is a new alternative to Capistrano, Mina, and Shipit that optimizes for simplicity and developer happiness.</p>
+<p>💻 Rich command-line interface with built-in bash completions<br/>
+☁️ Multi-environment and role-based multi-host support<br/>
+💎 Everything you need to deploy a basic Rails app out of the box<br/>
+🔌 Easily extensible for polyglot projects (not just Rails!)<br/>
+💡 Concise, helpful error messages<br/>
+📚 Quality documentation<br/>
+🔬 Minimal dependencies<br/></p>
+<p>This project wouldn&rsquo;t be possible without the generosity of the open source Ruby community. Please support open source projects and your fellow developers by helping answer questions, contributing pull requests to improve code and documentation, or just <a href="https://saythanks.io/to/mattbrictson">drop a note</a> to say thanks! ❤️</p>
+<hr />
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs help</code> - Print this help message.</li>
+<li><a href="#quick-start">Quick start</a></li>
+<li><a href="#reference-documentation">Reference documentation</a> [TODO]</li>
+<li><a href="#faq">FAQ</a> [TODO]</li>
+<li><a href="#support">Support</a></li>
+<li><a href="#license">License</a></li>
+<li><a href="#code-of-conduct">Code of conduct</a></li>
+<li><a href="#contribution-guide">Contribution guide</a> [TODO]</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<h2 id="quick-start">Quick start</h2>
+<p>Tomo is distributed as a ruby gem. To install:</p>
+<pre><code>$ gem install tomo
 </code></pre>
+
+<h4 id="getting-help">Getting help</h4>
+<p>An easy way to kick the tires is to view the <code>--help</code>.</p>
+<p><img alt="$ tomo --help" src="readme_images/tomo-help.png" /></p>
+<h4 id="configuring-a-project">Configuring a project</h4>
+<p>Let’s init a project to see how tomo is configured.</p>
+<p><img alt="$ tomo init" src="readme_images/tomo-init.png" /></p>
+<p>The <code>.tomo/config.rb</code> file defines all the settings and tasks needed to setup and deploy a typical Rails project. An abbreviated version looks like this:</p>
+<pre><code class="ruby"># .tomo/config.rb
+
+plugin &quot;git&quot;
+plugin &quot;bundler&quot;
+plugin &quot;rails&quot;
+# ...
+
+host &quot;user@hostname.or.ip.address&quot;
+
+set application: &quot;my-rails-app&quot;
+set deploy_to: &quot;/var/www/%&lt;application&gt;&quot;
+set git_url: &quot;git@github.com:my-username/my-rails-app.git&quot;
+set git_branch: &quot;master&quot;
+# ...
+
+setup do
+  run &quot;git:clone&quot;
+  run &quot;git:create_release&quot;
+  run &quot;bundler:install&quot;
+  run &quot;rails:db_schema_load&quot;
+  # ...
+end
+
+deploy do
+  run &quot;git:create_release&quot;
+  run &quot;core:symlink_shared&quot;
+  run &quot;core:write_release_json&quot;
+  run &quot;bundler:install&quot;
+  run &quot;rails:assets_precompile&quot;
+  run &quot;rails:db_migrate&quot;
+  run &quot;core:symlink_current&quot;
+  # ...
+end
+</code></pre>
+
+<p>Eventually you&rsquo;ll want to edit the config file to specify the appropriate user and host, perhaps define some custom tasks, and tweak the settings to make them suitable for your Rails app. You can also take advantage of more advanced features like multiple hosts and environment-based config.</p>
+<h4 id="host-setup">Host setup</h4>
+<p>With tomo, an initial deployment is separated into two distinct steps. The <code>setup</code> command prepares the host for its first deploy. Let’s take a look at the documentation with <code>--help</code>:</p>
+<p><img alt="$ tomo setup --help" src="readme_images/tomo-setup-help.png" /></p>
+<p>We can simulate the setup operation with the <code>--dry-run</code> option. Let&rsquo;s try it:</p>
+<p><img alt="$ tomo setup --dry-run" src="readme_images/tomo-setup-dry-run.png" /></p>
+<p>As you can see, the setup command in this project clones the git repository, installs ruby, node, bundler, and initializes the database. One the host is set up, it is ready for its first deploy.</p>
+<h4 id="performing-a-deploy">Performing a deploy</h4>
+<p>Typically you only need to run <code>setup</code> once. From then on deploying a project is a matter of running the <code>deploy</code> command.</p>
+<p><img alt="$ tomo deploy --help" src="readme_images/tomo-deploy-help.png" /></p>
+<p>Like <code>setup</code>, this can be simulated with <code>--dry-run</code>, like this:</p>
+<p><img alt="$ tomo deploy --dry-run" src="readme_images/tomo-deploy-dry-run.png" /></p>
+<h4 id="running-a-single-task">Running a single task</h4>
+<p>Tomo can also <code>run</code> individual remote tasks. Use the <code>tasks</code> command to see the list of tasks tomo knows about.</p>
+<p><img alt="$ tomo tasks" src="readme_images/tomo-tasks.png" /></p>
+<p>One of the built-in Rails tasks is <code>rails:console</code>, which brings up a fully-interactive Rails console over SSH. We can simulate this with <code>--dry-run</code> as well.</p>
+<p><img alt="$ tomo run rails:console --dry-run" src="readme_images/tomo-run-rails-console-dry-run.png" /></p>
+<h4 id="writing-tasks">Writing tasks</h4>
+<p>Tomo has many plugins built-in, but you can easily add your own to extend tomo with custom tasks. By convention, custom plugins are stored in <code>.tomo/plugins/</code>. These plugins can define tasks as plain ruby methods. For example:</p>
+<pre><code class="ruby"># .tomo/plugins/my-plugin.rb
+
+def hello
+  remote.run &quot;echo&quot;, &quot;hello&quot;, settings[:application]
+end
+</code></pre>
+
+<p>Use <code>remote.run</code> to execute shell scripts on the remote host, similar to how you would use Ruby&rsquo;s <code>system</code>. Project settings are accessible via <code>settings</code>, which is a plain Ruby hash.</p>
+<p>Load your plugin in <code>config.rb</code> like this:</p>
+<pre><code class="ruby"># .tomo/config.rb
+
+plugin &quot;./plugins/my-plugin.rb&quot;
+</code></pre>
+
+<p>And run it!</p>
+<p><img alt="$ tomo run my-plugin:hello --dry-run" src="readme_images/tomo-run-hello-dry-run.png" /></p>
+<h4 id="next-steps">Next steps</h4>
+<p>And just like that, you are now already familiar with the basics of tomo and how to extend it! Tomo is even more friendly and powerful with the help of bash completions. If you use bash, run <code>tomo completion-script</code> for instructions on setting them up.</p>
+<p>To prepare your existing project for a real deploy, check out the sections of the reference documentation on configuration [TODO], writing plugins [TODO], the setup command [TODO], and the deploy command [TODO]. There is also a tutorial [TODO] that walks through deploying a new Rails app from scratch. If you have questions, check out the <a href="#faq">FAQ</a> [TODO] and <a href="#support">support</a> notes below. Enjoy using tomo!</p>
+<h2 id="reference-documentation">Reference documentation</h2>
+<p>[TODO]</p>
+<h2 id="faq">FAQ</h2>
+<p>[TODO]</p>
+<h2 id="support">Support</h2>
+<p>Thanks for your interest in Tomo! I use Tomo myself to deploy my own Rails projects and intend to keep this repository working and up to date for the foreseeable future. However Tomo is only a hobby, and as the sole maintainer, my ability to provide support and review pull request is limited and a bit sporadic. My priorities right now are:</p>
+<ol>
+<li>Improve test coverage</li>
+<li>Keep the project free of any serious bugs</li>
+<li>Stay up to date with the latest versions of Ruby and gem dependencies</li>
+</ol>
+<p>If you&rsquo;d like to help by submitting a pull request, that would be much appreciated! Check out the contribution guide to get started.</p>
+<p>Otherwise if you want to report a bug, or have ideas, feedback or questions about Tomo, <a href="https://github.com/mattbrictson/tomo/issues/new">let me know via GitHub issues</a> and I will do my best to provide a helpful answer. Happy hacking! —Matt</p>
+<h2 id="license">License</h2>
+<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+<h2 id="code-of-conduct">Code of conduct</h2>
+<p>Everyone interacting in the Tomo project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the <a href="https://github.com/mattbrictson/tomo/blob/master/CODE_OF_CONDUCT.md">code of conduct</a>.</p>
+<h2 id="contribution-guide">Contribution guide</h2>
+<p>[TODO]</p>
               
             </div>
           </div>
@@ -300,5 +424,5 @@ docs/
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-06-09 21:43:04
+Build Date UTC : 2019-06-09 22:48:24
 -->
