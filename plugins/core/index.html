@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
   
   <script>
     // Current page data
@@ -267,7 +268,7 @@
 <tr>
 <td><code>current_path</code></td>
 <td>Location of the symlink that points to the currently deployed release</td>
-<td><code>"%&lt;deploy_to/current"</code></td>
+<td><code>"%&lt;deploy_to&gt;/current"</code></td>
 </tr>
 <tr>
 <td><code>deploy_to</code></td>
@@ -415,13 +416,13 @@ remote.run?(&quot;which&quot;, &quot;java&quot;) # =&gt; false
 </code></pre>
 
 <h3 id="remoteln_sftarget-link-4242options-tomoresult">remote.ln_sf(target, link, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
-<p>Create a symlink on the remote host at the path specified at <code>link</code> that points to <code>target</code>.</p>
+<p>Create a symlink on the remote host at the path specified at <code>link</code> that points to <code>target</code>. Deletes any existing file that already exists at the <code>link</code> path prior to creating the symlink.</p>
 <pre><code class="ruby">remote.ln_sf(paths.shared.join(&quot;.env&quot;), paths.release.join(&quot;.env&quot;))
 # $ ln -sf /var/www/my-app/shared/.env /var/www/my-app/releases/20190604204415/.env
 </code></pre>
 
 <h3 id="remoteln_sfntarget-link-4242options-tomoresult">remote.ln_sfn(target, link, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
-<p>Like <code>ln_sf</code> but also passes the <code>-n</code> flag, which deletes an existing file if necessary before creating the link.</p>
+<p>Like <code>ln_sf</code> but also passes the <code>-n</code> flag, which allows an existing <code>link</code> to be deleted even if it is a symlink to a directory.</p>
 <h3 id="remotemkdir_p42directories-4242options-tomoresult">remote.mkdir_p(*directories, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Creates one or more directories on the remote host.</p>
 <pre><code class="ruby">remote.mkdir_p(paths.current.dirname, paths.shared)

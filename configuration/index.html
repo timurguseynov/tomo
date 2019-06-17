@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/extra.css" rel="stylesheet">
   
   <script>
     // Current page data
@@ -315,11 +316,11 @@ end
 </code></pre>
 
 <h2 id="hostaddress-4242options">host(address, **options)</h2>
-<p>Specify the SSH host address that tomo will connect to. The <code>address</code> can contain username, host name or IP address, and optionally a port number. For example:</p>
+<p>Specify the SSH host address (including username) that tomo will connect to. For example:</p>
 <pre><code class="ruby">host &quot;deployer@app.example.com&quot; # port 22 is implied
 </code></pre>
 
-<pre><code class="ruby">host &quot;admin@192.168.1.50:8022&quot; # port 8022
+<pre><code class="ruby">host &quot;admin@192.168.1.50&quot;, port: 8022 # port 8022
 </code></pre>
 
 <p>The following advanced <code>options</code> are supported:</p>
@@ -332,6 +333,11 @@ end
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>port</code></td>
+<td>SSH port number.</td>
+<td><code>22</code></td>
+</tr>
 <tr>
 <td><code>roles</code></td>
 <td>An array of String roles to assign to this host. Used with the <a href="#rolename-runs">role</a> directive for specifying which tasks should run on this host.</td>

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
   
   <script>
     // Current page data
@@ -274,6 +275,12 @@
 </code></pre>
 
 <p><code>rails:db_seed</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. Since seeds rely on the structure of the database, it is typically run just after <a href="#railsdb_migrate">rails:db_migrate</a>.</p>
+<h3 id="railsdb_create">rails:db_create</h3>
+<p>Runs <code>bundle exec rake db:create</code> to create the database. This task is intended for use as a <a href="../../commands/setup/">setup</a> task. It will be automatically skipped if the database already exists, so it is safe to re-run.</p>
+<h3 id="railsdb_schema_load">rails:db_schema_load</h3>
+<p>Runs <code>bundle exec rake db:schema:load</code> to load the schema from <code>db/schema.rb</code> into an existing database. This task is intended for use as a <a href="../../commands/setup/">setup</a> task after <code>rails:db_create</code>. It will be automatically skipped if the database already contains a schema, so it is safe to re-run.</p>
+<h3 id="railsdb_structure_load">rails:db_structure_load</h3>
+<p>Runs <code>bundle exec rake db:structure:load</code> to load the schema from <code>db/structure.sql</code> into an existing database. This task is intended for use as a <a href="../../commands/setup/">setup</a> task after <code>rails:db_create</code>. It will be automatically skipped if the database already contains a schema, so it is safe to re-run.</p>
 <h2 id="helpers">Helpers</h2>
 <p>These helper methods become available on instances of <a href="../../api/Remote/">Remote</a> when the rails plugin is loaded. They accept the same <code>options</code> as <a href="../../api/Remote/#run42command-4242options-tomoresult">Remote#run</a>.</p>
 <h3 id="remoterails42args-4242options-tomoresult">remote.rails(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>

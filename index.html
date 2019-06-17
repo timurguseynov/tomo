@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/theme.css" type="text/css" />
   <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="css/extra.css" rel="stylesheet">
   
   <script>
     // Current page data
@@ -264,8 +265,8 @@
 <hr />
 <ul>
 <li><a href="#quick-start">Quick start</a></li>
-<li><a href="#reference-documentation">Reference documentation</a> [TODO]</li>
-<li><a href="#faq">FAQ</a> [TODO]</li>
+<li><a href="#reference-documentation">Reference documentation</a></li>
+<li><a href="#faq">FAQ</a></li>
 <li><a href="#support">Support</a></li>
 <li><a href="#license">License</a></li>
 <li><a href="#code-of-conduct">Code of conduct</a></li>
@@ -355,11 +356,55 @@ plugin &quot;./plugins/my-plugin.rb&quot;
 <p><img alt="$ tomo run my-plugin:hello --dry-run" src="readme_images/tomo-run-hello-dry-run.png" /></p>
 <h4 id="next-steps">Next steps</h4>
 <p>And just like that, you are now already familiar with the basics of tomo and how to extend it! Tomo is even more friendly and powerful with the help of bash completions. If you use bash, run <code>tomo completion-script</code> for instructions on setting them up.</p>
-<p>To prepare your existing project for a real deploy, check out the sections of the reference documentation on configuration [TODO], writing plugins [TODO], the setup command [TODO], and the deploy command [TODO]. There is also a tutorial [TODO] that walks through deploying a new Rails app from scratch. If you have questions, check out the <a href="#faq">FAQ</a> [TODO] and <a href="#support">support</a> notes below. Enjoy using tomo!</p>
+<p>To prepare your existing project for a real deploy, check out the sections of the reference documentation on <a href="https://tomo-deploy.com/configuration/">configuration</a>, <a href="https://tomo-deploy.com/tutorials/writing-custom-tasks/">writing custom tasks</a> [TODO], the <a href="https://tomo-deploy.com/commands/setup/">setup command</a>, and the <a href="https://tomo-deploy.com/commands/deploy/">deploy command</a>. There is also a tutorial that walks through <a href="https://tomo-deploy.com/tutorials/deploying-rails-from-scratch/">deploying a new Rails app from scratch</a> [TODO]. If you have questions, check out the <a href="#faq">FAQ</a> and <a href="#support">support</a> notes below. Enjoy using tomo!</p>
 <h2 id="reference-documentation">Reference documentation</h2>
-<p>[TODO]</p>
+<ul>
+<li><a href="https://tomo-deploy.com/configuration/">Configuration</a></li>
+<li>Commands<ul>
+<li><a href="https://tomo-deploy.com/commands/init/">init</a></li>
+<li><a href="https://tomo-deploy.com/commands/setup/">setup</a></li>
+<li><a href="https://tomo-deploy.com/commands/deploy/">deploy</a></li>
+<li><a href="https://tomo-deploy.com/commands/run/">run</a></li>
+<li><a href="https://tomo-deploy.com/commands/tasks/">tasks</a></li>
+</ul>
+</li>
+<li>Plugins<ul>
+<li><a href="https://tomo-deploy.com/plugins/core/">core</a></li>
+<li><a href="https://tomo-deploy.com/plugins/bundler/">bundler</a></li>
+<li><a href="https://tomo-deploy.com/plugins/env/">env</a></li>
+<li><a href="https://tomo-deploy.com/plugins/git/">git</a></li>
+<li><a href="https://tomo-deploy.com/plugins/nvm/">nvm</a></li>
+<li><a href="https://tomo-deploy.com/plugins/puma/">puma</a></li>
+<li><a href="https://tomo-deploy.com/plugins/rails/">rails</a></li>
+<li><a href="https://tomo-deploy.com/plugins/rbenv/">rbenv</a></li>
+</ul>
+</li>
+<li>Tutorials<ul>
+<li><a href="https://tomo-deploy.com/tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a> [TODO]</li>
+<li><a href="https://tomo-deploy.com/tutorials/writing-custom-tasks/">Writing Custom Tasks</a> [TODO]</li>
+<li><a href="https://tomo-deploy.com/tutorials/publishing-a-plugin/">Publishing a Plugin</a> [TODO]</li>
+</ul>
+</li>
+<li>API<ul>
+<li><a href="https://tomo-deploy.com/api/Host/">Host</a></li>
+<li><a href="https://tomo-deploy.com/api/Logger/">Logger</a></li>
+<li><a href="https://tomo-deploy.com/api/Paths/">Paths</a></li>
+<li><a href="https://tomo-deploy.com/api/Host/">PluginDSL</a></li>
+<li><a href="https://tomo-deploy.com/api/Remote/">Remote</a></li>
+<li><a href="https://tomo-deploy.com/api/Result/">Result</a></li>
+<li><a href="https://tomo-deploy.com/api/TaskLibrary/">TaskLibrary</a></li>
+<li><a href="https://tomo-deploy.com/api/testing/MockPluginTester/">Testing::MockPluginTester</a></li>
+<li><a href="https://tomo-deploy.com/api/testing/DockerPluginTester/">Testing::DockerPluginTester</a></li>
+</ul>
+</li>
+</ul>
 <h2 id="faq">FAQ</h2>
-<p>[TODO]</p>
+<h4 id="what-does-the-unsupported-option-accept-new-error-mean">What does the <code>unsupported option "accept-new"</code> error mean?</h4>
+<p>By default, tomo uses the <a href="https://www.openssh.com/txt/release-7.6">&ldquo;accept-new&rdquo;</a> value for the StrictHostKeyChecking option, which is supported by OpenSSH 7.6 and newer. If you are using an older version, this will cause an error. As a workaround, you can override tomo&rsquo;s default behavior like this:</p>
+<pre><code class="ruby"># Replace &quot;accept-new&quot; with something compatible with older versions of SSH
+set ssh_strict_host_key_checking: true # or false
+</code></pre>
+
 <h2 id="support">Support</h2>
 <p>Thanks for your interest in Tomo! I use Tomo myself to deploy my own Rails projects and intend to keep this repository working and up to date for the foreseeable future. However Tomo is only a hobby, and as the sole maintainer, my ability to provide support and review pull request is limited and a bit sporadic. My priorities right now are:</p>
 <ol>
@@ -425,5 +470,5 @@ plugin &quot;./plugins/my-plugin.rb&quot;
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-06-10 00:40:04
+Build Date UTC : 2019-06-17 02:03:41
 -->

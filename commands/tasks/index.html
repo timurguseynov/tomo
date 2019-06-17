@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
   
   <script>
     // Current page data
@@ -83,6 +84,19 @@
     <a class="current" href="./">tasks</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#tasks">tasks</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#usage">Usage</a></li>
+        
+            <li><a class="toctree-l4" href="#options">Options</a></li>
+        
+            <li><a class="toctree-l4" href="#example">Example</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
     </ul>
@@ -229,7 +243,71 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="tasks">tasks</h1>
+<p>List all tasks that can be used with the <a href="../run/">run</a> command.</p>
+<h2 id="usage">Usage</h2>
+<pre><code class="sh">$ tomo tasks
+</code></pre>
+
+<p>List all tomo tasks (i.e. those that can be used with <a href="../run/"><code>tomo run</code></a>). Available tasks are those defined by plugins loaded in <code>.tomo/config.rb</code>. Refer to the <a href="../../configuration/#pluginname_or_relative_path">Configuration</a> guide for an explanation of how plugins are loaded. The reference documentation for each plugin (e.g. <a href="../../plugins/core/">core</a>, <a href="../../plugins/git/">git</a>) describes the tasks these plugins provide.</p>
+<h2 id="options">Options</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--[no-]color</code></td>
+<td>By default, tomo automatically determines whether to use color output based on the capabilities of the terminal. Use this option to override this behavior and force tomo to enable or disable color output.</td>
+</tr>
+<tr>
+<td><code>--[no-]debug</code></td>
+<td>Enables verbose logging output that is helpful for troubleshooting. This includes runtime information such as the environment variables on the remote host and all tomo settings. Each SSH command executed by tomo is also logged in detail.</td>
+</tr>
+<tr>
+<td><code>--[no-]trace</code></td>
+<td>Normally if a tomo command fails, a concise and helpful error message is printed. If <code>--trace</code> is specified, tomo will also print the full backtrace.</td>
+</tr>
+<tr>
+<td><code>-h</code>, <code>--help</code></td>
+<td>Prints the help for this tomo command, similar to what you see on this page.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code class="plain">$ tomo tasks
+bundler:clean
+bundler:install
+bundler:upgrade_bundler
+core:clean_releases
+core:log_revision
+core:setup_directories
+core:symlink_current
+core:symlink_shared
+core:write_release_json
+env:set
+env:setup
+env:show
+env:unset
+env:update
+git:clone
+git:create_release
+nvm:install
+puma:restart
+rails:assets_precompile
+rails:console
+rails:db_create
+rails:db_migrate
+rails:db_schema_load
+rails:db_seed
+rails:db_setup
+rails:db_structure_load
+rails:log_tail
+rbenv:install
+</code></pre>
               
             </div>
           </div>

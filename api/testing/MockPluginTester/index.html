@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../../css/extra.css" rel="stylesheet">
   
   <script>
     // Current page data
@@ -281,7 +282,7 @@ end
 <p>Every MockPluginTester instance loads a fresh, independent tomo environment, so mocks, plugins, settings, etc. specified in one tester will not affect any other tests.</p>
 <p>Note that you must <code>require "tomo/testing"</code> to use MockPluginTester.</p>
 <h2 id="class-methods">Class methods</h2>
-<h3 id="new42plugin_names-settings-new_tester">new(*plugin_names, settings: {}) → new_tester</h3>
+<h3 id="new42plugin_names-settings-release-new_tester">new(*plugin_names, settings: {}, release: {}) → new_tester</h3>
 <p>Build a new MockPluginTester that loads the given list of <code>plugin_names</code>. The resulting tester object can be used to simulate any tasks or helpers that are provided by these plugins. Note that the &ldquo;core&rdquo; plugin is always loaded implicitly and does not need to be specified.</p>
 <p>Any <code>settings</code> that are specified will be applied <em>after</em> the defaults settings provided by the plugins have been defined. These settings can use template strings just like <a href="../../../configuration/#sethash">set</a>.</p>
 <pre><code class="ruby">require &quot;tomo/testing&quot;
@@ -297,6 +298,7 @@ tester = Tomo::Testing::MockPluginTester.new(
 )
 </code></pre>
 
+<p>Any <code>release</code> data specified will be available to the task under test via <code>remote.release</code>.</p>
 <h2 id="instance-methods">Instance methods</h2>
 <h3 id="run_tasktask-42args-nil">run_task(task, *args) → nil</h3>
 <p>Run the given <code>task</code> by its fully qualified name (the namespace is required). Any <code>args</code>, if specified, are passed to the task via <code>settings[:run_args]</code>.</p>
