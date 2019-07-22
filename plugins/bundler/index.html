@@ -289,6 +289,10 @@
 </code></pre>
 
 <p><code>bundler:upgrade_bundler</code> is intended for use as a <a href="../../commands/setup/">setup</a> task. It should be run prior to <a href="#bundlerinstall">bundler:install</a> to ensure that the correct version bundler is present.</p>
+<p>This task can also be used on the command line and accepts the desired bundler version as an optional argument. If given, the task will install the version of bundler specified. If not, it falls back to the implicit <code>Gemfile.lock</code> behavior described above. Example usage:</p>
+<pre><code class="plain">$ tomo run bundler:upgrade_bundler 2.0.2
+</code></pre>
+
 <h3 id="bundlerinstall">bundler:install</h3>
 <p>Runs <code>bundle install</code> to download and install all the dependencies specified by the Gemfile of the app that is being deployed. As a performance optimization, this task will run <code>bundle check</code> first to see if the app’s dependencies have already been installed. If so, <code>bundle install</code> is skipped.</p>
 <p><code>bundler:install</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. It should be run prior to any tasks that rely on gems.</p>
