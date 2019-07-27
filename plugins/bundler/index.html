@@ -276,6 +276,11 @@
 <td><code>"%&lt;shared_path&gt;/bundle"</code></td>
 </tr>
 <tr>
+<td><code>bundler_version</code></td>
+<td>The version of bundler to install, used by the <a href="#bundlerupgrade_bundler">bundler:upgrade_bundler</a> task; if <code>nil</code> (the default), determine the version based on <code>Gemfile.lock</code></td>
+<td><code>nil</code></td>
+</tr>
+<tr>
 <td><code>bundler_without</code></td>
 <td>Array of Gemfile groups to exclude from installation</td>
 <td><code>["development", "test"]</code></td>
@@ -284,15 +289,11 @@
 </table>
 <h2 id="tasks">Tasks</h2>
 <h3 id="bundlerupgrade_bundler">bundler:upgrade_bundler</h3>
-<p>Installs the version of bundler required by the app that is being deployed. The version is determined by looking at the <code>BUNDLED WITH</code> entry within the app’s <code>Gemfile.lock</code>. If the app is missing a lockfile this task does nothing. Bundler will be installed withing this command:</p>
+<p>Installs the version of bundler specified by the <code>:bundler_version</code> setting, if specified. If <code>:bundler_version</code> is <code>nil</code> (the default), this task will automatically determine the version of bundler required by the app that is being deployed by looking at the <code>BUNDLED WITH</code> entry within the app’s <code>Gemfile.lock</code>. If <code>:bundler_version</code> is <code>nil</code> and the app is missing a lockfile, then this task does nothing. Bundler will be installed withing this command:</p>
 <pre><code>gem install bundler --conservative --no-document -v VERSION
 </code></pre>
 
 <p><code>bundler:upgrade_bundler</code> is intended for use as a <a href="../../commands/setup/">setup</a> task. It should be run prior to <a href="#bundlerinstall">bundler:install</a> to ensure that the correct version bundler is present.</p>
-<p>This task can also be used on the command line and accepts the desired bundler version as an optional argument. If given, the task will install the version of bundler specified. If not, it falls back to the implicit <code>Gemfile.lock</code> behavior described above. Example usage:</p>
-<pre><code class="plain">$ tomo run bundler:upgrade_bundler 2.0.2
-</code></pre>
-
 <h3 id="bundlerinstall">bundler:install</h3>
 <p>Runs <code>bundle install</code> to download and install all the dependencies specified by the Gemfile of the app that is being deployed. As a performance optimization, this task will run <code>bundle check</code> first to see if the app’s dependencies have already been installed. If so, <code>bundle install</code> is skipped.</p>
 <p><code>bundler:install</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. It should be run prior to any tasks that rely on gems.</p>
