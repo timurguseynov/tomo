@@ -257,6 +257,7 @@ end
 </code></pre>
 
 <h2 id="instance-methods">Instance methods</h2>
+<p>In addition the methods listed here, all <a href="../../plugins/core/#helpers">helpers provided by the core plugin</a> are also available, as are helpers from any other plugins that have been explicitly loaded in <code>.tomo/config.rb</code>. Refer to the documentation for each plugin for details.</p>
 <h3 id="run42command-4242options-tomoresult">run(*command, **options) → <a href="../Result/">Tomo::Result</a></h3>
 <p>Runs a shell script on the remote host via SSH.</p>
 <p>The <code>command</code> can take one of two forms. If given as a single string, the <code>command</code> is executed as a shell script directly; no escaping is performed. This is useful if your script needs to specify output redirection (<code>&gt;</code> or <code>&gt;&gt;</code>), pipes, or other shell logic (<code>&amp;&amp;</code> or <code>||</code>). For example:</p>
