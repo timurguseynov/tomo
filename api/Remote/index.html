@@ -316,8 +316,8 @@ remote.run &quot;echo&quot;, settings[:greeting]
 </table>
 <h3 id="attach42command-4242options">attach(*command, **options)</h3>
 <p>Runs a script on the remote host via SSH, just like <a href="#run42command-4242options-tomoresult">run</a>, except the Ruby process will be replaced with the SSH process and control completely handed over to SSH (this is done via <code>Process.exec</code>). In other words, tomo will immediately stop and it will be like you had run SSH directly.</p>
-<p>This is useful for things like running a Rails console, where you would like to &ldquo;attach&rdquo; stdin/stdout to the remote process. Typically <code>pty: true</code> is used in these situations to force a tty.</p>
-<pre><code class="ruby">remote.attach &quot;bundle exec rails console&quot;, pty: true
+<p>This is useful for things like running a Rails console, where you would like to &ldquo;attach&rdquo; stdin/stdout to the remote process. Calling <code>attach</code> also implies <code>pty: true</code>.</p>
+<pre><code class="ruby">remote.attach &quot;bundle exec rails console&quot;
 </code></pre>
 
 <p><code>attach</code> accepts the same options as <a href="#run42command-4242options-tomoresult">run</a> (except for <code>:attach</code>, which is redundant).</p>
