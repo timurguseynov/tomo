@@ -251,7 +251,7 @@
 
 <p>Prepare the remote host for its first deploy by sequentially running the
 <a href="../../configuration/#setupblock">setup</a> list of tasks specified in <code>.tomo/config.rb</code>. These tasks typically create directories, initialize data stores, install prerequisite tools, and perform other one-time actions that are necessary before a deploy can take place.</p>
-<p>During setup, tomo will initialize the <code>:release_path</code> setting based on the current date and time and using a temporary directory (e.g. <code>/tmp/tomo/20190616214752</code>). This means setup tasks (e.g. <a href="../../plugins/rails/#railsdb_create">rails:db_create</a>, <a href="../../plugins/rails/#railsdb_schema_load">rails:db_schema_load</a>) to run in a location that won&rsquo;t be deployed as an actual release.</p>
+<p>During setup, tomo will initialize the <code>:release_path</code> setting to be a temporary directory based on the current date and time (e.g. <code>/tmp/tomo/20190616214752</code>). This means setup tasks (e.g. <a href="../../plugins/rails/#railsdb_create">rails:db_create</a>, <a href="../../plugins/rails/#railsdb_schema_load">rails:db_schema_load</a>) run in a location that won&rsquo;t be deployed as an actual release.</p>
 <h2 id="options">Options</h2>
 <table>
 <thead>
