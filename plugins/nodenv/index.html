@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>nvm - Tomo</title>
+  <title>nodenv - Tomo</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "nvm";
-    var mkdocs_page_input_path = "plugins/nvm.md";
+    var mkdocs_page_name = "nodenv";
+    var mkdocs_page_input_path = "plugins/nodenv.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -108,10 +108,10 @@
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">nvm</a>
+    <a class="current" href="./">nodenv</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#nvm">nvm</a></li>
+    <li class="toctree-l3"><a href="#nodenv">nodenv</a></li>
     
         <ul>
         
@@ -227,10 +227,10 @@
         
       
     
-    <li>nvm</li>
+    <li>nodenv</li>
     <li class="wy-breadcrumbs-aside">
       
-          <a href="https://github.com/mattbrictson/tomo/edit/master/docs/plugins/nvm.md" class="icon icon-github"
+          <a href="https://github.com/mattbrictson/tomo/edit/master/docs/plugins/nodenv.md" class="icon icon-github"
           > Edit on GitHub</a>
       
     </li>
@@ -241,8 +241,8 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nvm">nvm</h1>
-<p>The nvm plugin installs node and optionally yarn via nvm. This allows you to deploy an app with confidence that particular versions of these tools will be available on the host. This plugin is strongly recommended for Rails apps, which by default use webpacker and thus require node and yarn.</p>
+                <h1 id="nodenv">nodenv</h1>
+<p>The nodenv plugin installs node and optionally yarn via nodenv. This allows you to deploy an app with confidence that particular versions of these tools will be available on the host. This plugin is strongly recommended for Rails apps, which by default use webpacker and thus require node and yarn.</p>
 <h2 id="settings">Settings</h2>
 <table>
 <thead>
@@ -259,27 +259,22 @@
 <td><code>".bashrc"</code></td>
 </tr>
 <tr>
-<td><code>nvm_version</code></td>
-<td>Version of nvm to install</td>
-<td><code>"0.34.0"</code></td>
-</tr>
-<tr>
-<td><code>nvm_node_version</code></td>
+<td><code>nodenv_node_version</code></td>
 <td>Version of node to install</td>
 <td><code>nil</code></td>
 </tr>
 <tr>
-<td><code>nvm_yarn_version</code></td>
+<td><code>nodenv_yarn_version</code></td>
 <td>Version of yarn to install</td>
 <td><code>nil</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="tasks">Tasks</h2>
-<h3 id="nvminstall">nvm:install</h3>
-<p>Installs nvm, uses nvm to install node, and makes the desired version of node the global default version for the deploy user. During installation, the user’s bashrc file is modified so that nvm is automatically loaded for interactive and non-interactive shells.</p>
-<p>You must supply a value for the <code>nvm_node_version</code> setting for this task to work. If the <code>nvm_yarn_version</code> setting is specified, yarn is also installed globally via npm. This setting is optional.</p>
-<p><code>nvm:install</code> is intended for use as a <a href="../../commands/setup/">setup</a> task.</p>
+<h3 id="nodenvinstall">nodenv:install</h3>
+<p>Installs nodenv, uses nodenv to install node, and makes the desired version of node the global default version for the deploy user. During installation, the user’s bashrc file is modified so that nodenv is automatically loaded for interactive and non-interactive shells.</p>
+<p>You must supply a value for the <code>nodenv_node_version</code> setting for this task to work. If the <code>nodenv_yarn_version</code> setting is specified, yarn is also installed globally via npm. This setting is optional.</p>
+<p><code>nodenv:install</code> is intended for use as a <a href="../../commands/setup/">setup</a> task.</p>
               
             </div>
           </div>

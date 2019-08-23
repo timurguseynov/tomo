@@ -134,7 +134,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../plugins/nvm/">nvm</a>
+    <a class="" href="../plugins/nodenv/">nodenv</a>
                 </li>
                 <li class="">
                     
@@ -302,7 +302,7 @@ end
 </ul>
 <h2 id="pluginname_or_relative_path">plugin(name_or_relative_path)</h2>
 <p>Load a tomo plugin by name or from a Ruby file by a relative path.</p>
-<p>Several plugins are built into tomo: <a href="../plugins/bundler/">bundler</a>, <a href="../plugins/env/">env</a>, <a href="../plugins/git/">git</a>, <a href="../plugins/nvm/">nvm</a>, <a href="../plugins/puma/">puma</a>, <a href="../plugins/rails/">rails</a>, and <a href="../plugins/rbenv/">rbenv</a>. If you want to use the tasks provided by one of these plugins, load it by name, like this:</p>
+<p>Several plugins are built into tomo: <a href="../plugins/bundler/">bundler</a>, <a href="../plugins/env/">env</a>, <a href="../plugins/git/">git</a>, <a href="../plugins/nodenv/">nodenv</a>, <a href="../plugins/puma/">puma</a>, <a href="../plugins/rails/">rails</a>, and <a href="../plugins/rbenv/">rbenv</a>. If you want to use the tasks provided by one of these plugins, load it by name, like this:</p>
 <pre><code class="ruby">plugin &quot;git&quot;
 </code></pre>
 
@@ -410,7 +410,7 @@ $ tomo deploy
   run &quot;git:clone&quot;
   run &quot;git:create_release&quot;
   run &quot;core:symlink_shared&quot;
-  run &quot;nvm:install&quot;
+  run &quot;nodenv:install&quot;
   run &quot;rbenv:install&quot;
   run &quot;bundler:upgrade_bundler&quot;
   run &quot;bundler:install&quot;
