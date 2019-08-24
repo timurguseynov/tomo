@@ -343,7 +343,7 @@ end
 <p>Whereas <code>tomo setup</code> is typically run once, you can use <code>tomo deploy</code> every time you want to deploy a new version of your app. The deploy command will sequentially run the <a href="https://tomo-deploy.com/configuration#deployblock">deploy</a> list of tasks specified in <code>.tomo/config.rb</code>. You can customize this list to meet the needs of your app. By default, tomo runs these tasks:</p>
 <ol>
 <li>Create a release (using the <a href="https://tomo-deploy.com/plugins/git#gitcreate_release">git:create_release</a> task)</li>
-<li>Build the project (e.g. <a href="https://tomo-deploy.com/plugins/bundler#bundlerinstall">bundler:install</a>, <a href="../plugins/rails.md#railsassets_precompile">rails:assets_precompile</a>)</li>
+<li>Build the project (e.g. <a href="https://tomo-deploy.com/plugins/bundler#bundlerinstall">bundler:install</a>, <a href="https://tomo-deploy.com/plugins/rails#railsassets_precompile">rails:assets_precompile</a>)</li>
 <li>Migrate data to the meet the requirements of the new release (e.g. <a href="https://tomo-deploy.com/plugins/rails#railsdb_migrate">rails:db_migrate</a>)</li>
 <li>Make the new release the &ldquo;current&rdquo; one (<a href="https://tomo-deploy.com/plugins/core#coresymlink_current">core:symlink_current</a>)</li>
 <li>Restart the app to use the new current release (e.g. <a href="https://tomo-deploy.com/plugins/puma#pumarestart">puma:restart</a>)</li>
@@ -479,5 +479,5 @@ set ssh_strict_host_key_checking: true # or false
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-08-23 19:32:19
+Build Date UTC : 2019-08-24 19:40:37
 -->
