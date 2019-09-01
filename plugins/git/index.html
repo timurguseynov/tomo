@@ -276,6 +276,11 @@
 <td><code>{ GIT_SSH_COMMAND: "ssh -o PasswordAuthentication=no -o StrictHostKeyChecking=no" }</code></td>
 </tr>
 <tr>
+<td><code>git_ref</code></td>
+<td>The commit SHA or tag to deploy (overrides <code>:git_branch</code>)</td>
+<td><code>nil</code></td>
+</tr>
+<tr>
 <td><code>git_url</code></td>
 <td>URL of the git repository; always use the SSH form like <code>git@github.com:username/repo.git</code> (not HTTPS)</td>
 <td><code>nil</code></td>
@@ -287,7 +292,7 @@
 <p>Performs the initial clone of the git repository. This is necessary before a deploy can be performed. The clone of the repository will be stored in the <code>git_repo_path</code>. The <code>git_url</code> setting must be specified for this task to work.</p>
 <p><code>git:clone</code> is intended for use as a <a href="../../commands/setup/">setup</a> task.</p>
 <h3 id="gitcreate_release">git:create_release</h3>
-<p>Fetches the latest commits from <code>git_branch</code> and creates a release by copying the contents of that branch of repository into a new release inside the <code>releases_path</code>. Releases are numbered based on the timestamp of when the deploy takes place.</p>
+<p>Fetches the latest commits from <code>git_branch</code> (or <code>git_ref</code>) and creates a release by copying the contents of that branch of repository into a new release inside the <code>releases_path</code>. Releases are numbered based on the timestamp of when the deploy takes place.</p>
 <p><code>git:create_release</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task.</p>
 <h2 id="helpers">Helpers</h2>
 <p>These helper methods become available on instances of <a href="../../api/Remote/">Remote</a> when the git plugin is loaded. They accept the same <code>options</code> as <a href="../../api/Remote/#run42command-4242options-tomoresult">Remote#run</a>.</p>
