@@ -246,6 +246,7 @@
                 <h1 id="bundler">bundler</h1>
 <p>The bundler plugin installs ruby gem dependencies using bundler. This is required for deploying Rails apps. It also provides conveniences for using <code>bundle exec</code>.</p>
 <h2 id="settings">Settings</h2>
+<p>Note that the settings listed here only take effect if you run the <a href="#bundlerconfig">bundler:config</a> task.</p>
 <table>
 <thead>
 <tr>
@@ -256,9 +257,14 @@
 </thead>
 <tbody>
 <tr>
-<td><code>bundler_install_flags</code></td>
-<td>Array of command-line flags to pass to the <code>bundle install</code> command</td>
-<td><code>["--deployment"]</code></td>
+<td><code>bundler_config_path</code></td>
+<td>Location where the <a href="#bundlerconfig">bundler:config</a> task will write bundler&rsquo;s configuration file</td>
+<td><code>".bundle/config"</code></td>
+</tr>
+<tr>
+<td><code>bundler_deployment</code></td>
+<td>Enables bundler&rsquo;s <a href="https://bundler.io/v2.0/man/bundle-install.1.html#DEPLOYMENT-MODE">deployment mode</a> (strongly recommended)</td>
+<td><code>true</code></td>
 </tr>
 <tr>
 <td><code>bundler_gemfile</code></td>
@@ -274,6 +280,11 @@
 <td><code>bundler_path</code></td>
 <td>Directory where gems where be installed</td>
 <td><code>"%&lt;shared_path&gt;/bundle"</code></td>
+</tr>
+<tr>
+<td><code>bundler_retry</code></td>
+<td>Number of times to retry installing a gem if it fails to download</td>
+<td><code>"3"</code></td>
 </tr>
 <tr>
 <td><code>bundler_version</code></td>
@@ -294,6 +305,9 @@
 </code></pre>
 
 <p><code>bundler:upgrade_bundler</code> is intended for use as a <a href="../../commands/setup/">setup</a> task. It should be run prior to <a href="#bundlerinstall">bundler:install</a> to ensure that the correct version bundler is present.</p>
+<h3 id="bundlerconfig">bundler:config</h3>
+<p>Writes a <code>.bundle/config</code> file with the configuration specified by the various <code>:bundler_*</code> tomo settings. This ensures that invocations of <code>bundle check</code>, <code>bundle install</code>, and most importantly <code>bundle exec</code> all consistently use the correct bundler configuration.</p>
+<p><code>bundler:config</code> is intended for use as a <a href="../../commands/setup/">setup</a> task. It should be run prior to <a href="#bundlerinstall">bundler:install</a> so that gems are installed in the proper location.</p>
 <h3 id="bundlerinstall">bundler:install</h3>
 <p>Runs <code>bundle install</code> to download and install all the dependencies specified by the Gemfile of the app that is being deployed. As a performance optimization, this task will run <code>bundle check</code> first to see if the app’s dependencies have already been installed. If so, <code>bundle install</code> is skipped.</p>
 <p><code>bundler:install</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. It should be run prior to any tasks that rely on gems.</p>
