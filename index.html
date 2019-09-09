@@ -421,6 +421,16 @@ plugin &quot;./plugins/my-plugin.rb&quot;
 set ssh_strict_host_key_checking: true # or false
 </code></pre>
 
+<h4 id="why-does-my-deploy-hang-after-starting-puma">Why does my deploy hang after starting puma?</h4>
+<p>Puma 4.1.0 <a href="https://github.com/puma/puma/issues/1906">has a bug</a> where its output isn&rsquo;t properly detached prior to daemonzing. This causes tomo to hang waiting for output. You may see something like this prior to the deploy freezing:</p>
+<pre><code>Puma starting in single mode...
+* Version 4.1.0 (ruby 2.6.4-p104), codename: Fourth and One
+* Min threads: 5, max threads: 5
+* Environment: production
+* Daemonizing...
+</code></pre>
+
+<p>To fix, upgrade to puma 4.1.1 or newer.</p>
 <h2 id="support">Support</h2>
 <p>This project is a labor of love and I can only spend a few hours a week maintaining it, at most. If you&rsquo;d like to help by submitting a pull request, or if you&rsquo;ve discovered a bug that needs my attention, please let me know. Check out <a href="https://github.com/mattbrictson/tomo/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> to get started. Happy hacking! —Matt</p>
 <h2 id="license">License</h2>
@@ -479,5 +489,5 @@ set ssh_strict_host_key_checking: true # or false
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-09-05 05:27:04
+Build Date UTC : 2019-09-09 14:52:12
 -->
