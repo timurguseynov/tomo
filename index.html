@@ -62,6 +62,8 @@
         
             <li><a class="toctree-l3" href="#usage">Usage</a></li>
         
+            <li><a class="toctree-l3" href="#tutorials">Tutorials</a></li>
+        
             <li><a class="toctree-l3" href="#reference-documentation">Reference documentation</a></li>
         
             <li><a class="toctree-l3" href="#faq">FAQ</a></li>
@@ -267,6 +269,7 @@
 <li><a href="#quick-start">Quick start</a></li>
 <li><a href="#usage">Usage</a></li>
 <li><a href="#reference-documentation">Reference documentation</a></li>
+<li><a href="#tutorials">Tutorials</a></li>
 <li><a href="#faq">FAQ</a></li>
 <li><a href="#support">Support</a></li>
 <li><a href="#license">License</a></li>
@@ -329,7 +332,7 @@ end
 <li><code>tomo deploy</code> performs a deployment</li>
 <li><code>tomo run</code> lets you invoke one-off tasks</li>
 </ol>
-<h4 id="setup">Setup</h4>
+<h3 id="setup">Setup</h3>
 <p><code>tomo setup</code> prepares the remote host for its first deploy by sequentially running the
 <a href="https://tomo-deploy.com/configuration#setupblock">setup</a> list of tasks specified in <code>.tomo/config.rb</code>. These tasks typically create directories, initialize data stores, install prerequisite tools, and perform other one-time actions that are necessary before a deploy can take place.</p>
 <p>Out of the box, tomo will:</p>
@@ -339,7 +342,7 @@ end
 <li>Create all necessary deployment directories</li>
 <li>Create the Rails database, load the schema, and insert seed data</li>
 </ul>
-<h4 id="deploy">Deploy</h4>
+<h3 id="deploy">Deploy</h3>
 <p>Whereas <code>tomo setup</code> is typically run once, you can use <code>tomo deploy</code> every time you want to deploy a new version of your app. The deploy command will sequentially run the <a href="https://tomo-deploy.com/configuration#deployblock">deploy</a> list of tasks specified in <code>.tomo/config.rb</code>. You can customize this list to meet the needs of your app. By default, tomo runs these tasks:</p>
 <ol>
 <li>Create a release (using the <a href="https://tomo-deploy.com/plugins/git#gitcreate_release">git:create_release</a> task)</li>
@@ -349,12 +352,12 @@ end
 <li>Restart the app to use the new current release (e.g. <a href="https://tomo-deploy.com/plugins/puma#pumarestart">puma:restart</a>)</li>
 <li>Perform any cleanup (e.g. <a href="https://tomo-deploy.com/plugins/bundler#bundlerclean">bundler:clean</a>)</li>
 </ol>
-<h4 id="run">Run</h4>
+<h3 id="run">Run</h3>
 <p>Tomo can also <code>run</code> individual remote tasks on demand. You can use the <code>tasks</code> command to see the list of tasks tomo knows about.</p>
 <p><img alt="$ tomo tasks" src="readme_images/tomo-tasks.png" /></p>
 <p>One of the built-in Rails tasks is <code>rails:console</code>, which brings up a fully-interactive Rails console over SSH.</p>
 <p><img alt="$ tomo run rails:console" src="readme_images/tomo-run-rails-console.png" /></p>
-<h4 id="extending-tomo">Extending tomo</h4>
+<h3 id="extending-tomo">Extending tomo</h3>
 <p>Tomo has many plugins built-in, but you can easily add your own to extend tomo with custom tasks. By convention, custom plugins are stored in <code>.tomo/plugins/</code>. These plugins can define tasks as plain ruby methods. For example:</p>
 <pre><code class="ruby"># .tomo/plugins/my-plugin.rb
 
@@ -373,6 +376,12 @@ plugin &quot;./plugins/my-plugin.rb&quot;
 <p>And run it!</p>
 <p><img alt="$ tomo run my-plugin:hello" src="readme_images/tomo-run-hello.png" /></p>
 <p>Read the <a href="https://tomo-deploy.com/tutorials/writing-custom-tasks/">Writing Custom Tasks</a> tutorial for an in-depth guide to extending tomo.</p>
+<h2 id="tutorials">Tutorials</h2>
+<ul>
+<li><a href="https://tomo-deploy.com/tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a></li>
+<li><a href="https://tomo-deploy.com/tutorials/writing-custom-tasks/">Writing Custom Tasks</a></li>
+<li><a href="https://tomo-deploy.com/tutorials/publishing-a-plugin/">Publishing a Plugin</a> [TODO]</li>
+</ul>
 <h2 id="reference-documentation">Reference documentation</h2>
 <ul>
 <li><a href="https://tomo-deploy.com/configuration/">Configuration</a></li>
@@ -393,12 +402,6 @@ plugin &quot;./plugins/my-plugin.rb&quot;
 <li><a href="https://tomo-deploy.com/plugins/puma/">puma</a></li>
 <li><a href="https://tomo-deploy.com/plugins/rails/">rails</a></li>
 <li><a href="https://tomo-deploy.com/plugins/rbenv/">rbenv</a></li>
-</ul>
-</li>
-<li>Tutorials<ul>
-<li><a href="https://tomo-deploy.com/tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a></li>
-<li><a href="https://tomo-deploy.com/tutorials/writing-custom-tasks/">Writing Custom Tasks</a></li>
-<li><a href="https://tomo-deploy.com/tutorials/publishing-a-plugin/">Publishing a Plugin</a> [TODO]</li>
 </ul>
 </li>
 <li>API<ul>
@@ -489,5 +492,5 @@ set ssh_strict_host_key_checking: true # or false
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-09-10 15:14:05
+Build Date UTC : 2019-09-11 04:14:35
 -->
