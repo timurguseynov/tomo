@@ -291,6 +291,29 @@ end
 <pre><code class="ruby">require_settings :puma_control_token, :puma_control_url
 </code></pre>
 
+<h3 id="merge_templatepath-string">merge_template(path) → String</h3>
+<p>Given a local <code>path</code> to an <a href="https://ruby-doc.org/stdlib/libdoc/erb/rdoc/ERB.html">ERB</a> template, merge that template and return the resulting string. The ERB template can access the same API that tasks and helpers can access, namely: <code>settings</code>, <code>paths</code>, <code>remote</code>, and <code>raw</code>.</p>
+<p>Here is an example of an ERB template:</p>
+<pre><code class="erb">Hello, &lt;%= settings[:application] %&gt;!
+</code></pre>
+
+<p>If <code>path</code> begins with a <code>"."</code> it is interpreted as a path relative to the tomo configuration file. This allows for easy reference to project-specific templates. For example, given this directory structure:</p>
+<pre><code class="plain">.tomo
+├── config.rb
+└── templates
+    └── unicorn.service.erb
+</code></pre>
+
+<p>Then you could reference the template in a setting like this:</p>
+<pre><code class="ruby"># .tomo/config.rb
+
+set unicorn_service_template_path: &quot;./templates/unicorn.service.erb&quot;
+</code></pre>
+
+<p>And merge it in a task:</p>
+<pre><code class="ruby">merge_template(paths.unicorn_service_template)
+</code></pre>
+
 <h3 id="dry_run-true-or-false">dry_run? → true or false</h3>
 <p>Returns <code>true</code> if tomo was started with the <code>--dry-run</code> option. This is useful if there are certain code paths you want to ensure are taken during a dry run.</p>
 <pre><code class="ruby">def install

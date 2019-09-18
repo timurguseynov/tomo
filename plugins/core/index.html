@@ -355,6 +355,11 @@
 <td>Directory where the <a href="../../commands/setup/">setup</a> command stages temporary files</td>
 <td><code>"/tmp/tomo"</code></td>
 </tr>
+<tr>
+<td><code>tomo_config_file_path</code></td>
+<td>A special read-only setting containing the path to the <code>config.rb</code> file that was used to configure tomo</td>
+<td><code>"/path/to/.tomo/config.rb"</code></td>
+</tr>
 </tbody>
 </table>
 <h2 id="tasks">Tasks</h2>
@@ -413,11 +418,16 @@ ln -sfn /var/www/my-app/shared/config/database.yml \
 remote.run?(&quot;which&quot;, &quot;java&quot;) # =&gt; false
 </code></pre>
 
-<h3 id="remotewritetext-to-append-false-4242options-tomoresult">remote.write(text:, to:, append: false, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
-<p>Write the given <code>text</code> (must be a String) to the remote path specified by <code>to:</code>. If <code>append</code> is <code>false</code> (the default), the remote file will completely replaced; if <code>true</code>, the file will be appended to. This is designed for small amounts of text (e.g. configuration files), not large or binary data.</p>
+<h3 id="remotewritetexttemplate-to-append-false-4242options-tomoresult">remote.write(text:/template:, to:, append: false, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<p>Write the given <code>text</code> (a String) or the text resulting from merging the given <code>template</code> (a local path to an ERB template file) to the remote path specified by <code>to:</code>. Refer to the <a href="../../api/TaskLibrary/#merge_templatepath-string">merge_template</a> documentation for details on tomo’s ERB templating behavior.</p>
+<p>If <code>append</code> is <code>false</code> (the default), the remote file will completely replaced; if <code>true</code>, the file will be appended to. This is designed for small amounts of text (e.g. configuration files), not large or binary data.</p>
 <pre><code class="ruby">remote.write text: &quot;hello world!\n&quot;,
              to: paths.shared.join(&quot;greetings.txt&quot;),
              append: true
+</code></pre>
+
+<pre><code class="ruby">remote.write template: File.expand_path(&quot;unicorn.service.erb&quot;, __dir__),
+             to: &quot;.config/systemd/user/unicorn.service&quot;
 </code></pre>
 
 <h3 id="remoteln_sftarget-link-4242options-tomoresult">remote.ln_sf(target, link, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>

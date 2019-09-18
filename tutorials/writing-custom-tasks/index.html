@@ -265,23 +265,15 @@ plugin &quot;./plugins/cron.rb&quot;
 </code></pre>
 
 <pre><code class="ruby"># .tomo/plugins/cron.rb
-require &quot;erb&quot;
-
 def show
   remote.run &quot;crontab -l&quot;, raise_on_error: false
 end
 
 def install
-  crontab = merge_template(&quot;../templates/crontab.erb&quot;)
+  template_path = File.expand_path(&quot;../templates/crontab.erb&quot;, __dir__)
+  crontab = merge_template(template_path)
   remote.run &quot;echo #{crontab.shellescape} | crontab -&quot;,
              echo: &quot;echo [template:.tomo/templates/crontab.erb] | crontab -&quot;
-end
-
-private
-
-def merge_template(path)
-  template = IO.read(File.expand_path(path, __dir__))
-  ERB.new(template).result(binding)
 end
 </code></pre>
 
@@ -365,7 +357,7 @@ end
 <h3 id="cronshow">cron:show</h3>
 <p>We&rsquo;ll start by building the simpler of the two tasks: <code>cron:show</code>. First, let&rsquo;s try to run that task:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.3.0
+tomo run v0.7.0
 
   ERROR: cron:show is not a recognized task.
   To see a list of all available tasks, run tomo tasks.
@@ -387,7 +379,7 @@ plugin &quot;./plugins/cron.rb&quot;
 
 <p>Now we can try again:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.3.0
+tomo run v0.7.0
 → Connecting to deployer@app.example.com
 • cron:show
 Hi
@@ -402,7 +394,7 @@ end
 
 <p>One more try:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.3.0
+tomo run v0.7.0
 → Connecting to deployer@app.example.com
 • cron:show
 crontab -l
@@ -429,7 +421,7 @@ end
 
 <p>Now we&rsquo;re all good:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.3.0
+tomo run v0.7.0
 → Connecting to deployer@app.example.com
 • cron:show
 crontab -l
@@ -449,7 +441,7 @@ end
 
 <p>If we try to run <code>tomo setup</code> at this point, we&rsquo;ll get an error as expected:</p>
 <pre><code class="plain">$ tomo setup
-tomo setup v0.3.0
+tomo setup v0.7.0
 
   ERROR: cron:install is not a recognized task.
   To see a list of all available tasks, run tomo tasks.
@@ -470,7 +462,7 @@ end
 <p>Note that we are using <code>shellescape</code> as part of Ruby&rsquo;s built-in <a href="https://ruby-doc.org/stdlib-2.6.3/libdoc/shellwords/rdoc/Shellwords.html">shellwords</a> library to safely build the script.</p>
 <p>We can see what this task does without actually affecting the remote host by using <code>--dry-run</code> option:</p>
 <pre><code class="plain">$ tomo run cron:install --dry-run
-tomo run v0.3.0
+tomo run v0.7.0
 * → Connecting to deployer@app.example.com
 * • cron:install
 * echo SHELL\=/bin/bash'
@@ -479,36 +471,17 @@ tomo run v0.3.0
 * Simulated cron:install on deployer@app.example.com (dry run)
 </code></pre>
 
-<p>Looks good! But we if we made it more powerful with some erb templating?</p>
+<p>Looks good! But we if we made it more powerful with some ERB templating?</p>
 <h3 id="templates">Templates</h3>
-<p>There are no built-in templating mechanisms in tomo, but that&rsquo;s because tomo tasks are just Ruby, and we can implement a template with erb templates in just a few lines of code.</p>
-<p>First we can add a <em>private</em> method to our <code>.tomo/plugins/cron.rb</code> file. Private methods are not exposed as tomo tasks but give us the ability to organize our code. This private method reads in an erb template, evaluates it, and returns the rendered template as a string:</p>
-<pre><code class="ruby">require &quot;erb&quot;
-
-def show
-  # ...
-end
-
-def install
-  # ...
-end
-
-private
-
-def merge_template(path)
-  template = IO.read(File.expand_path(path, __dir__))
-  ERB.new(template).result(binding)
-end
-</code></pre>
-
-<p>Now we can use a template instead of a hard-coded cron job:</p>
+<p>Tomo offers a convenient way to use ERB templates with it’s built-in <a href="../../api/TaskLibrary/#merge_templatepath-string">merge_template</a> and <a href="../../plugins/core/#remotewritetexttemplate-to-append-false-4242options-tomoresult">write</a> methods. We can use <code>merge_template</code> instead of a hard-coding the cron job:</p>
 <pre><code class="ruby">def install
-  crontab = merge_template(&quot;../templates/crontab.erb&quot;)
+  template_path = File.expand_path(&quot;../templates/crontab.erb&quot;, __dir__)
+  crontab = merge_template(template_path)
   remote.run &quot;echo #{crontab.shellescape} | crontab -&quot;
 end
 </code></pre>
 
-<p>The erb template has access to all the same APIs as our task methods; that means we can remove the hard-coded paths from our original cron job specification and use tomo&rsquo;s <code>paths</code> helper. So our erb template file (<code>.tomo/templates/crontab.erb</code>) could look like this:</p>
+<p>The ERB template has access to all the same APIs as our task methods; that means we can remove the hard-coded paths from our original cron job specification and use tomo&rsquo;s <code>paths</code> helper. So our ERB template file (<code>.tomo/templates/crontab.erb</code>) could look like this:</p>
 <pre><code class="sh"># ./templates/crontab.erb
 SHELL=/bin/bash
 0 6 * * * . $HOME/.bashrc; cd &lt;%= paths.current %&gt;; bundle exec rails runner PeriodicTask.call &gt; &lt;%= paths.shared.join(&quot;log/periodic-task.log&quot;) %&gt; 2&gt;&amp;1
@@ -516,7 +489,7 @@ SHELL=/bin/bash
 
 <p>Let&rsquo;s check that it still works:</p>
 <pre><code class="plain">$ tomo run cron:install --dry-run
-tomo run v0.3.0
+tomo run v0.7.0
 * → Connecting to deployer@app.example.com
 * • cron:install
 * echo SHELL\=/bin/bash'
@@ -527,7 +500,8 @@ tomo run v0.3.0
 
 <p>That&rsquo;s great, but the output is really verbose. Do we really need to see the full contents of the crontab being echoed? What if our template becomes really large? In tomo, you can mute this output using <code>echo: false</code>, but you can also provide an echo string to show instead of the command. We can use this to echo an abbreviated version:</p>
 <pre><code class="ruby">def install
-  crontab = merge_template(&quot;../templates/crontab.erb&quot;)
+  template_path = File.expand_path(&quot;../templates/crontab.erb&quot;, __dir__)
+  crontab = merge_template(template_path)
   remote.run &quot;echo #{crontab.shellescape} | crontab -&quot;,
              echo: &quot;echo [template:.tomo/templates/crontab.erb] | crontab -&quot;
 end
@@ -535,7 +509,7 @@ end
 
 <p>And then try it:</p>
 <pre><code class="plain">$ tomo run cron:install --dry-run
-tomo run v0.3.0
+tomo run v0.7.0
 * → Connecting to deployer@app.example.com
 * • cron:install
 * echo [template:.tomo/templates/crontab.erb] | crontab -
@@ -554,7 +528,7 @@ echo [template:.tomo/templates/crontab.erb] | crontab -
 
 <p>And we can see what is installed with our <code>cron:show</code> task:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.3.0
+tomo run v0.7.0
 → Connecting to deployer@app.example.com
 • cron:show
 crontab -l
