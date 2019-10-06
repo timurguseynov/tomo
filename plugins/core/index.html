@@ -409,7 +409,7 @@ ln -sfn /var/www/my-app/shared/config/database.yml \
 <p>All of these methods are available on instances of <a href="../../api/Remote/">Remote</a> and accept the same <code>options</code> as <a href="../../api/Remote/#run42command-4242options-tomoresult">Remote#run</a>.</p>
 <h3 id="remotecapture42command-4242options-string">remote.capture(*command, **options) → String</h3>
 <p>Run the given command, returning the stdout of that command. If the command did not write to stdout, then return an empty String. Note that stderr is ignored, and an exception will be thrown if the command fails.</p>
-<pre><code class="ruby">remote.capture(&quot;echo&quot;, &quot;hello&quot;) # =&gt; &quot;hello&quot;
+<pre><code class="ruby">remote.capture(&quot;echo&quot;, &quot;hello&quot;) # =&gt; &quot;hello\n&quot;
 </code></pre>
 
 <h3 id="remoterun42command-4242options-true-or-false">remote.run?(*command, **options) → true or false</h3>
