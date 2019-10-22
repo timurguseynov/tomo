@@ -418,6 +418,7 @@ $ tomo deploy
   run &quot;rails:db_create&quot;
   run &quot;rails:db_schema_load&quot;
   run &quot;rails:db_seed&quot;
+  run &quot;puma:setup_systemd&quot;
 end
 </code></pre>
 
@@ -440,6 +441,7 @@ end
   run &quot;rails:assets_precompile&quot;
   run &quot;core:symlink_current&quot;
   run &quot;puma:restart&quot;
+  run &quot;puma:check_active&quot;
   run &quot;core:clean_releases&quot;
   run &quot;bundler:clean&quot;
   run &quot;core:log_revision&quot;

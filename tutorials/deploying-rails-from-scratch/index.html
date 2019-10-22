@@ -259,7 +259,7 @@
 <li><a href="#run-tomo-setup">Run tomo setup</a></li>
 <li><a href="#run-tomo-deploy">Run tomo deploy</a></li>
 </ol>
-<p>This is a basic tutorial that skips over DNS, TLS, load balancing, PostgreSQL, systemd, etc. If you have suggestions for expanding this guide, consider <a href="https://github.com/mattbrictson/tomo">opening an issue or pull request on GitHub</a>. Thanks for reading!</p>
+<p>This is a basic tutorial that skips over DNS, TLS, load balancing, PostgreSQL, etc. If you have suggestions for expanding this guide, consider <a href="https://github.com/mattbrictson/tomo">opening an issue or pull request on GitHub</a>. Thanks for reading!</p>
 <h2 id="create-an-ubuntu-1804-lts-vps">Create an Ubuntu 18.04 LTS VPS</h2>
 <p>Log into <a href="https://www.digitalocean.com">DigitalOcean</a> and create a &ldquo;Droplet&rdquo; (aka a VPS). If this is your first time using DigitalOcean, check out their <a href="https://www.digitalocean.com/docs/droplets/quickstart/">Droplet QuickStart</a> guide for an introduction to the service.</p>
 <p>When creating the Droplet, make sure to choose <strong>Ubuntu 18.04 (LTS) x64</strong>:</p>
@@ -285,7 +285,11 @@ locale-gen en_US.UTF-8
 <p>It may take a minute or two for all the packages to install.</p>
 <h2 id="set-up-a-deployer-user">Set up a deployer user</h2>
 <p>Running a Rails app as <code>root</code> is a security risk; we need to create a non-privileged user for this purpose. Run the following script to create a
-<code>deployer</code> user that has access to write to a <code>/var/www</code> directory, which is the default location where tomo will deploy our app.</p>
+<code>deployer</code> user that:</p>
+<ul>
+<li>has access to write to a <code>/var/www</code> directory, which is the default location where tomo will deploy our app; and</li>
+<li>can &ldquo;linger&rdquo;, i.e. run long-running processes like the puma web server</li>
+</ul>
 <pre><code class="sh"># Run these commands as root on the VPS
 adduser --disabled-password deployer &lt; /dev/null
 mkdir -p /home/deployer/.ssh
@@ -294,6 +298,7 @@ chown -R deployer:deployer /home/deployer/.ssh
 chmod 600 /home/deployer/.ssh/authorized_keys
 mkdir -p /var/www
 chown deployer:deployer /var/www
+loginctl enable-linger deployer
 </code></pre>
 
 <p>You can safely ignore the <code>Use of uninitialized value $answer</code> warning.</p>

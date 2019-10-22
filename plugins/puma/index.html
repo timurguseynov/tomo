@@ -242,7 +242,14 @@
             <div class="section">
               
                 <h1 id="puma">puma</h1>
-<p>The puma plugin provides basic, zero-configuration support for the default Rails web server.</p>
+<p>The puma plugin provides a <a href="https://en.wikipedia.org/wiki/Systemd">systemd</a>-based solution for starting, stopping, and restarting puma using <a href="https://github.com/puma/puma/blob/master/docs/systemd.md#socket-activation">socket activation</a> for zero-downtime restarts. It is based on the best practices in the <a href="https://github.com/puma/puma/blob/master/docs/systemd.md">official puma documentation</a>.</p>
+<p>Tomo&rsquo;s implementation installs puma as a <em>user-level</em> service using <code>systemctl --user</code>. This allows puma to be installed, started, stopped, and restarted without a root user or <code>sudo</code>. However, when provisioning the host you must make sure to run the following command as root to allow the puma process to continue running even after the tomo deploy user disconnects:</p>
+<pre><code class="sh"># run as root
+$ loginctl enable-linger &lt;DEPLOY_USER&gt;
+</code></pre>
+
+<p>Stdout and stderr of the puma process will be routed to syslog, as is the convention for systemd services. For Rails, it is recommended that you set <code>RAILS_LOG_TO_STDOUT=1</code> so that all Rails logs are handled this way (<code>tomo init</code> configures this by default).</p>
+<p>The tomo puma plugin assumes that your puma server will listen on a single TCP port for HTTP (not HTTPS) traffic. In other words, HTTPS termination will be handled by e.g. Nginx or a separate load balancer.</p>
 <h2 id="settings">Settings</h2>
 <table>
 <thead>
@@ -254,35 +261,85 @@
 </thead>
 <tbody>
 <tr>
-<td><code>puma_control_token</code></td>
-<td>Auth token to use when connecting to the puma control server</td>
-<td><code>"tomo"</code></td>
+<td><code>puma_check_timeout</code></td>
+<td>The number of seconds that the <a href="#pumacheck_active">puma:check_active</a> task will wait for puma to respond before timing out.</td>
+<td><code>15</code></td>
 </tr>
 <tr>
-<td><code>puma_control_url</code></td>
-<td>Connection URL for the puma control server</td>
-<td><code>"tcp://127.0.0.1:9293"</code></td>
+<td><code>puma_port</code></td>
+<td>TCP port that puma should listen on</td>
+<td><code>3000</code></td>
 </tr>
 <tr>
-<td><code>puma_stdout_path</code></td>
-<td>File where puma&rsquo;s stdout will be written using the <code>--redirect-stdout</code> option</td>
-<td><code>"%&lt;shared_path&gt;/log/puma.out"</code></td>
+<td><code>puma_systemd_service</code></td>
+<td>Name of the systemd service that manages the puma server</td>
+<td><code>"puma_%&lt;application&gt;.service"</code></td>
 </tr>
 <tr>
-<td><code>puma_stderr_path</code></td>
-<td>File where puma&rsquo;s stderr will be written using the <code>--redirect-stderr</code> option</td>
-<td><code>"%&lt;shared_path&gt;/log/puma.err"</code></td>
+<td><code>puma_systemd_socket</code></td>
+<td>Name of the systemd socket that is used for <a href="https://github.com/puma/puma/blob/master/docs/systemd.md#socket-activation">socket activation</a> of the puma service</td>
+<td><code>"puma_%&lt;application&gt;.socket"</code></td>
+</tr>
+<tr>
+<td><code>puma_systemd_service_path</code></td>
+<td>Path on the remote host where the systemd puma service configuration file will be created</td>
+<td><code>".config/systemd/user/%&lt;puma_systemd_service&gt;"</code></td>
+</tr>
+<tr>
+<td><code>puma_systemd_socket_path</code></td>
+<td>Path on the remote host where the systemd puma socket configuration file will be created</td>
+<td><code>".config/systemd/user/%&lt;puma_systemd_socket&gt;"</code></td>
+</tr>
+<tr>
+<td><code>puma_systemd_service_template_path</code></td>
+<td>Local path of the ERB template to use to create the the systemd puma service configuration file</td>
+<td><a href="https://github.com/mattbrictson/tomo/blob/master/lib/tomo/plugin/puma/systemd/service.erb">service.erb</a></td>
+</tr>
+<tr>
+<td><code>puma_systemd_socket_template_path</code></td>
+<td>Local path of the ERB template to use to create the the systemd puma socket configuration file</td>
+<td><a href="https://github.com/mattbrictson/tomo/blob/master/lib/tomo/plugin/puma/systemd/socket.erb">socket.erb</a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="tasks">Tasks</h2>
+<h3 id="pumasetup_systemd">puma:setup_systemd</h3>
+<p>Configures systemd to manage puma. This means that puma will automatically be restarted if it crashes, or if the host is rebooted. This task essentially does three things:</p>
+<ol>
+<li>Installs a <code>puma.socket</code> systemd unit</li>
+<li>Installs a <code>puma.service</code> systemd unit that depends on the socket</li>
+<li>Enables these units using <code>systemctl --user enable</code></li>
+</ol>
+<p>Note that these units will be installed and run for the deploy user. You can use <code>:puma_systemd_socket_template_path</code> and <code>:puma_systemd_service_template_path</code> to provide your own templates and customize how puma and systemd are configured.</p>
+<p><code>puma:setup_systemd</code> is intended for use as a <a href="../../commands/setup/">setup</a> task. It must be run before puma can be started during a deploy.</p>
 <h3 id="pumarestart">puma:restart</h3>
-<p>Attempts to restart the puma web server via <code>pumactl</code>. If puma is not already running or has crashed, this task will gracefully perform a cold start of the server instead. The <code>puma</code> gem must be present in the Rails application Gemfile for this task to work. Puma is started with this command:</p>
-<pre><code>bundle exec puma --daemon
+<p>Restarts the puma service via systemd. This starts puma if it isn&rsquo;t running already. The systemd socket remains running while puma itself is restarted. In other words, incoming requests will continue to connect and queue while puma restarts. This is a &ldquo;zero-downtime restart&rdquo;.</p>
+<p>Puma will be configured to listen on <code>:puma_port</code>, with the <code>config/puma.rb</code> file within the Rails app providing the remainder of the configuration. The default port is 3000. Puma is started using this command:</p>
+<pre><code>bundle exec --keep-file-descriptors puma -C config/puma.rb -b tcp://0.0.0.0:3000
 </code></pre>
 
-<p>The <code>config/puma.rb</code> file within the Rails app is used for configuration.</p>
 <p><code>puma:restart</code> is intended for use in a <a href="../../commands/deploy/">deploy</a>, immediately following <a href="../core/#coresymlink_current">core:symlink_current</a> to ensure that the new version of the Rails app is activated.</p>
+<h3 id="pumacheck_active">puma:check_active</h3>
+<p>This task queries systemd and executes a <code>curl</code> test to verify that puma is active and listening on <code>:puma_port</code>. Because puma is run in the background, it is not immediately obvious after starting or restarting puma via systemd as to whether it booted successfully, or if it crashed. This is where the <code>puma:check_active</code> task can help. If puma is not working it will fail and show puma&rsquo;s log output for easier troubleshooting.</p>
+<p><code>puma:check_active</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task, immediately following <a href="#pumarestart">puma:restart</a> to verify that puma restarted successfully.</p>
+<h3 id="pumastart">puma:start</h3>
+<p>Starts the puma socket and service via systemd, if they aren&rsquo;t running already. Equivalent to:</p>
+<pre><code>systemctl --user start puma.socket puma.service
+</code></pre>
+
+<h3 id="pumastop">puma:stop</h3>
+<p>Stops the puma socket and service via systemd. Equivalent to:</p>
+<pre><code>systemctl --user stop puma.socket puma.service
+</code></pre>
+
+<h3 id="pumalog">puma:log</h3>
+<p>Uses <code>journalctl</code> (part of systemd) to view the log output of the puma service. This task is intended for use as a <a href="../../commands/run/">run</a> task and accepts command-line arguments. The arguments are passed through to the <code>journalctl</code> command. For example:</p>
+<pre><code>$ tomo run -- puma:log -f
+</code></pre>
+
+<p>Will run this remote script:</p>
+<pre><code>journalctl -q --user-unit=puma.service -f
+</code></pre>
               
             </div>
           </div>
