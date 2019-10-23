@@ -259,7 +259,7 @@ module Tomo::Plugin::Bundler
   defaults bundler_install_flags: [&quot;--deployment&quot;],
            bundler_gemfile:       nil,
            bundler_jobs:          &quot;4&quot;,
-           bundler_path:          &quot;%&lt;shared_path&gt;/bundle&quot;,
+           bundler_path:          &quot;%{shared_path}/bundle&quot;,
            bundler_without:       %w[development test]
 end
 </code></pre>
@@ -276,7 +276,7 @@ end
   defaults bundler_install_flags: [&quot;--deployment&quot;],
            bundler_gemfile:       nil,
            bundler_jobs:          &quot;4&quot;,
-           bundler_path:          &quot;%&lt;shared_path&gt;/bundle&quot;,
+           bundler_path:          &quot;%{shared_path}/bundle&quot;,
            bundler_without:       %w[development test]
 end
 </code></pre>

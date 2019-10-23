@@ -273,22 +273,22 @@ $ loginctl enable-linger &lt;DEPLOY_USER&gt;
 <tr>
 <td><code>puma_systemd_service</code></td>
 <td>Name of the systemd service that manages the puma server</td>
-<td><code>"puma_%&lt;application&gt;.service"</code></td>
+<td><code>"puma_%{application}.service"</code></td>
 </tr>
 <tr>
 <td><code>puma_systemd_socket</code></td>
 <td>Name of the systemd socket that is used for <a href="https://github.com/puma/puma/blob/master/docs/systemd.md#socket-activation">socket activation</a> of the puma service</td>
-<td><code>"puma_%&lt;application&gt;.socket"</code></td>
+<td><code>"puma_%{application}.socket"</code></td>
 </tr>
 <tr>
 <td><code>puma_systemd_service_path</code></td>
 <td>Path on the remote host where the systemd puma service configuration file will be created</td>
-<td><code>".config/systemd/user/%&lt;puma_systemd_service&gt;"</code></td>
+<td><code>".config/systemd/user/%{puma_systemd_service}"</code></td>
 </tr>
 <tr>
 <td><code>puma_systemd_socket_path</code></td>
 <td>Path on the remote host where the systemd puma socket configuration file will be created</td>
-<td><code>".config/systemd/user/%&lt;puma_systemd_socket&gt;"</code></td>
+<td><code>".config/systemd/user/%{puma_systemd_socket}"</code></td>
 </tr>
 <tr>
 <td><code>puma_systemd_service_template_path</code></td>

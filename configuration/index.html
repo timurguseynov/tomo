@@ -269,7 +269,7 @@ plugin &quot;rails&quot;
 host &quot;deployer@app.example.com&quot;
 
 set application: &quot;my-rails-app&quot;
-set deploy_to: &quot;/var/www/%&lt;application&gt;&quot;
+set deploy_to: &quot;/var/www/%{application}&quot;
 set git_url: &quot;git@github.com:my-username/my-rails-app.git&quot;
 set git_branch: &quot;master&quot;
 # ...
@@ -362,14 +362,14 @@ end
 
 <p>For a full list of settings that affect tomo’s core behavior, refer to the <a href="../plugins/core/">core plugin documentation</a>. Each plugin such as <a href="../plugins/bundler/">bundler</a> and <a href="../plugins/git/">git</a> also has its own specialized list of settings. Refer to the each plugin’s documentation for a full reference.</p>
 <h4 id="interpolation">Interpolation</h4>
-<p>It is possible to reference other settings when specifying a value. The format of a reference string is <code>%&lt;name&gt;</code> where <code>name</code> is the name of another setting. This is often used to build paths that are relative to the release that is being deployed, or for paths relative to tomo’s shared directory.</p>
+<p>It is possible to reference other settings when specifying a value. The format of a reference string is <code>%{name}</code> where <code>name</code> is the name of another setting. This is often used to build paths that are relative to the release that is being deployed, or for paths relative to tomo’s shared directory.</p>
 <p>In this example, the value will be interpolated to contain the release that is being deployed:</p>
-<pre><code class="ruby">set release_json_path: &quot;%&lt;release_path&gt;/.tomo_release.json&quot;
+<pre><code class="ruby">set release_json_path: &quot;%{release_path}/.tomo_release.json&quot;
 # =&gt; &quot;/var/www/my-app/20190523234156/.tomo_release.json&quot;
 </code></pre>
 
 <p>Another common use case is the shared directory:</p>
-<pre><code class="ruby">set bundler_path: &quot;%&lt;shared_path&gt;/bundle&quot;
+<pre><code class="ruby">set bundler_path: &quot;%{shared_path}/bundle&quot;
 # =&gt; &quot;/var/www/my-app/shared/bundle&quot;
 </code></pre>
 

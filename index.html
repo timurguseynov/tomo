@@ -299,7 +299,7 @@ plugin &quot;rails&quot;
 host &quot;user@hostname.or.ip.address&quot;
 
 set application: &quot;my-rails-app&quot;
-set deploy_to: &quot;/var/www/%&lt;application&gt;&quot;
+set deploy_to: &quot;/var/www/%{application}&quot;
 set git_url: &quot;git@github.com:my-username/my-rails-app.git&quot;
 set git_branch: &quot;master&quot;
 # ...
@@ -482,5 +482,5 @@ set ssh_strict_host_key_checking: true # or false
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-10-22 04:42:58
+Build Date UTC : 2019-10-23 01:17:25
 -->

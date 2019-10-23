@@ -268,12 +268,12 @@
 <tr>
 <td><code>current_path</code></td>
 <td>Location of the symlink that points to the currently deployed release</td>
-<td><code>"%&lt;deploy_to&gt;/current"</code></td>
+<td><code>"%{deploy_to}/current"</code></td>
 </tr>
 <tr>
 <td><code>deploy_to</code></td>
 <td>The root directory under which all tomo data, releases, etc. are stored</td>
-<td><code>"/var/www/%&lt;application&gt;"</code></td>
+<td><code>"/var/www/%{application}"</code></td>
 </tr>
 <tr>
 <td><code>keep_releases</code></td>
@@ -298,17 +298,17 @@
 <tr>
 <td><code>releases_path</code></td>
 <td>Directory where the <a href="../../commands/deploy/">deploy</a> command creates releases</td>
-<td><code>"%&lt;deploy_to&gt;/releases"</code></td>
+<td><code>"%{deploy_to}/releases"</code></td>
 </tr>
 <tr>
 <td><code>release_json_path</code></td>
 <td>Path where the <a href="#corewrite_release_json">core:write_release_json</a> task will write a JSON file describing the release</td>
-<td><code>"%&lt;release_path&gt;/.tomo_release.json"</code></td>
+<td><code>"%{release_path}/.tomo_release.json"</code></td>
 </tr>
 <tr>
 <td><code>revision_log_path</code></td>
 <td>Path where the <a href="#corelog_revision">core:log_revision</a> task will append a log message with the date and time of the release</td>
-<td><code>"%&lt;deploy_to&gt;/revisions.log"</code></td>
+<td><code>"%{deploy_to}/revisions.log"</code></td>
 </tr>
 <tr>
 <td><code>run_args</code></td>
@@ -318,7 +318,7 @@
 <tr>
 <td><code>shared_path</code></td>
 <td>Directory where files shared between releases are stored; used by <a href="#coresymlink_shared">core:symlink_shared</a></td>
-<td><code>"%&lt;deploy_to&gt;/shared"</code></td>
+<td><code>"%{deploy_to}/shared"</code></td>
 </tr>
 <tr>
 <td><code>ssh_connect_timeout</code></td>
