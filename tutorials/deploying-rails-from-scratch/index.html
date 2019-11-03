@@ -301,7 +301,6 @@ chown deployer:deployer /var/www
 loginctl enable-linger deployer
 </code></pre>
 
-<p>You can safely ignore the <code>Use of uninitialized value $answer</code> warning.</p>
 <p>For convenience, the <code>deployer</code> user will accept the same SSH key that you are already using to authenticate when connecting as <code>root</code>. Test that it works:</p>
 <pre><code class="sh"># Run on your local machine
 $ ssh -o PasswordAuthentication=no deployer@IPADDR echo &quot;authenticated as deployer!&quot;
