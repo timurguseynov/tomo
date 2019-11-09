@@ -305,11 +305,17 @@ tester = Tomo::Testing::MockPluginTester.new(
 <p>Any remote SSH scripts run by the task (e.g. via <code>remote.run</code>) will be mocked according to rules previously supplied to <a href="#mock_script_resultscript42-stdout-stderr-exit_status-0-self">mock_script_result</a>. If a mock result has not been explicitly supplied, the script will use a default mock that returns a successful result with no output.</p>
 <pre><code class="ruby">require &quot;tomo/testing&quot;
 
-tester = Tomo::Testing::MockPluginTester.new(&quot;rails&quot;)
-tester.run_task(&quot;rails:log_tail&quot;, &quot;-F&quot;)
+tester = Tomo::Testing::MockPluginTester.new(
+  &quot;bundler&quot;, settings: { release_path: &quot;/app/release&quot; }
+)
+tester.mock_script_result(/bundle check/, exit_status: 1)
+tester.run_task(&quot;bundler:install&quot;)
 assert_equal(
-  &quot;tail -F /var/www/testing/current/log/${RAILS_ENV}.log&quot;,
-  tester.executed_script
+  [
+    &quot;cd /app/release &amp;&amp; bundle check&quot;,
+    &quot;cd /app/release &amp;&amp; bundle install&quot;
+  ],
+  tester.executed_scripts
 )
 </code></pre>
 
