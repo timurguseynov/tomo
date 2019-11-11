@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="None">
+  
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Home - Tomo</title>
+  <title>Comparisons - Tomo</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Home";
-    var mkdocs_page_input_path = "readme_images/README.md";
+    var mkdocs_page_name = "Comparisons";
+    var mkdocs_page_input_path = "comparisons.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -54,9 +54,21 @@
     <a class="" href="..">Home</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../comparisons/">Comparisons</a>
+    <a class="current" href="./">Comparisons</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#comparisons">Comparisons</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#at-a-glance">At a glance</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -214,10 +226,10 @@
     
       
     
-    <li>Home</li>
+    <li>Comparisons</li>
     <li class="wy-breadcrumbs-aside">
       
-          <a href="https://github.com/mattbrictson/tomo/edit/master/docs/readme_images/README.md" class="icon icon-github"
+          <a href="https://github.com/mattbrictson/tomo/edit/master/docs/comparisons.md" class="icon icon-github"
           > Edit on GitHub</a>
       
     </li>
@@ -228,16 +240,197 @@
           <div role="main">
             <div class="section">
               
-                <p>The images in this directory can be regenerated using the <code>record_console.rb</code> script.</p>
-<p>For example:</p>
-<pre><code>./record_console.rb tomo deploy --help
-</code></pre>
-<p>This will translate the output of the <code>tomo deploy --help</code> command into HTML and launch it in a browser. From there, press the
-<strong>Convert to PNG</strong> button to generate an image appropriately sized for a GitHub README.</p>
+                <h1 id="comparisons">Comparisons</h1>
+<p>Tomo is a SSH-based deployment tool written in Ruby, and so it is natural to compare it with the many other popular Ruby tools in that category. Here are some specific design choices make tomo different.</p>
+<ul>
+<li><strong>Batteries included.</strong> Running <code>tomo init</code> gives you everything you need to deploy a basic Rails app. Literally just specify the <code>host</code> in the generated configuration file and go! Tomo itself is constantly tested (via CircleCI) with an automated <code>tomo init</code> → <code>tomo setup</code> → <code>tomo deploy</code> of a real Rails app to verify that this out-of-the-box experience always works with the latest version of Rails.</li>
+<li><strong>Opinionated defaults.</strong> The tasks built-into tomo provide a very opinionated deployment: rbenv and nodenv to install ruby and node, puma via systemd with socket activation for zero-downtime restarts, 12-factor style configuration (environment variables as opposed to configuration files), and so on. Tomo provides a strong set of production-tested conventions without you needing to piece together snippets from blog posts or tutorials.</li>
+<li><strong>No Rake.</strong> Many Ruby deployment tools (Capistrano and Mina being the most popular examples) are built on top of Rake, a general purpose tool for making extensible task-based CLIs. Tomo, by contrast, does not use Rake and is a CLI designed specifically for one purpose: deploying Rails via SSH. This means tomo is much more limited than other tools, but conceptually simpler. No need to learn how Rake prerequisites work, the subtle differences between <code>task do ... end</code> and <code>def ... end</code>, or the esoteric trivia needed to replace or re-invoke a Rake task. Tomo tasks are just plain Ruby methods.</li>
+<li><strong>Intentionally simple DSL.</strong> Tomo purposely provides a very limited DSL for writing tasks: settings are immutable, so tasks cannot modify them; tasks cannot call other tasks; tasks cannot control the SSH connection. This simplicity makes tasks easy to write and easy to reason about. They have no side effects and can be easily unit tested.</li>
+</ul>
+<h2 id="at-a-glance">At a glance</h2>
+<p>Here&rsquo;s how tomo compares with the most popular Ruby-based deployment tools: Capistrano and Mina.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Tomo</th>
+<th>Capistrano</th>
+<th>Mina</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First release</td>
+<td>2019</td>
+<td>2009</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>Required gem dependencies</td>
+<td>0</td>
+<td>7</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Minimum supported ruby version</td>
+<td>2.4</td>
+<td>2.0</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>Configuration files</td>
+<td>1 (.tomo/config.rb)</td>
+<td>3+ (Capfile, config/deploy.rb, config/deploy/*.rb per stage)</td>
+<td>1 (config/deploy.rb)</td>
+</tr>
+<tr>
+<td>Deploy in parallel to multiple hosts</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td>Configure multiple environments/stages</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>✅ Yes, via custom rake tasks</td>
+</tr>
+<tr>
+<td>Simulate a deploy (dry run)</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Customizable deploy command</td>
+<td>✅ Yes, via config</td>
+<td>✅ Yes, via rake tasks that attach before/after hooks</td>
+<td>✅ Yes, via rake task</td>
+</tr>
+<tr>
+<td>Built-in setup or “cold deploy” command</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Automated host setup (ruby, bundler, yarn, etc.)</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td>Rollback command</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Manage host environment variables (SECRET_KEY_BASE, DATABASE_URL, etc.)</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td>Automated testing of deploying Rails end-to-end</td>
+<td>✅ Yes, via CircleCI</td>
+<td>❌ No</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td>Built-in Rails web server tasks</td>
+<td>✅ Yes, puma with systemd</td>
+<td>❌ No</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td>Built-in ruby version manager tasks</td>
+<td>✅ Yes, rbenv</td>
+<td>❌ No</td>
+<td>✅ Yes, chruby, rbenv, rvm, ry</td>
+</tr>
+<tr>
+<td>Built-in node version manager tasks</td>
+<td>✅ Yes, nodenv</td>
+<td>❌ No</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td>SSH command execution</td>
+<td>One at a time</td>
+<td>One at a time</td>
+<td>Batched</td>
+</tr>
+<tr>
+<td>SSH implementation</td>
+<td>Native</td>
+<td>Ruby (net-ssh)</td>
+<td>Native</td>
+</tr>
+<tr>
+<td>SSH connection management</td>
+<td>Automatic</td>
+<td>Explicit</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Task framework</td>
+<td>Tomo-specific</td>
+<td>Rake</td>
+<td>Rake</td>
+</tr>
+<tr>
+<td>Tasks can invoke other tasks</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Tasks can modify settings on the fly</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Tasks can have before/after hooks</td>
+<td>❌ No</td>
+<td>✅ Yes, via DSL</td>
+<td>✅ Yes, via rake</td>
+</tr>
+<tr>
+<td>DSL availability</td>
+<td>Inside task definitions only</td>
+<td>Global mixin (monkey patch)</td>
+<td>Global mixin (monkey patch)</td>
+</tr>
+<tr>
+<td>DSL for running scripts locally (as opposed to on remote host)</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>DSL for uploading ERB templates</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>❌ No</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../configuration/" class="btn btn-neutral float-right" title="Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -263,6 +456,10 @@
           <a href="https://github.com/mattbrictson/tomo/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../configuration/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -272,8 +469,3 @@
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.0.4
-Build Date UTC : 2019-11-11 06:55:43
--->
