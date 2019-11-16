@@ -345,7 +345,7 @@ Review the changes and then run:
 
 <p>Don&rsquo;t forget to <code>git commit</code> and <code>git push</code> the changes.</p>
 <h2 id="define-the-plugin">Define the plugin</h2>
-<p>The entry point for a tomo plugin gem is the <code>lib/tomo/plugin/&lt;name&gt;.rb</code> file. This file defines the plugin by providing the following three pieces of information:</p>
+<p>The entry point for a tomo plugin gem is the <code>lib/tomo/plugin/&lt;name&gt;.rb</code> file. This file defines the plugin by extending <a href="../../api/PluginDSL/">Tomo::PluginDSL</a> to provide the following three pieces of information:</p>
 <ol>
 <li>Default settings</li>
 <li>Tasks</li>
