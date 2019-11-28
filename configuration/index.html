@@ -508,7 +508,44 @@ host &quot;deployer@app2.example.com&quot;, roles: []
 end
 </code></pre>
 
-<p>In the above configuration, we care that <code>core:symlink_current</code> is executed at the same time on all hosts, but before and after that, the other tasks can be executed out of sync.</p>
+<p>At runtime, tomo turns this configuration into an &ldquo;execution plan&rdquo;, which you can see by passing the <code>--debug</code> option to <code>tomo deploy</code>. Here&rsquo;s what the execution plan might look like for the above configuration with two hosts:</p>
+<pre><code>DEBUG: Execution plan:
+CONCURRENTLY (2 THREADS):
+  = CONNECT deployer@app1.example.com
+  = CONNECT deployer@app2.example.com
+CONCURRENTLY (2 THREADS):
+  = IN SEQUENCE:
+      RUN env:update ON deployer@app1.example.com
+      RUN git:create_release ON deployer@app1.example.com
+      RUN core:symlink_shared ON deployer@app1.example.com
+      RUN core:write_release_json ON deployer@app1.example.com
+      RUN bundler:install ON deployer@app1.example.com
+      RUN rails:assets_precompile ON deployer@app1.example.com
+      RUN rails:db_migrate ON deployer@app1.example.com
+  = IN SEQUENCE:
+      RUN env:update ON deployer@app2.example.com
+      RUN git:create_release ON deployer@app2.example.com
+      RUN core:symlink_shared ON deployer@app2.example.com
+      RUN core:write_release_json ON deployer@app2.example.com
+      RUN bundler:install ON deployer@app2.example.com
+      RUN rails:assets_precompile ON deployer@app2.example.com
+CONCURRENTLY (2 THREADS):
+  = RUN core:symlink_current ON deployer@app1.example.com
+  = RUN core:symlink_current ON deployer@app2.example.com
+CONCURRENTLY (2 THREADS):
+  = IN SEQUENCE:
+      RUN puma:restart ON deployer@app1.example.com
+      RUN core:clean_releases ON deployer@app1.example.com
+      RUN bundler:clean ON deployer@app1.example.com
+      RUN core:log_revision ON deployer@app1.example.com
+  = IN SEQUENCE:
+      RUN puma:restart ON deployer@app2.example.com
+      RUN core:clean_releases ON deployer@app2.example.com
+      RUN bundler:clean ON deployer@app2.example.com
+      RUN core:log_revision ON deployer@app2.example.com
+</code></pre>
+
+<p>As we can see, <code>core:symlink_current</code> is executed at the same time on both hosts, but before and after that, the other tasks can be executed out of sync.</p>
               
             </div>
           </div>
