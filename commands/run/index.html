@@ -317,19 +317,18 @@
 </table>
 <h2 id="example">Example</h2>
 <p>Given the following configuration:</p>
-<pre><code class="ruby">plugin &quot;bundler&quot;
-plugin &quot;puma&quot;
+<pre><code class="ruby">plugin &quot;puma&quot;
 host &quot;deployer@localhost&quot;, port: 32811
 </code></pre>
 
 <p>Then we could run <a href="../../plugins/puma/#pumarestart">puma:restart</a> like this:</p>
 <pre><code class="plain">$ tomo run puma:restart
-tomo run v0.1.0
-→ Connecting to deployer@localhost:32811
+tomo run v0.14.0
+→ Connecting to deployer@app.example.com
 • puma:restart
-cd /var/www/rails-new/current &amp;&amp; bundle exec pumactl --control-url tcp://127.0.0.1:9293 --control-token tomo restart
-Command restart sent success
-✔ Ran puma:restart on deployer@localhost:32811
+systemctl --user start puma_visionbot.socket
+systemctl --user restart puma_visionbot.service
+✔ Ran puma:restart on deployer@app.example.com
 </code></pre>
               
             </div>
