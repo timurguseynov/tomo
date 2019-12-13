@@ -430,6 +430,18 @@ plugin &quot;./plugins/my-plugin.rb&quot;
 set ssh_strict_host_key_checking: true # or false
 </code></pre>
 
+<h4 id="can-i-deploy-multiple-apps-to-a-single-host">Can I deploy multiple apps to a single host?</h4>
+<p>Tomo relies on the host user&rsquo;s bash profile for various things, like setting environment variables and initializing rbenv and nodenv. This makes it impractical to deploy multiple apps to a single host using the same deploy user.</p>
+<p>The solution is to create multiple users on the remote host, and then configure a different user for deploying each app. That way each user can have its own distinct environment variables and you can easily configure each app differently without risking conflicts. Refer to the <a href="https://tomo-deploy.com/tutorials/deploying-rails-from-scratch/#set-up-a-deployer-user">tomo Rails tutorial</a> for instructions on creating a deploy user.</p>
+<p>E.g. app1 would be configured to deploy as:</p>
+<pre><code class="ruby">host &quot;app1@example.com&quot;
+</code></pre>
+
+<p>And app2 would be configured to deploy as:</p>
+<pre><code class="ruby">host &quot;app2@example.com&quot;
+</code></pre>
+
+<p>Next run <code>tomo setup</code> for <em>both</em> apps; this will set everything up for both users on the remote host (environment variables, rbenv, etc.). You can now deploy both apps to the same host, with the confidence that their configurations will be kept cleanly separated.</p>
 <h2 id="support">Support</h2>
 <p>This project is a labor of love and I can only spend a few hours a week maintaining it, at most. If you&rsquo;d like to help by submitting a pull request, or if you&rsquo;ve discovered a bug that needs my attention, please let me know. Check out <a href="https://github.com/mattbrictson/tomo/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> to get started. Happy hacking! —Matt</p>
 <h2 id="license">License</h2>
@@ -488,5 +500,5 @@ set ssh_strict_host_key_checking: true # or false
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-12-07 22:12:53
+Build Date UTC : 2019-12-13 06:12:07
 -->
