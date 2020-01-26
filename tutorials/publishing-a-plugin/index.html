@@ -351,13 +351,13 @@ Review the changes and then run:
 <li>Tasks</li>
 <li>Helpers</li>
 </ol>
-<p>For our &ldquo;cron&rdquo; plugin it looks like this:</p>
+<p>For our &ldquo;cron&rdquo; plugin, the entry point generated from the template looks like this:</p>
 <pre><code class="ruby"># lib/tomo/plugin/cron.rb
 
 require &quot;tomo&quot;
-require &quot;tomo/plugin/cron/helpers&quot;
-require &quot;tomo/plugin/cron/tasks&quot;
-require &quot;tomo/plugin/cron/version&quot;
+require_relative &quot;cron/helpers&quot;
+require_relative &quot;cron/tasks&quot;
+require_relative &quot;cron/version&quot;
 
 module Tomo::Plugin::Cron
   extend Tomo::PluginDSL
@@ -416,7 +416,7 @@ end
 <li>Delete <code>lib/tomo/plugin/cron/helpers.rb</code></li>
 <li>Delete <code>test/tomo/plugin/cron/helpers_test.rb</code></li>
 <li>Remove the following lines from <code>lib/tomo/plugin/cron.rb</code><ul>
-<li><code>require "tomo/plugin/cron/helpers"</code></li>
+<li><code>require_relative "cron/helpers"</code></li>
 <li><code>helpers Tomo::Plugin::Cron::Helpers</code></li>
 </ul>
 </li>
@@ -519,7 +519,7 @@ end
 </code></pre>
 
 <p>Commit the changes:</p>
-<pre><code class="plain">$ git commit -a -m &quot;Releasing v0.2.0&quot;
+<pre><code class="plain">$ git commit -a -m &quot;Release v0.2.0&quot;
 </code></pre>
 
 <p>And then release:</p>
