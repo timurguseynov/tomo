@@ -251,14 +251,14 @@
 <p>The Docker image is based on Ubuntu 18.04. The first time DockerPluginTester is used, the base image will be downloaded and a tomo-specific image will be created, which can take a few minutes. Because of the overhead involved, Docker-based tests should be used sparingly and only when they provide high value over much faster unit tests.</p>
 <p>Note that you must <code>require "tomo/testing"</code> to use DockerPluginTester.</p>
 <h2 id="class-methods">Class methods</h2>
-<h3 id="new42plugin_names-settings-new_tester">new(*plugin_names, settings: {}) → new_tester</h3>
+<h3 id="newplugin_names-settings-new_tester">new(*plugin_names, settings: {}) → new_tester</h3>
 <p>Build a new DockerPluginTester that loads the given list of <code>plugin_names</code>. The resulting tester object can be used to execute any tasks or helpers that are provided by these plugins. Note that the &ldquo;core&rdquo; plugin is always loaded implicitly and does not need to be specified.</p>
 <p>Creating a new DockerPluginTester will implicitly build and run a Docker image containing an SSH server. This can take a few minutes the first time the image is built.</p>
 <p>Make sure to call <a href="#teardown">teardown</a> after you are done using the tester.</p>
 <h2 id="instance-methods">Instance methods</h2>
-<h3 id="run_tasktask-42args-nil">run_task(task, *args) → nil</h3>
+<h3 id="run_tasktask-args-nil">run_task(task, *args) → nil</h3>
 <p>Run the given <code>task</code> by its fully qualified name (the namespace is required). Any <code>args</code>, if specified, are passed to the task via <code>settings[:run_args]</code>. Any remote SSH scripts run by the task will be executed via an SSH connection to the Docker container.</p>
-<h3 id="call_helperhelper-42args-4242kwargs-obj">call_helper(helper, *args, **kwargs) → obj</h3>
+<h3 id="call_helperhelper-args-kwargs-obj">call_helper(helper, *args, **kwargs) → obj</h3>
 <p>Invoke the specified <code>helper</code> method name with the optional positional <code>args</code> and keyword <code>kwargs</code>. Returns the return value of the helper. Any remote SSH scripts run by the task will be executed via an SSH connection to the Docker container.</p>
 <h3 id="teardown-nil">teardown → nil</h3>
 <p>Stop the underlying Docker container associated with this tester. Be sure to call <code>teardown</code> after the test(s) that use the tester are finished.</p>

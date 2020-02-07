@@ -412,18 +412,18 @@ ln -sfn /var/www/my-app/shared/config/database.yml \
 
 <h2 id="helpers">Helpers</h2>
 <p>All of these methods are available on instances of <a href="../../api/Remote/">Remote</a> and accept the same <code>options</code> as <a href="../../api/Remote/#run42command-4242options-tomoresult">Remote#run</a>.</p>
-<h3 id="remotecapture42command-4242options-string">remote.capture(*command, **options) → String</h3>
+<h3 id="remotecapturecommand-options-string">remote.capture(*command, **options) → String</h3>
 <p>Run the given command, returning the stdout of that command. If the command did not write to stdout, then return an empty String. Note that stderr is ignored, and an exception will be thrown if the command fails.</p>
 <pre><code class="ruby">remote.capture(&quot;echo&quot;, &quot;hello&quot;) # =&gt; &quot;hello\n&quot;
 </code></pre>
 
-<h3 id="remoterun42command-4242options-true-or-false">remote.run?(*command, **options) → true or false</h3>
+<h3 id="remoteruncommand-options-true-or-false">remote.run?(*command, **options) → true or false</h3>
 <p>Run the given command, returning <code>true</code> if the command succeeded (exit status of 0) or <code>false</code> otherwise.</p>
 <pre><code class="ruby"># If java is not installed in the $PATH
 remote.run?(&quot;which&quot;, &quot;java&quot;) # =&gt; false
 </code></pre>
 
-<h3 id="remotewritetexttemplate-to-append-false-4242options-tomoresult">remote.write(text:/template:, to:, append: false, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<h3 id="remotewritetexttemplate-to-append-false-options-tomoresult">remote.write(text:/template:, to:, append: false, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Write the given <code>text</code> (a String) or the text resulting from merging the given <code>template</code> (a local path to an ERB template file) to the remote path specified by <code>to:</code>. Refer to the <a href="../../api/TaskLibrary/#merge_templatepath-string">merge_template</a> documentation for details on tomo’s ERB templating behavior.</p>
 <p>If <code>append</code> is <code>false</code> (the default), the remote file will completely replaced; if <code>true</code>, the file will be appended to. This is designed for small amounts of text (e.g. configuration files), not large or binary data.</p>
 <pre><code class="ruby">remote.write text: &quot;hello world!\n&quot;,
@@ -435,47 +435,47 @@ remote.run?(&quot;which&quot;, &quot;java&quot;) # =&gt; false
              to: &quot;.config/systemd/user/unicorn.service&quot;
 </code></pre>
 
-<h3 id="remoteln_sftarget-link-4242options-tomoresult">remote.ln_sf(target, link, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<h3 id="remoteln_sftarget-link-options-tomoresult">remote.ln_sf(target, link, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Create a symlink on the remote host at the path specified at <code>link</code> that points to <code>target</code>. Deletes any existing file that already exists at the <code>link</code> path prior to creating the symlink.</p>
 <pre><code class="ruby">remote.ln_sf(paths.shared.join(&quot;.env&quot;), paths.release.join(&quot;.env&quot;))
 # $ ln -sf /var/www/my-app/shared/.env /var/www/my-app/releases/20190604204415/.env
 </code></pre>
 
-<h3 id="remoteln_sfntarget-link-4242options-tomoresult">remote.ln_sfn(target, link, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<h3 id="remoteln_sfntarget-link-options-tomoresult">remote.ln_sfn(target, link, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Like <code>ln_sf</code> but also passes the <code>-n</code> flag, which allows an existing <code>link</code> to be deleted even if it is a symlink to a directory.</p>
-<h3 id="remotemkdir_p42directories-4242options-tomoresult">remote.mkdir_p(*directories, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<h3 id="remotemkdir_pdirectories-options-tomoresult">remote.mkdir_p(*directories, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Creates one or more directories on the remote host.</p>
 <pre><code class="ruby">remote.mkdir_p(paths.current.dirname, paths.shared)
 # $ mkdir -p /var/www/my-app /var/www/my-app/shared
 </code></pre>
 
-<h3 id="remoterm_rf42paths-4242options-tomoresult">remote.rm_rf(*paths, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<h3 id="remoterm_rfpaths-options-tomoresult">remote.rm_rf(*paths, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Deletes one or more files or directories on the remote host.</p>
 <pre><code class="ruby">remote.rm_rf(paths.tmp)
 # $ rm -rf /tmp/tomo
 </code></pre>
 
-<h3 id="remotelist_filesdirectorynil-4242options-string">remote.list_files(directory=nil, **options) → [String]</h3>
+<h3 id="remotelist_filesdirectorynil-options-string">remote.list_files(directory=nil, **options) → [String]</h3>
 <p>Lists non-hidden files in the specified directory. If <code>directory</code> is omitted, the default SSH login directory is used (typically the deploy user’s home directory). The result will be an array of the directory contents.</p>
 <pre><code class="ruby">remote.list_files(&quot;/var/www/my-app&quot;) # =&gt; [&quot;current&quot;, &quot;releases&quot;, &quot;revision.log&quot;, shared&quot;]
 </code></pre>
 
-<h3 id="remotecommand_availablecommand_name-4242options-true-or-false">remote.command_available?(command_name, **options) → true or false</h3>
+<h3 id="remotecommand_availablecommand_name-options-true-or-false">remote.command_available?(command_name, **options) → true or false</h3>
 <p>Runs <code>which</code> on the remote host to determine whether the given <code>command_name</code> is an available executable. Returns <code>true</code> if an executable exists, <code>false</code> otherwise.</p>
 <pre><code class="ruby">remote.command_available?(&quot;java&quot;) # =&gt; false
 </code></pre>
 
-<h3 id="remotefilefile-4242options-true-or-false">remote.file?(file, **options) → true or false</h3>
+<h3 id="remotefilefile-options-true-or-false">remote.file?(file, **options) → true or false</h3>
 <p>Uses the shell expression <code>[ -f ]</code> to test whether the given <code>file</code> exists on the remote host. Returns <code>true</code> if the path exists and is a normal file, <code>false</code> otherwise.</p>
 <pre><code class="ruby">remote.file?(&quot;.bashrc&quot;) # =&gt; true
 </code></pre>
 
-<h3 id="remoteexecutablefile-4242options-true-or-false">remote.executable?(file, **options) → true or false</h3>
+<h3 id="remoteexecutablefile-options-true-or-false">remote.executable?(file, **options) → true or false</h3>
 <p>Uses the shell expression <code>[ -x ]</code> to test whether the given <code>file</code> exists on the remote host. Returns <code>true</code> if the path exists and is executable, <code>false</code> otherwise.</p>
 <pre><code class="ruby">remote.executable?(&quot;/usr/bin/git&quot;) # =&gt; true
 </code></pre>
 
-<h3 id="remotedirectorydirectory-4242options-true-or-false">remote.directory?(directory, **options) → true or false</h3>
+<h3 id="remotedirectorydirectory-options-true-or-false">remote.directory?(directory, **options) → true or false</h3>
 <p>Uses the shell expression <code>[ -d ]</code> to test whether the given <code>directory</code> exists on the remote host. Returns <code>true</code> if the path exists and is a directory, <code>false</code> otherwise.</p>
 <pre><code class="ruby">remote.directory?(&quot;/opt&quot;) # =&gt; true
 </code></pre>

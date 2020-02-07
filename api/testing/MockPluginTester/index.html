@@ -287,7 +287,7 @@ end
 <p>Every MockPluginTester instance loads a fresh, independent tomo environment, so mocks, plugins, settings, etc. specified in one tester will not affect any other tests.</p>
 <p>Note that you must <code>require "tomo/testing"</code> to use MockPluginTester.</p>
 <h2 id="class-methods">Class methods</h2>
-<h3 id="new42plugin_names-settings-release-new_tester">new(*plugin_names, settings: {}, release: {}) → new_tester</h3>
+<h3 id="newplugin_names-settings-release-new_tester">new(*plugin_names, settings: {}, release: {}) → new_tester</h3>
 <p>Build a new MockPluginTester that loads the given list of <code>plugin_names</code>. The resulting tester object can be used to simulate any tasks or helpers that are provided by these plugins. Note that the &ldquo;core&rdquo; plugin is always loaded implicitly and does not need to be specified.</p>
 <p>Any <code>settings</code> that are specified will be applied <em>after</em> the defaults settings provided by the plugins have been defined. These settings can use template strings just like <a href="../../../configuration/#sethash">set</a>.</p>
 <pre><code class="ruby">require &quot;tomo/testing&quot;
@@ -305,7 +305,7 @@ tester = Tomo::Testing::MockPluginTester.new(
 
 <p>Any <code>release</code> data specified will be available to the task under test via <code>remote.release</code>.</p>
 <h2 id="instance-methods">Instance methods</h2>
-<h3 id="run_tasktask-42args-nil">run_task(task, *args) → nil</h3>
+<h3 id="run_tasktask-args-nil">run_task(task, *args) → nil</h3>
 <p>Run the given <code>task</code> by its fully qualified name (the namespace is required). Any <code>args</code>, if specified, are passed to the task via <code>settings[:run_args]</code>.</p>
 <p>Any remote SSH scripts run by the task (e.g. via <code>remote.run</code>) will be mocked according to rules previously supplied to <a href="#mock_script_resultscript42-stdout-stderr-exit_status-0-self">mock_script_result</a>. If a mock result has not been explicitly supplied, the script will use a default mock that returns a successful result with no output.</p>
 <pre><code class="ruby">require &quot;tomo/testing&quot;
@@ -324,7 +324,7 @@ assert_equal(
 )
 </code></pre>
 
-<h3 id="call_helperhelper-42args-4242kwargs-obj">call_helper(helper, *args, **kwargs) → obj</h3>
+<h3 id="call_helperhelper-args-kwargs-obj">call_helper(helper, *args, **kwargs) → obj</h3>
 <p>Invoke the specified <code>helper</code> method name with the optional positional <code>args</code> and keyword <code>kwargs</code>. Returns the return value of the helper. Remote SSH scripts are mocked as explained in <a href="#run_tasktask-42args-nil">run_task</a>.</p>
 <pre><code class="ruby">require &quot;tomo/testing&quot;
 
@@ -336,7 +336,7 @@ def test_capture_returns_stdout_not_stderr
 end
 </code></pre>
 
-<h3 id="mock_script_resultscript42-stdout-stderr-exit_status-0-self">mock_script_result(script=/.*/, stdout: &ldquo;&rdquo;, stderr: &ldquo;&rdquo;, exit_status: 0) → self</h3>
+<h3 id="mock_script_resultscript-stdout-stderr-exit_status-0-self">mock_script_result(script=/.*/, stdout: &ldquo;&rdquo;, stderr: &ldquo;&rdquo;, exit_status: 0) → self</h3>
 <p>Mock the return value of remote SSH scripts that match the given <code>script</code>. If <code>script</code> is a String, the mock rule will apply only to scripts that match this String exactly. If <code>script</code> is Regexp, the mock rule will apply to any scripts that match that pattern. If <code>script</code> is omitted, the mock rule will apply always.</p>
 <p>In this example, any task or helper invoked via this tester that runs <code>readline /app/current</code> will receive the given mock stdout response:</p>
 <pre><code class="ruby">tester.mock_script_result(&quot;readlink /app/current&quot;, stdout: &lt;&lt;~OUT)

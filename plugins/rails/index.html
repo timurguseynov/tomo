@@ -288,19 +288,19 @@
 <p>Runs <code>bundle exec rake db:structure:load</code> to load the schema from <code>db/structure.sql</code> into an existing database. This task is intended for use as a <a href="../../commands/setup/">setup</a> task after <code>rails:db_create</code>. It will be automatically skipped if the database already contains a schema, so it is safe to re-run.</p>
 <h2 id="helpers">Helpers</h2>
 <p>These helper methods become available on instances of <a href="../../api/Remote/">Remote</a> when the rails plugin is loaded. They accept the same <code>options</code> as <a href="../../api/Remote/#run42command-4242options-tomoresult">Remote#run</a>.</p>
-<h3 id="remoterails42args-4242options-tomoresult">remote.rails(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<h3 id="remoterailsargs-options-tomoresult">remote.rails(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Runs <code>bundle exec rails</code> in within <code>paths.release</code> by default.</p>
 <pre><code class="ruby">remote.rails(&quot;routes&quot;)
 # $ cd /var/www/my-app/releases/20190604204415 &amp;&amp; bundle exec rails routes
 </code></pre>
 
-<h3 id="remoterake42args-4242options-tomoresult">remote.rake(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<h3 id="remoterakeargs-options-tomoresult">remote.rake(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Runs <code>bundle exec rake</code> in within <code>paths.release</code> by default.</p>
 <pre><code class="ruby">remote.rake(&quot;db:migrate&quot;)
 # $ cd /var/www/my-app/releases/20190604204415 &amp;&amp; bundle exec rake db:migrate
 </code></pre>
 
-<h3 id="remoterake42args-4242options-true-or-false">remote.rake?(*args, **options) → true or false</h3>
+<h3 id="remoterakeargs-options-true-or-false">remote.rake?(*args, **options) → true or false</h3>
 <p>Like <code>rake</code> but returns <code>true</code> if the command succeeds (exit status 0), otherwise <code>false</code>.</p>
 <pre><code class="ruby">remote.rake?(&quot;db:migrate&quot;) # =&gt; true
 </code></pre>

@@ -292,7 +292,7 @@ end
 end
 </code></pre>
 
-<h3 id="tasks42task_library_class">tasks(*task_library_class)</h3>
+<h3 id="taskstask_library_class">tasks(*task_library_class)</h3>
 <p>Specify the tasks that will be defined by this plugin by supplying one or more <a href="../TaskLibrary/">TaskLibrary</a> classes. The public instance methods of each class will be turned into tomo tasks.</p>
 <pre><code class="ruby">class Tomo::Plugin::Git::Tasks &lt; Tomo::TaskLibrary
   def clone
@@ -326,7 +326,7 @@ end
 end
 </code></pre>
 
-<h3 id="helpers42module">helpers(*module)</h3>
+<h3 id="helpersmodule">helpers(*module)</h3>
 <p>Specify the helpers that will be defined by this plugin by supplying one or more plain Ruby modules. The modules will be mixed in at runtime to extend the <a href="../Remote/">Remote</a> interface with additional methods.</p>
 <pre><code class="ruby">module Tomo::Plugin::Core::Helpers
   def ln_sf(target, link, **run_opts)

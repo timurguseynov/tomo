@@ -321,13 +321,13 @@
 <p><code>bundler:clean</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. It should be run at the conclusion of the deploy after all other tasks.</p>
 <h2 id="helpers">Helpers</h2>
 <p>These helper methods become available on instances of <a href="../../api/Remote/">Remote</a> when the bundler plugin is loaded. They accept the same <code>options</code> as <a href="../../api/Remote/#run42command-4242options-tomoresult">Remote#run</a>.</p>
-<h3 id="remotebundle42args-4242options-tomoresult">remote.bundle(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
+<h3 id="remotebundleargs-options-tomoresult">remote.bundle(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Runs <code>bundle</code> within <code>release_path</code> by default.</p>
 <pre><code class="ruby">remote.bundle(&quot;exec&quot;, &quot;rails&quot;, &quot;console&quot;)
 # $ cd /var/www/my-app/current &amp;&amp; bundle exec rails console
 </code></pre>
 
-<h3 id="remotebundle42args-4242options-true-or-false">remote.bundle?(*args, **options) → true or false</h3>
+<h3 id="remotebundleargs-options-true-or-false">remote.bundle?(*args, **options) → true or false</h3>
 <p>Same as <code>bundle</code> but returns <code>true</code> if the command succeeded, <code>false</code> otherwise.</p>
               
             </div>
