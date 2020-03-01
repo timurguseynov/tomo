@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>core - Tomo</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="../../css/extra.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../css/extra.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,7 +26,7 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,6 +37,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="../.." class="icon icon-home"> Tomo</a>
         <div role="search">
@@ -46,171 +48,130 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../..">Home</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../comparisons/">Comparisons</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../configuration/">Configuration</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Commands</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../commands/init/">init</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../commands/setup/">setup</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../commands/deploy/">deploy</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../commands/run/">run</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../commands/tasks/">tasks</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Plugins</span>
-    <ul class="subnav">
-                <li class=" current">
-                    
-    <a class="current" href="./">core</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#core">core</a></li>
-    
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../comparisons/">Comparisons</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Commands</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/init/">init</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/setup/">setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/deploy/">deploy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/run/">run</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/tasks/">tasks</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Plugins</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">core</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#settings">Settings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tasks">Tasks</a>
         <ul>
-        
-            <li><a class="toctree-l4" href="#settings">Settings</a></li>
-        
-            <li><a class="toctree-l4" href="#tasks">Tasks</a></li>
-        
-            <li><a class="toctree-l4" href="#helpers">Helpers</a></li>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#coresetup_directories">core:setup_directories</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#coresymlink_shared">core:symlink_shared</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#coresymlink_current">core:symlink_current</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#coreclean_releases">core:clean_releases</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#corewrite_release_json">core:write_release_json</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#corelog_revision">core:log_revision</a>
+    </li>
         </ul>
-    
-
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../bundler/">bundler</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../env/">env</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../git/">git</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../nodenv/">nodenv</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../puma/">puma</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../rails/">rails</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../rbenv/">rbenv</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Tutorials</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../tutorials/writing-custom-tasks/">Writing Custom Tasks</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../tutorials/publishing-a-plugin/">Publishing a Plugin</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">API</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../api/Host/">Tomo::Host</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/Logger/">Tomo::Logger</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/Paths/">Tomo::Paths</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/PluginDSL/">Tomo::PluginDSL</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/Remote/">Tomo::Remote</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/Result/">Tomo::Result</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/TaskLibrary/">Tomo::TaskLibrary</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/testing/MockPluginTester/">Tomo::Testing::MockPluginTester</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/testing/DockerPluginTester/">Tomo::Testing::DockerPluginTester</a>
-                </li>
-    </ul>
-	    </li>
-          
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#helpers">Helpers</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#remotecapturecommand-options-string">remote.capture(*command, **options) → String</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remoteruncommand-options-true-or-false">remote.run?(*command, **options) → true or false</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remotewritetexttemplate-to-append-false-options-tomoresult">remote.write(text:/template:, to:, append: false, **options) → Tomo::Result</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remoteln_sftarget-link-options-tomoresult">remote.ln_sf(target, link, **options) → Tomo::Result</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remoteln_sfntarget-link-options-tomoresult">remote.ln_sfn(target, link, **options) → Tomo::Result</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remotemkdir_pdirectories-options-tomoresult">remote.mkdir_p(*directories, **options) → Tomo::Result</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remoterm_rfpaths-options-tomoresult">remote.rm_rf(*paths, **options) → Tomo::Result</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remotelist_filesdirectorynil-options-string">remote.list_files(directory=nil, **options) → [String]</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remotecommand_availablecommand_name-options-true-or-false">remote.command_available?(command_name, **options) → true or false</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remotefilefile-options-true-or-false">remote.file?(file, **options) → true or false</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remoteexecutablefile-options-true-or-false">remote.executable?(file, **options) → true or false</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remotedirectorydirectory-options-true-or-false">remote.directory?(directory, **options) → true or false</a>
+    </li>
         </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../bundler/">bundler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../env/">env</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../git/">git</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nodenv/">nodenv</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../puma/">puma</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rails/">rails</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rbenv/">rbenv</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/writing-custom-tasks/">Writing Custom Tasks</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/publishing-a-plugin/">Publishing a Plugin</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Host/">Tomo::Host</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Logger/">Tomo::Logger</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Paths/">Tomo::Paths</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/PluginDSL/">Tomo::PluginDSL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Remote/">Tomo::Remote</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Result/">Tomo::Result</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/TaskLibrary/">Tomo::TaskLibrary</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/testing/MockPluginTester/">Tomo::Testing::MockPluginTester</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/testing/DockerPluginTester/">Tomo::Testing::DockerPluginTester</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -501,7 +462,7 @@ remote.run?(&quot;which&quot;, &quot;java&quot;) # =&gt; false
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -511,7 +472,7 @@ remote.run?(&quot;which&quot;, &quot;java&quot;) # =&gt; false
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
           <a href="https://github.com/mattbrictson/tomo/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
@@ -527,6 +488,11 @@ remote.run?(&quot;which&quot;, &quot;java&quot;) # =&gt; false
     <script>var base_url = '../..';</script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

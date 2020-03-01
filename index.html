@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="None">
   
+  
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Home - Tomo</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <title>Tomo</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="css/extra.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="css/extra.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,7 +26,7 @@
   
   <script src="js/jquery-2.1.1.min.js" defer></script>
   <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,6 +37,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="." class="icon icon-home"> Tomo</a>
         <div role="search">
@@ -46,183 +48,122 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href=".">Home</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#tomo">Tomo</a></li>
-    
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick start</a>
         <ul>
-        
-            <li><a class="toctree-l3" href="#quick-start">Quick start</a></li>
-        
-            <li><a class="toctree-l3" href="#usage">Usage</a></li>
-        
-            <li><a class="toctree-l3" href="#tutorials">Tutorials</a></li>
-        
-            <li><a class="toctree-l3" href="#reference-documentation">Reference documentation</a></li>
-        
-            <li><a class="toctree-l3" href="#faq">FAQ</a></li>
-        
-            <li><a class="toctree-l3" href="#support">Support</a></li>
-        
-            <li><a class="toctree-l3" href="#license">License</a></li>
-        
-            <li><a class="toctree-l3" href="#code-of-conduct">Code of conduct</a></li>
-        
-            <li><a class="toctree-l3" href="#contribution-guide">Contribution guide</a></li>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#configuring-a-project">Configuring a project</a>
+    </li>
         </ul>
-    
-
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="comparisons/">Comparisons</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="configuration/">Configuration</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Commands</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="commands/init/">init</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="commands/setup/">setup</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="commands/deploy/">deploy</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="commands/run/">run</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="commands/tasks/">tasks</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Plugins</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="plugins/core/">core</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="plugins/bundler/">bundler</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="plugins/env/">env</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="plugins/git/">git</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="plugins/nodenv/">nodenv</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="plugins/puma/">puma</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="plugins/rails/">rails</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="plugins/rbenv/">rbenv</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Tutorials</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="tutorials/writing-custom-tasks/">Writing Custom Tasks</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="tutorials/publishing-a-plugin/">Publishing a Plugin</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">API</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="api/Host/">Tomo::Host</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="api/Logger/">Tomo::Logger</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="api/Paths/">Tomo::Paths</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="api/PluginDSL/">Tomo::PluginDSL</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="api/Remote/">Tomo::Remote</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="api/Result/">Tomo::Result</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="api/TaskLibrary/">Tomo::TaskLibrary</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="api/testing/MockPluginTester/">Tomo::Testing::MockPluginTester</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="api/testing/DockerPluginTester/">Tomo::Testing::DockerPluginTester</a>
-                </li>
-    </ul>
-	    </li>
-          
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#deploy">Deploy</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run">Run</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#extending-tomo">Extending tomo</a>
+    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tutorials">Tutorials</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#reference-documentation">Reference documentation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#faq">FAQ</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-does-the-unsupported-option-accept-new-error-mean">What does the unsupported option "accept-new" error mean?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#can-i-deploy-multiple-apps-to-a-single-host">Can I deploy multiple apps to a single host?</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#support">Support</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#code-of-conduct">Code of conduct</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#contribution-guide">Contribution guide</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="comparisons/">Comparisons</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="configuration/">Configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Commands</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="commands/init/">init</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="commands/setup/">setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="commands/deploy/">deploy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="commands/run/">run</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="commands/tasks/">tasks</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Plugins</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="plugins/core/">core</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="plugins/bundler/">bundler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="plugins/env/">env</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="plugins/git/">git</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="plugins/nodenv/">nodenv</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="plugins/puma/">puma</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="plugins/rails/">rails</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="plugins/rbenv/">rbenv</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="tutorials/deploying-rails-from-scratch/">Deploying Rails From Scratch</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="tutorials/writing-custom-tasks/">Writing Custom Tasks</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="tutorials/publishing-a-plugin/">Publishing a Plugin</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="api/Host/">Tomo::Host</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="api/Logger/">Tomo::Logger</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="api/Paths/">Tomo::Paths</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="api/PluginDSL/">Tomo::PluginDSL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="api/Remote/">Tomo::Remote</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="api/Result/">Tomo::Result</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="api/TaskLibrary/">Tomo::TaskLibrary</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="api/testing/MockPluginTester/">Tomo::Testing::MockPluginTester</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="api/testing/DockerPluginTester/">Tomo::Testing::DockerPluginTester</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -470,7 +411,7 @@ set ssh_strict_host_key_checking: true # or false
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -480,7 +421,7 @@ set ssh_strict_host_key_checking: true # or false
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
           <a href="https://github.com/mattbrictson/tomo/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
@@ -494,11 +435,16 @@ set ssh_strict_host_key_checking: true # or false
     <script>var base_url = '.';</script>
     <script src="js/theme.js" defer></script>
       <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 1.0.4
-Build Date UTC : 2020-02-22 22:51:46
+MkDocs version : 1.1
+Build Date UTC : 2020-03-01 16:56:42
 -->

@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>Publishing a Plugin - Tomo</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="../../css/extra.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../css/extra.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,7 +26,7 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,6 +37,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="../.." class="icon icon-home"> Tomo</a>
         <div role="search">
@@ -46,179 +48,118 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../..">Home</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../comparisons/">Comparisons</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../configuration/">Configuration</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Commands</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../commands/init/">init</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../commands/setup/">setup</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../commands/deploy/">deploy</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../commands/run/">run</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../commands/tasks/">tasks</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Plugins</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../plugins/core/">core</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../plugins/bundler/">bundler</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../plugins/env/">env</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../plugins/git/">git</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../plugins/nodenv/">nodenv</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../plugins/puma/">puma</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../plugins/rails/">rails</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../plugins/rbenv/">rbenv</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Tutorials</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../deploying-rails-from-scratch/">Deploying Rails From Scratch</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../writing-custom-tasks/">Writing Custom Tasks</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">Publishing a Plugin</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#publishing-a-plugin">Publishing a Plugin</a></li>
-    
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../comparisons/">Comparisons</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Commands</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/init/">init</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/setup/">setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/deploy/">deploy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/run/">run</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../commands/tasks/">tasks</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Plugins</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../plugins/core/">core</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../plugins/bundler/">bundler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../plugins/env/">env</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../plugins/git/">git</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../plugins/nodenv/">nodenv</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../plugins/puma/">puma</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../plugins/rails/">rails</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../plugins/rbenv/">rbenv</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../deploying-rails-from-scratch/">Deploying Rails From Scratch</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../writing-custom-tasks/">Writing Custom Tasks</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Publishing a Plugin</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#create-the-gem">Create the gem</a>
         <ul>
-        
-            <li><a class="toctree-l4" href="#create-the-gem">Create the gem</a></li>
-        
-            <li><a class="toctree-l4" href="#define-the-plugin">Define the plugin</a></li>
-        
-            <li><a class="toctree-l4" href="#write-tests">Write tests</a></li>
-        
-            <li><a class="toctree-l4" href="#try-it-out">Try it out</a></li>
-        
-            <li><a class="toctree-l4" href="#write-a-good-readme">Write a good README</a></li>
-        
-            <li><a class="toctree-l4" href="#set-up-ci">Set up CI</a></li>
-        
-            <li><a class="toctree-l4" href="#publish-to-rubygemsorg">Publish to rubygems.org</a></li>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#choose-a-name">Choose a name</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#use-the-tomo-plugin-template">Use the tomo-plugin template</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-the-rename_templaterb-script">Run the rename_template.rb script</a>
+    </li>
         </ul>
-    
-
-    </ul>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">API</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../api/Host/">Tomo::Host</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/Logger/">Tomo::Logger</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/Paths/">Tomo::Paths</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/PluginDSL/">Tomo::PluginDSL</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/Remote/">Tomo::Remote</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/Result/">Tomo::Result</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/TaskLibrary/">Tomo::TaskLibrary</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/testing/MockPluginTester/">Tomo::Testing::MockPluginTester</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../api/testing/DockerPluginTester/">Tomo::Testing::DockerPluginTester</a>
-                </li>
-    </ul>
-	    </li>
-          
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#define-the-plugin">Define the plugin</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#default-settings">Default settings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tasks">Tasks</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#helpers">Helpers</a>
+    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#write-tests">Write tests</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#try-it-out">Try it out</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#write-a-good-readme">Write a good README</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#set-up-ci">Set up CI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#publish-to-rubygemsorg">Publish to rubygems.org</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#releasing-a-new-version">Releasing a new version</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Host/">Tomo::Host</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Logger/">Tomo::Logger</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Paths/">Tomo::Paths</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/PluginDSL/">Tomo::PluginDSL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Remote/">Tomo::Remote</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/Result/">Tomo::Result</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/TaskLibrary/">Tomo::TaskLibrary</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/testing/MockPluginTester/">Tomo::Testing::MockPluginTester</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../api/testing/DockerPluginTester/">Tomo::Testing::DockerPluginTester</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -277,7 +218,7 @@
 <li>Press <a href="https://github.com/mattbrictson/tomo-plugin/generate">Use this template</a></li>
 <li>Name the repo <code>tomo-plugin-NAME</code> where <code>NAME</code> is the name of the plugin</li>
 </ol>
-<p><img alt="GitHub: Create a new repository from tomo-plugin" src="../create-new-repo@2x.png" /></p>
+<p><img alt="GitHub: Create a new repository from tomo-plugin" src="../create-new-repo%402x.png" /></p>
 <p>For this example we will use &ldquo;cron&rdquo; as the plugin name.</p>
 <h3 id="run-the-rename_templaterb-script">Run the rename_template.rb script</h3>
 <p>Use git to clone the resulting GitHub repo. Inside the repo, run:</p>
@@ -550,7 +491,7 @@ end
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -560,7 +501,7 @@ end
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
           <a href="https://github.com/mattbrictson/tomo/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
@@ -576,6 +517,11 @@ end
     <script>var base_url = '../..';</script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
