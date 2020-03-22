@@ -202,25 +202,18 @@ end
 <p>You can change the default mocking behavior by using <a href="#mock_script_resultscript42-stdout-stderr-exit_status-0-self">mock_script_result</a>, like this:</p>
 <pre><code class="ruby">require &quot;tomo/testing&quot;
 
-def setup
-  @tester = Tomo::Testing::MockPluginTester.new(
-    &quot;bundler&quot;,
-    &quot;puma&quot;,
-    settings: {
-      current_path: &quot;/app/current&quot;,
-      puma_control_url: &quot;tcp://127.0.0.1:9293&quot;,
-      puma_control_token: &quot;test&quot;
-    }
+def test_install
+  tester = Tomo::Testing::MockPluginTester.new(
+    &quot;bundler&quot;, settings: { release_path: &quot;/app/release&quot; }
   )
-end
-
-def test_restart_starts_puma_if_pumactl_fails
-  @tester.mock_script_result(/pumactl/, exit_status: 1)
-  @tester.run_task(&quot;puma:restart&quot;)
+  tester.mock_script_result(/bundle check/, exit_status: 1)
+  tester.run_task(&quot;bundler:install&quot;)
   assert_equal(
-    &quot;cd /app/current &amp;&amp; bundle exec puma --daemon &quot;\
-    &quot;--control-url tcp://127.0.0.1:9293 --control-token test&quot;,
-    @tester.executed_scripts.last
+    [
+      &quot;cd /app/release &amp;&amp; bundle check&quot;,
+      &quot;cd /app/release &amp;&amp; bundle install&quot;
+    ],
+    tester.executed_scripts
   )
 end
 </code></pre>
@@ -234,12 +227,10 @@ end
 <pre><code class="ruby">require &quot;tomo/testing&quot;
 
 tester = Tomo::Testing::MockPluginTester.new(
-  &quot;bundler&quot;,
   &quot;puma&quot;,
   settings: {
-    current_path: &quot;/app/current&quot;,
-    puma_control_url: &quot;tcp://127.0.0.1:9293&quot;,
-    puma_control_token: &quot;test&quot;
+    application: &quot;test&quot;,
+    current_path: &quot;/app/current&quot;
   }
 )
 </code></pre>
@@ -285,8 +276,8 @@ end
 OUT
 </code></pre>
 
-<p>Here, any script that includes <code>pumactl</code> will fail with an exit status of 1:</p>
-<pre><code class="ruby">tester.mock_script_result(/pumactl/, exit_status: 1)
+<p>Here, any script that includes <code>systemctl</code> will fail with an exit status of 1:</p>
+<pre><code class="ruby">tester.mock_script_result(/systemctl/, exit_status: 1)
 </code></pre>
 
 <p>This mocks <em>all</em> scripts to fail with exit status of 255 and stderr of &ldquo;oh no!&rdquo;:</p>
