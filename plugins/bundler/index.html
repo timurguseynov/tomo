@@ -242,7 +242,7 @@
 </table>
 <h2 id="tasks">Tasks</h2>
 <h3 id="bundlerupgrade_bundler">bundler:upgrade_bundler</h3>
-<p>Installs the version of bundler specified by the <code>:bundler_version</code> setting, if specified. If <code>:bundler_version</code> is <code>nil</code> (the default), this task will automatically determine the version of bundler required by the app that is being deployed by looking at the <code>BUNDLED WITH</code> entry within the app’s <code>Gemfile.lock</code>. If <code>:bundler_version</code> is <code>nil</code> and the app is missing a lockfile, then this task does nothing. Bundler will be installed withing this command:</p>
+<p>Installs the version of bundler specified by the <code>:bundler_version</code> setting, if specified. If <code>:bundler_version</code> is <code>nil</code> (the default), this task will automatically determine the version of bundler required by the app that is being deployed by looking at the <code>BUNDLED WITH</code> entry within the app’s <code>Gemfile.lock</code>. Bundler will be installed withing this command:</p>
 <pre><code>gem install bundler --conservative --no-document -v VERSION
 </code></pre>
 
