@@ -178,7 +178,7 @@
                 <h1 id="tomologger">Tomo::Logger</h1>
 <p>Provides a simple interface for logging messages to stdout and stderr. In multi-host deployments, messages are automatically prefixed with <code>[1]</code>, <code>[2]</code>, etc. based on current host. This makes it easier to distinguish where log messages are coming from.</p>
 <pre><code>$ tomo run bundler:clean
-tomo run v0.1.0
+tomo run v1.0.0
 [1] → Connecting to deployer@web1.example.com
 [2] → Connecting to deployer@web2.example.com
 [1] • bundler:clean
@@ -190,7 +190,7 @@ tomo run v0.1.0
 
 <p>If tomo is run in <code>--dry-run</code> mode, log messages are prefixed with a <code>*</code> to indicate the commands are being simulated.</p>
 <pre><code>$ tomo run bundler:clean --dry-run
-tomo run v0.1.0
+tomo run v1.0.0
 * [1] → Connecting to deployer@web1.example.com
 * [2] → Connecting to deployer@web2.example.com
 * [1] • bundler:clean

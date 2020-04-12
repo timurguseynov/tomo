@@ -295,7 +295,7 @@ end
 <h3 id="cronshow">cron:show</h3>
 <p>We&rsquo;ll start by building the simpler of the two tasks: <code>cron:show</code>. First, let&rsquo;s try to run that task:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.8.0
+tomo run v1.0.0
 
   ERROR: cron:show is not a recognized task.
   To see a list of all available tasks, run tomo tasks.
@@ -317,7 +317,7 @@ plugin &quot;./plugins/cron.rb&quot;
 
 <p>Now we can try again:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.8.0
+tomo run v1.0.0
 → Connecting to deployer@app.example.com
 • cron:show
 Hi
@@ -332,7 +332,7 @@ end
 
 <p>One more try:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.8.0
+tomo run v1.0.0
 → Connecting to deployer@app.example.com
 • cron:show
 crontab -l
@@ -359,7 +359,7 @@ end
 
 <p>Now we&rsquo;re all good:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.8.0
+tomo run v1.0.0
 → Connecting to deployer@app.example.com
 • cron:show
 crontab -l
@@ -379,7 +379,7 @@ end
 
 <p>If we try to run <code>tomo setup</code> at this point, we&rsquo;ll get an error as expected:</p>
 <pre><code class="plain">$ tomo setup
-tomo setup v0.8.0
+tomo setup v1.0.0
 
   ERROR: cron:install is not a recognized task.
   To see a list of all available tasks, run tomo tasks.
@@ -400,7 +400,7 @@ end
 <p>Note that we are using <code>shellescape</code> as part of Ruby&rsquo;s built-in <a href="https://ruby-doc.org/stdlib-2.6.3/libdoc/shellwords/rdoc/Shellwords.html">shellwords</a> library to safely build the script.</p>
 <p>We can see what this task does without actually affecting the remote host by using <code>--dry-run</code> option:</p>
 <pre><code class="plain">$ tomo run cron:install --dry-run
-tomo run v0.8.0
+tomo run v1.0.0
 * → Connecting to deployer@app.example.com
 * • cron:install
 * echo SHELL\=/bin/bash'
@@ -427,7 +427,7 @@ SHELL=/bin/bash
 
 <p>Let&rsquo;s check that it still works:</p>
 <pre><code class="plain">$ tomo run cron:install --dry-run
-tomo run v0.8.0
+tomo run v1.0.0
 * → Connecting to deployer@app.example.com
 * • cron:install
 * echo SHELL\=/bin/bash'
@@ -447,7 +447,7 @@ end
 
 <p>And then try it:</p>
 <pre><code class="plain">$ tomo run cron:install --dry-run
-tomo run v0.8.0
+tomo run v1.0.0
 * → Connecting to deployer@app.example.com
 * • cron:install
 * echo [template:.tomo/templates/crontab.erb] | crontab -
@@ -466,7 +466,7 @@ echo [template:.tomo/templates/crontab.erb] | crontab -
 
 <p>And we can see what is installed with our <code>cron:show</code> task:</p>
 <pre><code class="plain">$ tomo run cron:show
-tomo run v0.8.0
+tomo run v1.0.0
 → Connecting to deployer@app.example.com
 • cron:show
 crontab -l
