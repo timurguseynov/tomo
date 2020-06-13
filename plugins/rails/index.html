@@ -97,6 +97,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#railsconsole">rails:console</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#railsdb_console">rails:db_console</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#railsdb_migrate">rails:db_migrate</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#railsdb_seed">rails:db_seed</a>
@@ -209,6 +211,15 @@
 
 <p>Will run this remote script:</p>
 <pre><code>cd /var/www/my-app/current &amp;&amp; bundle exec rails console --sandbox
+</code></pre>
+
+<h3 id="railsdb_console">rails:db_console</h3>
+<p>Starts an interactive database console (e.g. psql) for the primary Rails database via SSH to the remote host. This task is intended for use as a <a href="../../commands/run/">run</a> task. The <code>include-password</code> option is passed automatically.</p>
+<pre><code>$ tomo run rails:db_console
+</code></pre>
+
+<p>Will run this remote script:</p>
+<pre><code>cd /var/www/my-app/current &amp;&amp; bundle exec rails dbconsole --include-password
 </code></pre>
 
 <h3 id="railsdb_migrate">rails:db_migrate</h3>
