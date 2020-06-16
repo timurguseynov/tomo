@@ -203,7 +203,7 @@ host &quot;deployer@app.example.com&quot;
 set application: &quot;my-rails-app&quot;
 set deploy_to: &quot;/var/www/%{application}&quot;
 set git_url: &quot;git@github.com:my-username/my-rails-app.git&quot;
-set git_branch: &quot;master&quot;
+set git_branch: &quot;main&quot;
 # ...
 
 setup do
@@ -392,7 +392,7 @@ end
 
 environment :production do
   host &quot;deployer@app.example.com&quot;
-  set git_branch: &quot;master&quot;
+  set git_branch: &quot;main&quot;
 end
 </code></pre>
 

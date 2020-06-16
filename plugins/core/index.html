@@ -355,7 +355,7 @@ ln -sfn /var/www/my-app/shared/config/database.yml \
 <h3 id="corewrite_release_json">core:write_release_json</h3>
 <p>Writes a JSON file to the location specified by the <code>:release_json_path</code> setting. This file will contain a JSON object with properties that describe the release. Here is an example:</p>
 <pre><code class="json">{
-  &quot;branch&quot;: &quot;master&quot;,
+  &quot;branch&quot;: &quot;main&quot;,
   &quot;author&quot;: &quot;matt@example.com&quot;,
   &quot;revision&quot;: &quot;0d1cb3212e2f9c43aa49fb172d8d9c726163cecf&quot;,
   &quot;revision_date&quot;: &quot;2019-06-01 17:23:48 -0700&quot;,
@@ -366,7 +366,7 @@ ln -sfn /var/www/my-app/shared/config/database.yml \
 
 <h3 id="corelog_revision">core:log_revision</h3>
 <p>Appends a message to a log file specified by the <code>:revision_log_path</code> setting. The message contains information about the release. Here is an example entry:</p>
-<pre><code>2019-06-05 19:00:26 -0700 - 0d1cb3212e2f9c43aa49fb172d8d9c726163cecf (master) deployed by mbrictson
+<pre><code>2019-06-05 19:00:26 -0700 - 0d1cb3212e2f9c43aa49fb172d8d9c726163cecf (main) deployed by mbrictson
 </code></pre>
 
 <h2 id="helpers">Helpers</h2>
