@@ -237,16 +237,16 @@
 <h2 id="example">Example</h2>
 <p>Given the following configuration:</p>
 <pre><code class="ruby">plugin &quot;puma&quot;
-host &quot;deployer@localhost&quot;, port: 32811
+host &quot;deployer@app.example.com&quot;
 </code></pre>
 
 <p>Then we could run <a href="../../plugins/puma/#pumarestart">puma:restart</a> like this:</p>
 <pre><code class="plain">$ tomo run puma:restart
-tomo run v0.14.0
+tomo run v1.1.2
 → Connecting to deployer@app.example.com
 • puma:restart
-systemctl --user start puma_visionbot.socket
-systemctl --user restart puma_visionbot.service
+systemctl --user start puma_example.socket
+systemctl --user restart puma_example.service
 ✔ Ran puma:restart on deployer@app.example.com
 </code></pre>
               
