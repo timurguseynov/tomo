@@ -188,7 +188,7 @@
                 <h1 id="tomotasklibrary">Tomo::TaskLibrary</h1>
 <p>This is the primary public API for extending tomo.</p>
 <p>A TaskLibrary defines tasks. Every public instance method of a TaskLibrary becomes accessible to tomo as a task of the same name, prefixed by the name of its plugin. For example, this is how the <code>git:clone</code> task is defined:</p>
-<pre><code class="ruby">module Tomo::Plugin::Git
+<pre><code class="language-ruby">module Tomo::Plugin::Git
   class Tasks &lt; Tomo::TaskLibrary
     # This becomes the implementation of the git:clone task
     def clone
@@ -198,19 +198,17 @@
   end
 end
 </code></pre>
-
 <p>The TaskLibrary base class provides several useful private methods (detailed below) that allow task authors to run commands on the remote host, access tomo settings, and more. For more information on writing tasks, refer to the <a href="../../tutorials/writing-custom-tasks/">Writing Custom Tasks</a> tutorial.</p>
 <h2 id="instance-methods">Instance methods</h2>
 <h3 id="paths-tomopaths">paths → <a href="../Paths/">Tomo::Paths</a></h3>
 <p>Returns a <a href="../Paths/">Paths</a> object that provides convenient access to settings representing file system paths.</p>
-<pre><code class="ruby">paths.current.join(&quot;lib&quot;) # =&gt; &quot;/var/www/my-app/current/lib&quot;
+<pre><code class="language-ruby">paths.current.join(&quot;lib&quot;) # =&gt; &quot;/var/www/my-app/current/lib&quot;
 # ...which is syntactic sugar for:
 Pathname.new(settings[:current_path]).join(&quot;lib&quot;)
 </code></pre>
-
 <h3 id="settings-hash">settings → Hash</h3>
 <p>Returns a frozen (i.e. read-only) Hash containing all of tomo’s settings. Any <a href="../../configuration/#interpolation">string interpolations</a> will have already been applied. The keys representing the setting names are always symbols.</p>
-<pre><code class="ruby">settings[:application]        # =&gt; &quot;my-app&quot;
+<pre><code class="language-ruby">settings[:application]        # =&gt; &quot;my-app&quot;
 settings[:deploy_to]          # =&gt; &quot;/var/www/my-app&quot;
 settings[:non_existing]       # =&gt; nil
 settings.fetch(:non_existing) # =&gt; KeyError
@@ -218,69 +216,59 @@ settings[:foo] = &quot;bar&quot;        # =&gt; FrozenError
 settings.key?(:application)   # =&gt; true
 settings.key?(:non_existing)  # =&gt; false
 </code></pre>
-
 <h3 id="remote-tomoremote">remote → <a href="../Remote/">Tomo::Remote</a></h3>
 <p>Returns the <a href="../Remote/">Remote</a> façade that allows scripts to be run on the remote host.</p>
-<pre><code class="ruby">remote.run(&quot;echo&quot;, &quot;hello world&quot;)
+<pre><code class="language-ruby">remote.run(&quot;echo&quot;, &quot;hello world&quot;)
 </code></pre>
-
 <h3 id="require_settingname-nil">require_setting(name) → nil</h3>
 <p>Raises an exception if a setting with the given <code>name</code> is not present. In other words, it will raise if <code>settings[name]</code> is <code>nil</code>. This can be used as a guard clause to ensure that users provide all necessary settings before a task can be run.</p>
-<pre><code class="ruby">def clone
+<pre><code class="language-ruby">def clone
   require_setting :git_url
   remote.run &quot;git&quot;, &quot;clone&quot;, settings[:git_url]
 end
 </code></pre>
-
 <h3 id="require_settingsnames-nil">require_settings(*names) → nil</h3>
 <p>Like <code>require_setting</code>, except it accepts an arbitrary number of setting names. Raises if <em>any</em> of the settings are <code>nil</code>.</p>
-<pre><code class="ruby">require_settings :puma_control_token, :puma_control_url
+<pre><code class="language-ruby">require_settings :puma_control_token, :puma_control_url
 </code></pre>
-
 <h3 id="merge_templatepath-string">merge_template(path) → String</h3>
 <p>Given a local <code>path</code> to an <a href="https://ruby-doc.org/stdlib/libdoc/erb/rdoc/ERB.html">ERB</a> template, merge that template and return the resulting string. The ERB template can access the same API that tasks and helpers can access, namely: <code>settings</code>, <code>paths</code>, <code>remote</code>, and <code>raw</code>.</p>
 <p>Here is an example of an ERB template:</p>
-<pre><code class="erb">Hello, &lt;%= settings[:application] %&gt;!
+<pre><code class="language-erb">Hello, &lt;%= settings[:application] %&gt;!
 </code></pre>
-
 <p>If <code>path</code> begins with a <code>"."</code> it is interpreted as a path relative to the tomo configuration file. This allows for easy reference to project-specific templates. For example, given this directory structure:</p>
-<pre><code class="plain">.tomo
+<pre><code class="language-plain">.tomo
 ├── config.rb
 └── templates
     └── unicorn.service.erb
 </code></pre>
-
 <p>Then you could reference the template in a setting like this:</p>
-<pre><code class="ruby"># .tomo/config.rb
+<pre><code class="language-ruby"># .tomo/config.rb
 
 set unicorn_service_template_path: &quot;./templates/unicorn.service.erb&quot;
 </code></pre>
-
 <p>And merge it in a task:</p>
-<pre><code class="ruby">merge_template(paths.unicorn_service_template)
+<pre><code class="language-ruby">merge_template(paths.unicorn_service_template)
 </code></pre>
-
 <h3 id="dry_run-true-or-false">dry_run? → true or false</h3>
 <p>Returns <code>true</code> if tomo was started with the <code>--dry-run</code> option. This is useful if there are certain code paths you want to ensure are taken during a dry run.</p>
-<pre><code class="ruby">def install
+<pre><code class="language-ruby">def install
   return if remote.bundle?(&quot;check&quot;, *check_options) &amp;&amp; !dry_run?
 
   remote.bundle(&quot;install&quot;, *install_options)
 end
 </code></pre>
-
 <h3 id="logger-tomologger">logger → <a href="../Logger/">Tomo::Logger</a></h3>
 <p>Returns the global <a href="../Logger/">Logger</a> object that can be used to write messages to tomo’s output.</p>
-<pre><code class="ruby">logger.debug &quot;got here&quot;
+<pre><code class="language-ruby">logger.debug &quot;got here&quot;
 logger.info &quot;hi!&quot;
 logger.warn &quot;uh oh&quot;
 </code></pre>
-
 <h3 id="diereason">die(reason)</h3>
 <p>Immediately halt task execution by raising an exception. This will automatically print information to stderr about what task failed, on which host, and the <code>reason</code> for the failure.</p>
 <h3 id="rawstring-string">raw(string) → String</h3>
 <p>Mark a string as a &ldquo;raw&rdquo; value so that it is not automatically escaped. By default tomo applies shell escaping rules for safety. If you explicitly want to invoke shell behavior, use <code>raw</code> to prevent these escaping rules.</p>
-<pre><code class="ruby">remote.run &quot;ls&quot;, &quot;$HOME/.bashrc&quot;
+<pre><code class="language-ruby">remote.run &quot;ls&quot;, &quot;$HOME/.bashrc&quot;
 # $ ls $\HOME/.bashrc
 # &quot;$HOME/.bashrc&quot;: No such file or directory (os error 2)
 

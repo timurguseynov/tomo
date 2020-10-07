@@ -170,21 +170,17 @@
                 <h1 id="run">run</h1>
 <p>Run a specific remote task from the current project.</p>
 <h2 id="usage">Usage</h2>
-<pre><code class="plain">$ tomo run [--dry-run] [options] [--] TASK [ARGS...]
+<pre><code class="language-plain">$ tomo run [--dry-run] [options] [--] TASK [ARGS...]
 </code></pre>
-
 <p>Remotely run one specified TASK, optionally passing ARGS to that task. For example, if this project uses the <a href="../../plugins/rails/">rails plugin</a>, you could run:</p>
-<pre><code class="plain">$ tomo run -- rails:console --sandbox
+<pre><code class="language-plain">$ tomo run -- rails:console --sandbox
 </code></pre>
-
 <p>This will run the <a href="../../plugins/rails/#railsconsole">rails:console</a> task on the host specified in <code>.tomo/config.rb</code> <a href="../../configuration/">configuration file</a>, and will pass the <code>--sandbox</code> argument to that task. The <code>--</code> is used to separate tomo options from options that are passed to the task. If a task does not accept options, the <code>--</code> can be omitted, like this:</p>
-<pre><code class="plain">$ tomo run core:clean_releases
+<pre><code class="language-plain">$ tomo run core:clean_releases
 </code></pre>
-
 <p>When you specify a task name, the <code>run</code> command is implied and can be omitted, so this works as well:</p>
-<pre><code class="plain">$ tomo core:clean_releases
+<pre><code class="language-plain">$ tomo core:clean_releases
 </code></pre>
-
 <p>You can run any task defined by plugins loaded by the <a href="../../configuration/#pluginname_or_relative_path">plugin</a> declarations in <code>.tomo/config.rb</code>. To see a list of available tasks, run the <a href="../tasks/">tasks</a> command.</p>
 <p>During the <code>run</code> command, tomo will initialize the <code>:release_path</code> setting to be equal to the current symlink (i.e. <code>/var/www/my-app/current</code>). This means that the task will run within the current release.</p>
 <h2 id="options">Options</h2>
@@ -236,12 +232,11 @@
 </table>
 <h2 id="example">Example</h2>
 <p>Given the following configuration:</p>
-<pre><code class="ruby">plugin &quot;puma&quot;
+<pre><code class="language-ruby">plugin &quot;puma&quot;
 host &quot;deployer@app.example.com&quot;
 </code></pre>
-
 <p>Then we could run <a href="../../plugins/puma/#pumarestart">puma:restart</a> like this:</p>
-<pre><code class="plain">$ tomo run puma:restart
+<pre><code class="language-plain">$ tomo run puma:restart
 tomo run v1.1.2
 → Connecting to deployer@app.example.com
 • puma:restart

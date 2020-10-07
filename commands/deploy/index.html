@@ -170,9 +170,8 @@
                 <h1 id="deploy">deploy</h1>
 <p>Deploy the current project to remote host(s).</p>
 <h2 id="usage">Usage</h2>
-<pre><code class="plain">$ tomo deploy [--dry-run] [options]
+<pre><code class="language-plain">$ tomo deploy [--dry-run] [options]
 </code></pre>
-
 <p>Sequentially run the <a href="../../configuration/#deployblock">deploy</a> list of tasks specified in <code>.tomo/config.rb</code> to deploy the project to a remote host. In practice, a deploy will usually consist of the following steps:</p>
 <ol>
 <li>Create a release (using the <a href="../../plugins/git/#gitcreate_release">git:create_release</a> task)</li>
@@ -184,7 +183,7 @@
 </ol>
 <p>During a deploy, tomo will initialize the <code>:release_path</code> setting based on the current date and time (e.g. <code>/var/www/my-app/releases/20190616214752</code>). Any tasks that copy files into a release (<a href="../../plugins/git/#gitcreate_release">git:create_release</a>), or run inside the release (<a href="../../plugins/bundler/#bundlerinstall">bundler:install</a>, <a href="../../plugins/rails/#railsassets_precompile">rails:assets_precompile</a>, <a href="../../plugins/rails/#railsdb_migrate">rails:db_migrate</a>, etc.) will operate using this path. As a result, every <code>tomo deploy</code> will create a new entry in the releases directory, and the <code>current</code> symlink will point to the release that is currently active, i.e. the most recent successful deploy.</p>
 <p>The directory structure on the remote host looks like this:</p>
-<pre><code class="plain">/var/www/my-app
+<pre><code class="language-plain">/var/www/my-app
 ├── git_repo/
 ├── releases/
 |   ├── 20190614192115/
@@ -199,7 +198,6 @@
 ├── current -&gt; /var/www/my-app/releases/20190616214752
 └── revisions.log
 </code></pre>
-
 <p>This structure is customizable; see the <a href="../../plugins/core/#settings">core plugin settings</a> for details.</p>
 <p>Tip: run <code>tomo deploy --debug --dry-run</code> to see an in-depth explanation of the settings and execution plan that will be used for the deployment.</p>
 <h2 id="options">Options</h2>
@@ -247,7 +245,7 @@
 </table>
 <h2 id="example">Example</h2>
 <p>Given the following configuration:</p>
-<pre><code class="ruby">host &quot;deployer@localhost&quot;, port: 32809
+<pre><code class="language-ruby">host &quot;deployer@localhost&quot;, port: 32809
 
 deploy do
   run &quot;env:update&quot;
@@ -266,9 +264,8 @@ deploy do
   run &quot;core:log_revision&quot;
 end
 </code></pre>
-
 <p>Then a deploy would produce:</p>
-<pre><code class="plain">$ tomo deploy
+<pre><code class="language-plain">$ tomo deploy
 tomo deploy v1.0.0
 → Connecting to deployer@localhost:32829
 • env:update

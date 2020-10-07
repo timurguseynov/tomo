@@ -191,21 +191,19 @@
 <p>And use <strong>SSH keys</strong> for authentication (tomo does not work with password authentication):</p>
 <p><img alt="SSH Authentication" src="../ssh-auth%402x.png" /></p>
 <p>Once the Droplet is created, confirm that you are able to connect to it (substitute <code>IPADDR</code> with the IP address provided in the DigitalOcean control panel for the new Droplet):</p>
-<pre><code class="sh"># Run on your local machine
+<pre><code class="language-sh"># Run on your local machine
 $ ssh -o PasswordAuthentication=no root@IPADDR echo &quot;authenticated as root!&quot;
 authenticated as root!
 </code></pre>
-
 <p>You may need to type <code>yes</code> when prompted to trust the host fingerprint.</p>
 <h2 id="install-necessary-apt-packages">Install necessary apt packages</h2>
 <p>Rails requires certain operating system packages in order to build Ruby and install various gems that have native extensions. Connect to the VPS as root and install the following:</p>
-<pre><code class="sh"># Run these commands as root on the VPS
+<pre><code class="language-sh"># Run these commands as root on the VPS
 apt-get -y update
 apt-get -y install build-essential zlib1g-dev libssl-dev libreadline-dev \
                    git-core curl locales libsqlite3-dev tzdata
 locale-gen en_US.UTF-8
 </code></pre>
-
 <p>It may take a minute or two for all the packages to install.</p>
 <h2 id="set-up-a-deployer-user">Set up a deployer user</h2>
 <p>Running a Rails app as <code>root</code> is a security risk; we need to create a non-privileged user for this purpose. Run the following script to create a
@@ -214,7 +212,7 @@ locale-gen en_US.UTF-8
 <li>has access to write to a <code>/var/www</code> directory, which is the default location where tomo will deploy our app; and</li>
 <li>can &ldquo;linger&rdquo;, i.e. run long-running processes like the puma web server</li>
 </ul>
-<pre><code class="sh"># Run these commands as root on the VPS
+<pre><code class="language-sh"># Run these commands as root on the VPS
 adduser --disabled-password deployer &lt; /dev/null
 mkdir -p /home/deployer/.ssh
 cp /root/.ssh/authorized_keys /home/deployer/.ssh
@@ -224,28 +222,24 @@ mkdir -p /var/www
 chown deployer:deployer /var/www
 loginctl enable-linger deployer
 </code></pre>
-
 <p>For convenience, the <code>deployer</code> user will accept the same SSH key that you are already using to authenticate when connecting as <code>root</code>. Test that it works:</p>
-<pre><code class="sh"># Run on your local machine
+<pre><code class="language-sh"># Run on your local machine
 $ ssh -o PasswordAuthentication=no deployer@IPADDR echo &quot;authenticated as deployer!&quot;
 authenticated as deployer!
 </code></pre>
-
 <h2 id="configure-tomo">Configure tomo</h2>
 <p>We will be deploying <a href="https://github.com/mattbrictson/rails-new">this basic Rails app</a>. Clone the repository to get started:</p>
-<pre><code class="sh"># Run on your local machine
+<pre><code class="language-sh"># Run on your local machine
 $ git clone https://github.com/mattbrictson/rails-new
 </code></pre>
-
 <p>Rails requires Node and Yarn, so make sure they are working:</p>
-<pre><code class="sh"># Run on your local machine
+<pre><code class="language-sh"># Run on your local machine
 $ rails-new/bin/yarn -v
 1.16.0
 </code></pre>
-
 <p>If you get an error, install Node and Yarn before continuing.</p>
 <p>Now it is time to configure tomo to deploy this Rails app. Inside the <code>rails-new</code> directory, install tomo and run <code>tomo init</code>. This will set up a deploy configuration with a good set of defaults:</p>
-<pre><code class="sh"># Run on your local machine
+<pre><code class="language-sh"># Run on your local machine
 $ cd rails-new
 
 $ gem install tomo
@@ -256,18 +250,15 @@ Successfully installed tomo-1.0.0
 $ tomo init
 ✔ Created .tomo/config.rb
 </code></pre>
-
 <p>The <code>.tomo/config.rb</code> configuration is ready right out of the box. All you will need to change is the <code>host</code> line, and be sure to replace <code>IPADDR</code> with the IP address of your VPS:</p>
-<pre><code class="ruby"># Modify the 'host' line of .tomo/config.rb
+<pre><code class="language-ruby"># Modify the 'host' line of .tomo/config.rb
 host &quot;deployer@IPADDR&quot;
 </code></pre>
-
 <h2 id="run-tomo-setup">Run tomo setup</h2>
 <p>Tomo comes with a <code>setup</code> command that will prepare your VPS for its first deployment. This does things like install Node, Yarn, and Ruby. It also sets up some important environment variables. Just run:</p>
-<pre><code class="sh"># Run on your local machine
+<pre><code class="language-sh"># Run on your local machine
 $ tomo setup
 </code></pre>
-
 <p>You will be asked for two environment variables. Tomo will store these values on the VPS so that you only have to provide them once:</p>
 <ul>
 <li><strong>DATABASE_URL</strong> is needed to tell Rails how to connect to the database. The basic app we are deploying uses sqlite. Provide this value when prompted: <code>sqlite3:/var/www/rails-new/shared/production.sqlite3</code>. This will store the database in a shared location so that it doesn&rsquo;t change from release to release.</li>
@@ -276,10 +267,9 @@ $ tomo setup
 <p>Note that <code>tomo setup</code> compiles Ruby from source, which will take several minutes.</p>
 <h2 id="run-tomo-deploy">Run tomo deploy</h2>
 <p>Once <code>setup</code> completes, your VPS is ready to go. Deploying is now just a matter of running <code>tomo deploy</code>:</p>
-<pre><code class="sh"># Run on your local machine
+<pre><code class="language-sh"># Run on your local machine
 $ tomo deploy
 </code></pre>
-
 <p>When the deploy completes, the Rails app will be accessible on port 3000 of your VPS: <code>http://IPADDR:3000</code>.</p>
 <p>Congratulations!</p>
               

@@ -170,9 +170,8 @@
                 <h1 id="tasks">tasks</h1>
 <p>List all tasks that can be used with the <a href="../run/">run</a> command.</p>
 <h2 id="usage">Usage</h2>
-<pre><code class="sh">$ tomo tasks
+<pre><code class="language-sh">$ tomo tasks
 </code></pre>
-
 <p>List all tomo tasks (i.e. those that can be used with <a href="../run/"><code>tomo run</code></a>). Available tasks are those defined by plugins loaded in <code>.tomo/config.rb</code>. Refer to the <a href="../../configuration/#pluginname_or_relative_path">Configuration</a> guide for an explanation of how plugins are loaded. The reference documentation for each plugin (e.g. <a href="../../plugins/core/">core</a>, <a href="../../plugins/git/">git</a>) describes the tasks these plugins provide.</p>
 <h2 id="options">Options</h2>
 <table>
@@ -202,7 +201,7 @@
 </tbody>
 </table>
 <h2 id="example">Example</h2>
-<pre><code class="plain">$ tomo tasks
+<pre><code class="language-plain">$ tomo tasks
 bundler:clean
 bundler:install
 bundler:upgrade_bundler

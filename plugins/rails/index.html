@@ -202,37 +202,30 @@
 <p>Builds the asset pipeline in preparation for deployment. This is necessary for Rails apps that use the asset pipeline, which is all new Rails apps by default. Running this task will execute this script:</p>
 <pre><code>cd /var/www/my-app/releases/&lt;RELEASE_NUMBER&gt; &amp;&amp; bundle exec rake assets:precompile
 </code></pre>
-
 <p><code>rails:assets_precompile</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. It is typically run just prior to <a href="../core/#coresymlink_current">core:symlink_current</a> to activate a new release.</p>
 <h3 id="railsconsole">rails:console</h3>
 <p>Starts an interactive Rails console via SSH to the remote host. This task is intended for use as a <a href="../../commands/run/">run</a> task and accepts command-line arguments. The arguments are passed through to the console. For example:</p>
 <pre><code>$ tomo run -- rails:console --sandbox
 </code></pre>
-
 <p>Will run this remote script:</p>
 <pre><code>cd /var/www/my-app/current &amp;&amp; bundle exec rails console --sandbox
 </code></pre>
-
 <h3 id="railsdb_console">rails:db_console</h3>
 <p>Starts an interactive database console (e.g. psql) for the primary Rails database via SSH to the remote host. This task is intended for use as a <a href="../../commands/run/">run</a> task. The <code>include-password</code> option is passed automatically.</p>
 <pre><code>$ tomo run rails:db_console
 </code></pre>
-
 <p>Will run this remote script:</p>
 <pre><code>cd /var/www/my-app/current &amp;&amp; bundle exec rails dbconsole --include-password
 </code></pre>
-
 <h3 id="railsdb_migrate">rails:db_migrate</h3>
 <p>Migrates the database by running:</p>
 <pre><code>cd /var/www/my-app/releases/&lt;RELEASE_NUMBER&gt; &amp;&amp; bundle exec rake db:migrate
 </code></pre>
-
 <p><code>rails:db_migrate</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. It is typically run just after <a href="../bundler/#bundlerinstall">bundler:install</a> prior to activating a new release.</p>
 <h3 id="railsdb_seed">rails:db_seed</h3>
 <p>Loads seed data into the database. Seeds should be written to be idempotent, such that it is safe to seed the database on each deploy. Typically seeds are used to load reference data need for the app to function, or for example to create an initial admin user. This task runs the following script:</p>
 <pre><code>cd /var/www/my-app/releases/&lt;RELEASE_NUMBER&gt; &amp;&amp; bundle exec rake db:seed
 </code></pre>
-
 <p><code>rails:db_seed</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. Since seeds rely on the structure of the database, it is typically run just after <a href="#railsdb_migrate">rails:db_migrate</a>.</p>
 <h3 id="railsdb_create">rails:db_create</h3>
 <p>Runs <code>bundle exec rake db:create</code> to create the database. This task is intended for use as a <a href="../../commands/setup/">setup</a> task. It will be automatically skipped if the database already exists, so it is safe to re-run.</p>
@@ -244,19 +237,17 @@
 <p>These helper methods become available on instances of <a href="../../api/Remote/">Remote</a> when the rails plugin is loaded. They accept the same <code>options</code> as <a href="../../api/Remote/#run42command-4242options-tomoresult">Remote#run</a>.</p>
 <h3 id="remoterailsargs-options-tomoresult">remote.rails(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Runs <code>bundle exec rails</code> in within <code>paths.release</code> by default.</p>
-<pre><code class="ruby">remote.rails(&quot;routes&quot;)
+<pre><code class="language-ruby">remote.rails(&quot;routes&quot;)
 # $ cd /var/www/my-app/releases/20190604204415 &amp;&amp; bundle exec rails routes
 </code></pre>
-
 <h3 id="remoterakeargs-options-tomoresult">remote.rake(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Runs <code>bundle exec rake</code> in within <code>paths.release</code> by default.</p>
-<pre><code class="ruby">remote.rake(&quot;db:migrate&quot;)
+<pre><code class="language-ruby">remote.rake(&quot;db:migrate&quot;)
 # $ cd /var/www/my-app/releases/20190604204415 &amp;&amp; bundle exec rake db:migrate
 </code></pre>
-
 <h3 id="remoterakeargs-options-true-or-false">remote.rake?(*args, **options) → true or false</h3>
 <p>Like <code>rake</code> but returns <code>true</code> if the command succeeds (exit status 0), otherwise <code>false</code>.</p>
-<pre><code class="ruby">remote.rake?(&quot;db:migrate&quot;) # =&gt; true
+<pre><code class="language-ruby">remote.rake?(&quot;db:migrate&quot;) # =&gt; true
 </code></pre>
               
             </div>

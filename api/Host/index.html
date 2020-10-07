@@ -177,13 +177,12 @@
               
                 <h1 id="tomohost">Tomo::Host</h1>
 <p>Represents a remote SSH host.</p>
-<pre><code class="ruby">host.address # =&gt; &quot;example.com&quot;
+<pre><code class="language-ruby">host.address # =&gt; &quot;example.com&quot;
 host.port    # =&gt; 22
 host.user    # =&gt; &quot;deployer&quot;
 host.roles   # =&gt; [&quot;app&quot;, &quot;db&quot;]
 host.to_s    # =&gt; &quot;deployer@example.com&quot;
 </code></pre>
-
 <p>A Host is always frozen and cannot be modified.</p>
 <h2 id="instance-methods">Instance methods</h2>
 <h3 id="address-string">address → String</h3>

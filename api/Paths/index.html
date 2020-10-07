@@ -164,40 +164,35 @@
                 <h1 id="tomopaths">Tomo::Paths</h1>
 <p>Provides syntactic sugar for accessing settings that represent file system paths. For every tomo setting in the form <code>:&lt;name&gt;_path</code>, Paths will expose a method of that name that behaves like a Ruby Pathname object. As a special exception, the <code>:deploy_to</code> setting is also exposed even though it does not follow the same naming convention.</p>
 <p>In tomo the following path settings are always available:</p>
-<pre><code class="ruby">settings[:deploy_to]     # =&gt; &quot;/var/www/my-app&quot;
+<pre><code class="language-ruby">settings[:deploy_to]     # =&gt; &quot;/var/www/my-app&quot;
 settings[:current_path]  # =&gt; &quot;/var/www/my-app/current&quot;
 settings[:release_path]  # =&gt; &quot;/var/www/my-app/releases/20190531164322&quot;
 settings[:releases_path] # =&gt; &quot;/var/www/my-app/releases&quot;
 settings[:shared_path]   # =&gt; &quot;/var/www/my-app/shared&quot;
 </code></pre>
-
 <p>Using Paths, these same settings can be accessed like this:</p>
-<pre><code class="ruby">paths.deploy_to # =&gt; &quot;/var/www/my-app&quot;
+<pre><code class="language-ruby">paths.deploy_to # =&gt; &quot;/var/www/my-app&quot;
 paths.current   # =&gt; &quot;/var/www/my-app/current&quot;
 paths.release   # =&gt; &quot;/var/www/my-app/releases/20190531164322&quot;
 paths.releases  # =&gt; &quot;/var/www/my-app/releases&quot;
 paths.shared    # =&gt; &quot;/var/www/my-app/shared&quot;
 </code></pre>
-
 <p>More powerfully, the values returned by Paths respond to <code>join</code> and <code>dirname</code>, so you can easily compose them:</p>
-<pre><code class="ruby">paths.current.dirname       # =&gt; &quot;/var/www/my-app&quot;
+<pre><code class="language-ruby">paths.current.dirname       # =&gt; &quot;/var/www/my-app&quot;
 paths.release.join(&quot;tmp&quot;)   # =&gt; &quot;/var/www/my-app/releases/20190531164322/tmp&quot;
 paths.shared.join(&quot;bundle&quot;) # =&gt; &quot;/var/www/my-app/shared/bundle&quot;
 </code></pre>
-
 <p>Paths can be used wherever a path string is expected, like <a href="../Remote/#chdirdir-block-obj">chdir</a>:</p>
-<pre><code class="ruby">remote.chdir(paths.current) do
+<pre><code class="language-ruby">remote.chdir(paths.current) do
   remote.run(&quot;bundle&quot;, &quot;exec&quot;, &quot;puma&quot;, &quot;--daemon&quot;)
 end
 # $ cd /var/www/my-app/current &amp;&amp; bundle exec puma --daemon
 </code></pre>
-
 <p>If a plugin defines a setting with the suffix <code>_path</code> or if you create your own setting with that suffix, it automatically will be exposed via the Paths object:</p>
-<pre><code class="ruby"># .tomo/config.rb
+<pre><code class="language-ruby"># .tomo/config.rb
 set my_custom_path: &quot;/opt/custom&quot;
 </code></pre>
-
-<pre><code class="ruby">paths.my_custom.join(&quot;var&quot;) # =&gt; &quot;/opt/custom/var&quot;
+<pre><code class="language-ruby">paths.my_custom.join(&quot;var&quot;) # =&gt; &quot;/opt/custom/var&quot;
 </code></pre>
               
             </div>

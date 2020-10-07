@@ -243,7 +243,6 @@
 <p>Installs the version of bundler specified by the <code>:bundler_version</code> setting, if specified. If <code>:bundler_version</code> is <code>nil</code> (the default), this task will automatically determine the version of bundler required by the app that is being deployed by looking at the <code>BUNDLED WITH</code> entry within the app’s <code>Gemfile.lock</code>. Bundler will be installed withing this command:</p>
 <pre><code>gem install bundler --conservative --no-document -v VERSION
 </code></pre>
-
 <p><code>bundler:upgrade_bundler</code> is intended for use as a <a href="../../commands/setup/">setup</a> task. It should be run prior to <a href="#bundlerinstall">bundler:install</a> to ensure that the correct version bundler is present.</p>
 <h3 id="bundlerconfig">bundler:config</h3>
 <p>Writes a <code>.bundle/config</code> file with the configuration specified by the various <code>:bundler_*</code> tomo settings. This ensures that invocations of <code>bundle check</code>, <code>bundle install</code>, and most importantly <code>bundle exec</code> all consistently use the correct bundler configuration.</p>
@@ -258,10 +257,9 @@
 <p>These helper methods become available on instances of <a href="../../api/Remote/">Remote</a> when the bundler plugin is loaded. They accept the same <code>options</code> as <a href="../../api/Remote/#run42command-4242options-tomoresult">Remote#run</a>.</p>
 <h3 id="remotebundleargs-options-tomoresult">remote.bundle(*args, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Runs <code>bundle</code> within <code>release_path</code> by default.</p>
-<pre><code class="ruby">remote.bundle(&quot;exec&quot;, &quot;rails&quot;, &quot;console&quot;)
+<pre><code class="language-ruby">remote.bundle(&quot;exec&quot;, &quot;rails&quot;, &quot;console&quot;)
 # $ cd /var/www/my-app/current &amp;&amp; bundle exec rails console
 </code></pre>
-
 <h3 id="remotebundleargs-options-true-or-false">remote.bundle?(*args, **options) → true or false</h3>
 <p>Same as <code>bundle</code> but returns <code>true</code> if the command succeeded, <code>false</code> otherwise.</p>
               

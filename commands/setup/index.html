@@ -170,9 +170,8 @@
                 <h1 id="setup">setup</h1>
 <p>Prepare the current project for its first deploy.</p>
 <h2 id="usage">Usage</h2>
-<pre><code class="plain">$ tomo setup [--dry-run] [options]
+<pre><code class="language-plain">$ tomo setup [--dry-run] [options]
 </code></pre>
-
 <p>Prepare the remote host for its first deploy by sequentially running the
 <a href="../../configuration/#setupblock">setup</a> list of tasks specified in <code>.tomo/config.rb</code>. These tasks typically create directories, initialize data stores, install prerequisite tools, and perform other one-time actions that are necessary before a deploy can take place.</p>
 <p>During setup, tomo will initialize the <code>:release_path</code> setting to be a temporary directory based on the current date and time (e.g. <code>/tmp/tomo/20190616214752</code>). This means setup tasks (e.g. <a href="../../plugins/rails/#railsdb_create">rails:db_create</a>, <a href="../../plugins/rails/#railsdb_schema_load">rails:db_schema_load</a>) run in a location that won&rsquo;t be deployed as an actual release.</p>
@@ -221,7 +220,7 @@
 </table>
 <h2 id="example">Example</h2>
 <p>Given the following configuration:</p>
-<pre><code class="ruby">host &quot;deployer@localhost&quot;, port: 32829
+<pre><code class="language-ruby">host &quot;deployer@localhost&quot;, port: 32829
 
 setup do
   run &quot;env:setup&quot;
@@ -240,9 +239,8 @@ setup do
   run &quot;puma:setup_systemd&quot;
 end
 </code></pre>
-
 <p>Then a setup would produce:</p>
-<pre><code class="plain">$ tomo setup
+<pre><code class="language-plain">$ tomo setup
 tomo setup v1.0.0
 → Connecting to deployer@localhost:32829
 • env:setup

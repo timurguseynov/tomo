@@ -179,7 +179,7 @@
               
                 <h1 id="tomoresult">Tomo::Result</h1>
 <p>Represents the result of a remote SSH script.</p>
-<pre><code class="ruby">result = remote.run(&quot;echo&quot;, &quot;hello world&quot;)
+<pre><code class="language-ruby">result = remote.run(&quot;echo&quot;, &quot;hello world&quot;)
 result.success?    # =&gt; true
 result.failure?    # =&gt; false
 result.exit_status # =&gt; 0
@@ -187,7 +187,6 @@ result.stdout      # =&gt; &quot;hello world\n&quot;
 result.stderr      # =&gt; &quot;&quot;
 result.output      # =&gt; &quot;hello world\n&quot;
 </code></pre>
-
 <p>A Result is always frozen and cannot be modified.</p>
 <h2 id="instance-methods">Instance methods</h2>
 <h3 id="success-true-or-false">success? → true or false</h3>

@@ -185,7 +185,6 @@ tomo run v1.0.0
 [2] cd /home/deployer/apps/my-app/current &amp;&amp; bundle clean
 ✔ Ran bundler:clean on deployer@web1.example.com and deployer@web2.example.com
 </code></pre>
-
 <p>If tomo is run in <code>--dry-run</code> mode, log messages are prefixed with a <code>*</code> to indicate the commands are being simulated.</p>
 <pre><code>$ tomo run bundler:clean --dry-run
 tomo run v1.0.0
@@ -197,7 +196,6 @@ tomo run v1.0.0
 * [2] cd /home/deployer/apps/my-app/current &amp;&amp; bundle clean
 * Simulated bundler:clean on deployer@web1.example.com and deployer@web2.example.com (dry run)
 </code></pre>
-
 <h2 id="instance-methods">Instance methods</h2>
 <h3 id="debugmessage-nil">debug(message) → nil</h3>
 <p>Prints a message to <em>stderr</em> in gray with a <code>DEBUG:</code> prefix. Debug messages are only shown if tomo is run with the <code>--debug</code> option. Otherwise this is a no-op.</p>

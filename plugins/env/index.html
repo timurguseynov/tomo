@@ -214,26 +214,22 @@
 <h2 id="tasks">Tasks</h2>
 <h3 id="envsetup">env:setup</h3>
 <p>Performs an <a href="#envupdate">env:update</a> and then modifies the deploy user&rsquo;s bashrc so that the envrc is automatically loaded for all future SSH sessions. Specifically, this is what is added to the <em>top</em> of the <code>.bashrc</code> file:</p>
-<pre><code class="sh">if [ -f /var/www/my-app/envrc ]; then
+<pre><code class="language-sh">if [ -f /var/www/my-app/envrc ]; then
   . /var/www/my-app/envrc
 fi
 </code></pre>
-
 <p><code>env:setup</code> is intended for use as a <a href="../../commands/setup/">setup</a> task. It must be run before other env tasks.</p>
 <h3 id="envupdate">env:update</h3>
 <p>Ensures that all environment variables that are specified in the <code>:env_vars</code> setting are present in the envrc file on the remote host, modifying the envrc file if necessary. For example, given this config:</p>
-<pre><code class="ruby">set env_vars: { RAILS_ENV: &quot;production&quot;, PUMA_THREADS: 20 }
+<pre><code class="language-ruby">set env_vars: { RAILS_ENV: &quot;production&quot;, PUMA_THREADS: 20 }
 </code></pre>
-
 <p>This task will ensure that the envrc file is updated to include:</p>
-<pre><code class="bash">export RAILS_ENV=production
+<pre><code class="language-bash">export RAILS_ENV=production
 export PUMA_THREADS=20
 </code></pre>
-
 <p>For environment variables that are used for secrets or other sensitive data, you can specify <code>:prompt</code> instead of the actual value. In this case tomo will prompt interactively for the value the first time it is needed. For example:</p>
-<pre><code class="ruby">set env_vars: { SECRET_KEY_BASE: :prompt }
+<pre><code class="language-ruby">set env_vars: { SECRET_KEY_BASE: :prompt }
 </code></pre>
-
 <p>The first time <code>env:update</code> is run, tomo will prompt for the value:</p>
 <pre><code>$ tomo deploy
 tomo deploy v1.0.0
@@ -241,29 +237,25 @@ tomo deploy v1.0.0
 • env:update
 SECRET_KEY_BASE?
 </code></pre>
-
 <p>Once the environment variable exists in the envrc file, tomo will no longer prompt for it.</p>
 <p><code>env:update</code> is intended for use as a <a href="../../commands/deploy/">deploy</a> task. It should be run at the beginning of a deploy to ensure that the environment has all the latest values before other tasks are run.</p>
 <h3 id="envset">env:set</h3>
 <p>Set one or more environment variables in the remote envrc file. This task is intended for use with <a href="../../commands/run/">run</a> and takes command-line arguments. There are two forms:</p>
-<pre><code class="sh"># Set the remote envrc var named KEY to have VALUE
+<pre><code class="language-sh"># Set the remote envrc var named KEY to have VALUE
 $ tomo run env:set KEY=VALUE
 </code></pre>
-
-<pre><code class="sh"># Prompt interactively for the value of KEY and then set it in the remote envrc
+<pre><code class="language-sh"># Prompt interactively for the value of KEY and then set it in the remote envrc
 $ tomo run env:set KEY
 KEY?
 </code></pre>
-
 <h3 id="envunset">env:unset</h3>
 <p>Remove one or more environment variables from the remote envrc file. This task is intended for use with <a href="../../commands/run/">run</a> and takes command-line arguments.</p>
-<pre><code class="sh"># Remove the remote envrc var named KEY
+<pre><code class="language-sh"># Remove the remote envrc var named KEY
 $ tomo run env:unset KEY
 </code></pre>
-
 <h3 id="envshow">env:show</h3>
 <p>Display the contents of the remote envrc file. This task is intended for use with <a href="../../commands/run/">run</a>.</p>
-<pre><code class="plain">$ tomo run env:show
+<pre><code class="language-plain">$ tomo run env:show
 tomo run v1.0.0
 → Connecting to deployer@app.example.com
 • env:show

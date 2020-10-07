@@ -220,11 +220,10 @@
 <p>For this example we will use &ldquo;cron&rdquo; as the plugin name.</p>
 <h3 id="run-the-rename_templaterb-script">Run the rename_template.rb script</h3>
 <p>Use git to clone the resulting GitHub repo. Inside the repo, run:</p>
-<pre><code class="plain">$ ruby rename_template.rb
+<pre><code class="language-plain">$ ruby rename_template.rb
 </code></pre>
-
 <p>This will prompt for some information needed to set up the project. Press enter to accept the default values, which should be sufficient for each question.</p>
-<pre><code class="plain">&gt;&gt;&gt;&gt; git remote -v
+<pre><code class="language-plain">&gt;&gt;&gt;&gt; git remote -v
 &gt;&gt;&gt;&gt; git remote get-url origin
 &gt;&gt;&gt;&gt; git config user.email
 &gt;&gt;&gt;&gt; git config user.name
@@ -281,7 +280,6 @@ Review the changes and then run:
   git commit &amp;&amp; git push
 
 </code></pre>
-
 <p>Don&rsquo;t forget to <code>git commit</code> and <code>git push</code> the changes.</p>
 <h2 id="define-the-plugin">Define the plugin</h2>
 <p>The entry point for a tomo plugin gem is the <code>lib/tomo/plugin/&lt;name&gt;.rb</code> file. This file defines the plugin by extending <a href="../../api/PluginDSL/">Tomo::PluginDSL</a> to provide the following three pieces of information:</p>
@@ -291,7 +289,7 @@ Review the changes and then run:
 <li>Helpers</li>
 </ol>
 <p>For our &ldquo;cron&rdquo; plugin, the entry point generated from the template looks like this:</p>
-<pre><code class="ruby"># lib/tomo/plugin/cron.rb
+<pre><code class="language-ruby"># lib/tomo/plugin/cron.rb
 
 require &quot;tomo&quot;
 require_relative &quot;cron/helpers&quot;
@@ -309,17 +307,15 @@ module Tomo::Plugin::Cron
   helpers Tomo::Plugin::Cron::Helpers
 end
 </code></pre>
-
 <h3 id="default-settings">Default settings</h3>
 <p>It is a good practice to provide default values for <em>all</em> settings that your plugin relies on. If there is truly no default value for a setting, declare it as <code>nil</code>. This at least informs tomo the name of the setting that the plugin is expecting.</p>
 <p>Our cron plugin needs a crontab template that has no default value (the user of the plugin will need to provide it):</p>
-<pre><code class="ruby">defaults cron_template_path: nil
+<pre><code class="language-ruby">defaults cron_template_path: nil
 </code></pre>
-
 <p>Notice how we&rsquo;ve named the setting starting with <code>cron_</code>. This is a convention that makes it clear to users which settings correspond to which plugin, and reduces the unintended collisions.</p>
 <h3 id="tasks">Tasks</h3>
 <p>By default, the tasks of the plugin are defined in a file <code>lib/tomo/plugin/&lt;name&gt;/tasks.rb</code>. It looks like this:</p>
-<pre><code class="ruby"># lib/tomo/plugin/cron/tasks.rb
+<pre><code class="language-ruby"># lib/tomo/plugin/cron/tasks.rb
 
 module Tomo::Plugin::Cron
   class Tasks &lt; Tomo::TaskLibrary
@@ -327,9 +323,8 @@ module Tomo::Plugin::Cron
   end
 end
 </code></pre>
-
 <p>We can copy the tasks from the <a href="../writing-custom-tasks/">Writing Custom Tasks tutorial</a> into this file with a few modifications to use the new <code>:cron_template_path</code> setting we just defined:</p>
-<pre><code class="ruby"># lib/tomo/plugin/cron/tasks.rb
+<pre><code class="language-ruby"># lib/tomo/plugin/cron/tasks.rb
 
 module Tomo::Plugin::Cron
   class Tasks &lt; Tomo::TaskLibrary
@@ -347,7 +342,6 @@ module Tomo::Plugin::Cron
   end
 end
 </code></pre>
-
 <p>Note the <code>require_setting</code> line will check that the user has provided a value for the <code>:cron_template_path</code> setting and will show a helpful error message if it is missing.</p>
 <h3 id="helpers">Helpers</h3>
 <p>Helpers extend the <code>remote</code> DSL in tomo. This is an advanced feature that most plugins will not use. We can remove it from our plugin:</p>
@@ -363,7 +357,7 @@ end
 <h2 id="write-tests">Write tests</h2>
 <p>Tomo makes it easy to write tests in a plugin gem using the <a href="../../api/testing/MockPluginTester/">MockPluginTester</a>. MockPluginTester works by mocking the underlying SSH connection so that no actual remote SSH scripts are run. By default, the tester will simulate that the script runs successfully (exit status of 0) with empty stdout and stderr. You can then write assertions verifying that the script was run as expected.</p>
 <p>Here&rsquo;s what tests look like for the tasks of our hypothetical cron plugin:</p>
-<pre><code class="ruby"># test/tomo/plugin/cron/tasks_test.rb
+<pre><code class="language-ruby"># test/tomo/plugin/cron/tasks_test.rb
 
 require &quot;test_helper&quot;
 require &quot;tempfile&quot;
@@ -395,9 +389,8 @@ class Tomo::Plugin::Cron::TasksTest &lt; Minitest::Test
   end
 end
 </code></pre>
-
 <p>To run the tests:</p>
-<pre><code class="plain">$ bundle exec rake
+<pre><code class="language-plain">$ bundle exec rake
 Started with run options --seed 29280
 
 Tomo::Plugin::CronTest
@@ -415,18 +408,15 @@ Inspecting 12 files
 
 12 files inspected, no offenses detected
 </code></pre>
-
 <h2 id="try-it-out">Try it out</h2>
 <p>Unit tests are valuable but no substitute for trying out your plugin gem in a real-world scenario. There are two easy ways to try your gem before publishing.</p>
 <p>One option is to install the gem into your local Ruby environment like this:</p>
-<pre><code class="plain">$ bundle exec rake install
+<pre><code class="language-plain">$ bundle exec rake install
 </code></pre>
-
 <p>Now your plugin will be available anywhere you use <code>tomo</code> on your local system.</p>
 <p>However, that won&rsquo;t work for a project where you are managing tomo gems via Bundler. In that case, edit the Gemfile of the project to reference your plugin by <code>path</code>:</p>
-<pre><code class="ruby">gem &quot;tomo-plugin-cron&quot;, path: &quot;../tomo-plugin-cron&quot;
+<pre><code class="language-ruby">gem &quot;tomo-plugin-cron&quot;, path: &quot;../tomo-plugin-cron&quot;
 </code></pre>
-
 <p>Run <code>bundle install</code> and now your plugin will be available via <code>bundle exec tomo</code>.</p>
 <h2 id="write-a-good-readme">Write a good README</h2>
 <p>The tomo-plugin template will create a basic README but it is up to you to fill in the details. In particular users will be interested to know what tasks your plugin provides and how to configure it. Make sure to fill in the Settings and Tasks sections of the README. In the case of our hypothetical cron plugin, we&rsquo;d want to specify installation instructions as well, to explain that the <code>cron:install</code> task should be listed part of the <code>setup</code> tasks. Check out <a href="https://github.com/mattbrictson/tomo-plugin-sidekiq/blob/main/README.md">tomo-plugin-sidekiq</a> for an example README.</p>
@@ -440,31 +430,26 @@ Inspecting 12 files
 <p>These services will build and test your project on every push and PR and update the status badges in your README.</p>
 <h2 id="publish-to-rubygemsorg">Publish to rubygems.org</h2>
 <p>Once you are ready to share your gem with the world, <a href="https://rubygems.org/sign_up">create a rubygems.org account</a> if you haven&rsquo;t already. Then ensure you are logged in via the <code>gem</code> CLI:</p>
-<pre><code class="plain">$ gem signin
+<pre><code class="language-plain">$ gem signin
 </code></pre>
-
 <p>To publish, run:</p>
-<pre><code class="plain">$ bundle exec rake release
+<pre><code class="language-plain">$ bundle exec rake release
 </code></pre>
-
 <p>Finally, don&rsquo;t forget to document your release with release notes in the Releases section of your project on GitHub.</p>
 <h3 id="releasing-a-new-version">Releasing a new version</h3>
 <p>If you&rsquo;ve already published your gem and want to release a new version, first edit the <code>version.rb</code> file:</p>
-<pre><code class="ruby"># lib/tomo/plugin/cron/version.rb
+<pre><code class="language-ruby"># lib/tomo/plugin/cron/version.rb
 
 module Tomo::Plugin::Cron
   VERSION = &quot;0.2.0&quot;.freeze
 end
 </code></pre>
-
 <p>Commit the changes:</p>
-<pre><code class="plain">$ git commit -a -m &quot;Release v0.2.0&quot;
+<pre><code class="language-plain">$ git commit -a -m &quot;Release v0.2.0&quot;
 </code></pre>
-
 <p>And then release:</p>
-<pre><code class="plain">$ bundle exec rake release
+<pre><code class="language-plain">$ bundle exec rake release
 </code></pre>
-
 <p>Once again, don&rsquo;t forget the release notes on GitHub.</p>
 <p>That&rsquo;s it!</p>
               

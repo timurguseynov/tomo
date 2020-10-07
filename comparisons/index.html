@@ -55,7 +55,9 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Comparisons</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#at-a-glance">At a glance</a>
+    <li class="toctree-l2"><a class="reference internal" href="#code-example">Code example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#features">Features</a>
     </li>
     </ul>
                     </li>
@@ -160,14 +162,31 @@
             <div class="section">
               
                 <h1 id="comparisons">Comparisons</h1>
-<p>Tomo is a SSH-based deployment tool written in Ruby, and so it is natural to compare it with the many other popular Ruby tools in that category. Here are some specific design choices make tomo different.</p>
+<p>Tomo is a SSH-based deployment tool written in Ruby, and so it is natural to compare it with the many other popular Ruby tools in that category. Here are some specific design choices that make tomo different.</p>
 <ul>
-<li><strong>Batteries included.</strong> Running <code>tomo init</code> gives you everything you need to deploy a basic Rails app. Literally just specify the <code>host</code> in the generated configuration file and go! Tomo itself is constantly tested (via CircleCI) with an automated <code>tomo init</code> → <code>tomo setup</code> → <code>tomo deploy</code> of a real Rails app to verify that this out-of-the-box experience always works with the latest version of Rails.</li>
+<li><strong>Proven built-in Rails support.</strong> Tomo includes all the setup and deployment tasks you need to deploy a basic Rails app. On top of that, every release of tomo is automatically tested to verify that it can successfully deploy the latest versions of Rails, Bundler, and Ruby out of the box.</li>
 <li><strong>Opinionated defaults.</strong> The tasks built-into tomo provide a very opinionated deployment: rbenv and nodenv to install ruby and node, puma via systemd with socket activation for zero-downtime restarts, 12-factor style configuration (environment variables as opposed to configuration files), and so on. Tomo provides a strong set of production-tested conventions without you needing to piece together snippets from blog posts or tutorials.</li>
-<li><strong>No Rake.</strong> Many Ruby deployment tools (Capistrano and Mina being the most popular examples) are built on top of Rake, a general purpose tool for making extensible task-based CLIs. Tomo, by contrast, does not use Rake and is a CLI designed specifically for one purpose: deploying Rails via SSH. This means tomo is much more limited than other tools, but conceptually simpler. No need to learn how Rake prerequisites work, the subtle differences between <code>task do ... end</code> and <code>def ... end</code>, or the esoteric trivia needed to replace or re-invoke a Rake task. Tomo tasks are just plain Ruby methods.</li>
-<li><strong>Intentionally simple DSL.</strong> Tomo purposely provides a very limited DSL for writing tasks: settings are immutable, so tasks cannot modify them; tasks cannot call other tasks; tasks cannot control the SSH connection. This simplicity makes tasks easy to write and easy to reason about. They have no side effects and can be easily unit tested.</li>
+<li><strong>Easy to extend.</strong> Unlike other Ruby deployment tools that layer DSL monkey patches on top of rake, tomo is built from the ground up with modern CLI conventions, testability, and simplicity in mind. Tomo takes care of SSH connection management for you, and the ordering of deployment and setup operations is purely configuration based. There are no complex chains of prerequisites or programmatic before/after hooks to deal with. All you have to do is write plain Ruby methods utilizing a concise API.</li>
 </ul>
-<h2 id="at-a-glance">At a glance</h2>
+<h2 id="code-example">Code example</h2>
+<p>To get an idea of how much simpler tomo can be, here is an example of the same task implemented in capistrano vs tomo:</p>
+<pre><code class="language-ruby"># capistrano
+task :precompile do
+  on release_roles(fetch(:assets_roles)) do
+    within release_path do
+      with rails_env: fetch(:rails_env), rails_groups: fetch(:rails_assets_groups) do
+        execute :rake, &quot;assets:precompile&quot;
+      end
+    end
+  end
+end
+</code></pre>
+<pre><code class="language-ruby"># tomo
+def assets_precompile
+  remote.rake(&quot;assets:precompile&quot;)
+end
+</code></pre>
+<h2 id="features">Features</h2>
 <p>Here&rsquo;s how tomo compares with the most popular Ruby-based deployment tools: Capistrano and Mina.</p>
 <table>
 <thead>

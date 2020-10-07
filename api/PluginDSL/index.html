@@ -179,7 +179,7 @@
 <li>Helpers</li>
 </ul>
 <p>Here is the bundler plugin as an example:</p>
-<pre><code class="ruby">require_relative &quot;bundler/helpers&quot;
+<pre><code class="language-ruby">require_relative &quot;bundler/helpers&quot;
 require_relative &quot;bundler/tasks&quot;
 
 module Tomo::Plugin::Bundler
@@ -198,14 +198,13 @@ module Tomo::Plugin::Bundler
            bundler_without:     %w[development test]
 end
 </code></pre>
-
 <p>The above plugin defines several default settings, defines tasks using a <a href="../TaskLibrary/">TaskLibrary</a> named <code>Tomo::Plugin::Bundler::Tasks</code>, and defines helpers in a module named <code>Tomo::Plugin::Bundler::Helpers</code>.</p>
 <p>Refer to the <a href="../../tutorials/publishing-a-plugin/">Publishing a Plugin</a> tutorial for more information about packaging and distributing tomo plugins.</p>
 <h2 id="instance-methods">Instance methods</h2>
 <h3 id="defaultshash">defaults(hash)</h3>
 <p>Specify default settings that will be applied when this plugin is loaded. Although not strictly necessary, it is best practice to list all required and optional settings that are used by the plugin, even if the default values are <code>nil</code>. This lets other developers know what setting names are expected when using the plugin.</p>
 <p>Settings must use symbol keys and typically String values, although any Ruby type is possible. Strings can contain <a href="../../configuration/#interpolation">interpolated values</a>.</p>
-<pre><code class="ruby">module Tomo::Plugin::Bundler
+<pre><code class="language-ruby">module Tomo::Plugin::Bundler
   extend Tomo::PluginDSL
 
   defaults bundler_config_path: &quot;.bundle/config&quot;,
@@ -218,10 +217,9 @@ end
            bundler_without:     %w[development test]
 end
 </code></pre>
-
 <h3 id="taskstask_library_class">tasks(*task_library_class)</h3>
 <p>Specify the tasks that will be defined by this plugin by supplying one or more <a href="../TaskLibrary/">TaskLibrary</a> classes. The public instance methods of each class will be turned into tomo tasks.</p>
-<pre><code class="ruby">class Tomo::Plugin::Git::Tasks &lt; Tomo::TaskLibrary
+<pre><code class="language-ruby">class Tomo::Plugin::Git::Tasks &lt; Tomo::TaskLibrary
   def clone
     # ...
   end
@@ -237,9 +235,8 @@ class Tomo::Plugin::Git
   tasks Tomo::Plugin::Git::Tasks
 end
 </code></pre>
-
 <p>You can use <code>tasks self</code> to define a plugin and its tasks together as a single class:</p>
-<pre><code class="ruby">class Tomo::Plugin::Git &lt; Tomo::TaskLibrary
+<pre><code class="language-ruby">class Tomo::Plugin::Git &lt; Tomo::TaskLibrary
   extend Tomo::PluginDSL
   tasks self
 
@@ -252,10 +249,9 @@ end
   end
 end
 </code></pre>
-
 <h3 id="helpersmodule">helpers(*module)</h3>
 <p>Specify the helpers that will be defined by this plugin by supplying one or more plain Ruby modules. The modules will be mixed in at runtime to extend the <a href="../Remote/">Remote</a> interface with additional methods.</p>
-<pre><code class="ruby">module Tomo::Plugin::Core::Helpers
+<pre><code class="language-ruby">module Tomo::Plugin::Core::Helpers
   def ln_sf(target, link, **run_opts)
     # ...
   end
