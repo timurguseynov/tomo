@@ -188,7 +188,7 @@
 </tr>
 <tr>
 <td><code>rbenv_ruby_version</code></td>
-<td>Version of ruby to install</td>
+<td>Version of ruby to install. if nil (the default), determine the version based on .ruby-version</td>
 <td><code>nil</code></td>
 </tr>
 </tbody>
@@ -197,7 +197,7 @@
 <h3 id="rbenvinstall">rbenv:install</h3>
 <p>Installs rbenv, uses rbenv to install ruby, and makes the desired version of ruby the global default version for the deploy user. During installation, the user’s bashrc file is modified so that rbenv is automatically loaded for interactive and non-interactive shells.</p>
 <p>Behind the scenes, rbenv installs ruby via ruby-build, which compiles ruby from source. This means installation can take several minutes. If the desired version of ruby is already installed, the compilation step will be skipped.</p>
-<p>You must supply a value for the <code>rbenv_ruby_version</code> setting for this task to work.</p>
+<p>You must supply a value for the <code>rbenv_ruby_version</code> setting or <code>.ruby-version</code> file for this task to work.</p>
 <p><code>rbenv:install</code> is intended for use as a <a href="../../commands/setup/">setup</a> task.</p>
               
             </div>
