@@ -317,7 +317,7 @@
 <tr>
 <td><code>tmp_path</code></td>
 <td>Directory where the <a href="../../commands/setup/">setup</a> command stages temporary files</td>
-<td><code>"/tmp/tomo"</code></td>
+<td><code>"/tmp/tomo-#{SecureRandom.alphanumeric(8)}"</code></td>
 </tr>
 <tr>
 <td><code>tomo_config_file_path</code></td>
@@ -401,7 +401,7 @@ remote.run?(&quot;which&quot;, &quot;java&quot;) # =&gt; false
 <h3 id="remoterm_rfpaths-options-tomoresult">remote.rm_rf(*paths, **options) → <a href="../../api/Result/">Tomo::Result</a></h3>
 <p>Deletes one or more files or directories on the remote host.</p>
 <pre><code class="language-ruby">remote.rm_rf(paths.tmp)
-# $ rm -rf /tmp/tomo
+# $ rm -rf /tmp/tomo-a4DBHX0P
 </code></pre>
 <h3 id="remotelist_filesdirectorynil-options-string">remote.list_files(directory=nil, **options) → [String]</h3>
 <p>Lists non-hidden files in the specified directory. If <code>directory</code> is omitted, the default SSH login directory is used (typically the deploy user’s home directory). The result will be an array of the directory contents.</p>
