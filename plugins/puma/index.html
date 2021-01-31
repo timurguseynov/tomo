@@ -105,6 +105,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#pumalog">puma:log</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pumatail_log">puma:tail_log</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -302,6 +304,8 @@ systemctl --user status puma_example.socket puma_example.service
 <p>Will run this remote script:</p>
 <pre><code>journalctl -q --user-unit=puma.service -f
 </code></pre>
+<h3 id="pumatail_log">puma:tail_log</h3>
+<p>A convenience method for tailing the puma logs. Equivalent to <code>tomo run -- puma:log -f</code></p>
               
             </div>
           </div>
